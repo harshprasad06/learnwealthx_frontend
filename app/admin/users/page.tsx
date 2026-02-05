@@ -267,13 +267,13 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Users Management</h1>
-            <p className="text-gray-600 mt-1">Manage all users and their roles</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Users Management</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">Manage all users and their roles</p>
           </div>
           <Link
             href="/admin/affiliates"
@@ -284,10 +284,10 @@ export default function AdminUsersPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 mb-6 transition-colors">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Filter by Role
               </label>
               <select
@@ -296,7 +296,7 @@ export default function AdminUsersPage() {
                   setFilters({ ...filters, role: e.target.value });
                   setPage(1);
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
               >
                 <option value="all">All Roles</option>
                 <option value="ADMIN">Admin</option>
@@ -306,7 +306,7 @@ export default function AdminUsersPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Search (Email/Name)
               </label>
               <input
@@ -317,60 +317,60 @@ export default function AdminUsersPage() {
                   setPage(1);
                 }}
                 placeholder="Search users..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
               />
             </div>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4 transition-colors">
             {error}
           </div>
         )}
 
         {loading ? (
-          <div className="text-center py-12">Loading users...</div>
+          <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading users...</div>
         ) : (
           <>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         User
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Role
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Purchases
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Affiliate Info
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Joined
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     {users.map((user) => (
-                      <tr key={user.id} className="hover:bg-gray-50">
+                      <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <td className="px-6 py-4">
                           <div className="flex items-center space-x-3">
                             {renderAvatar(user.picture, user.name, user.email, `user-${user.id}`)}
                             <div>
-                              <p className="text-sm font-medium text-gray-900">
+                              <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                                 {user.name || 'No name'}
                               </p>
-                              <p className="text-xs text-gray-500">{user.email}</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
                               {user.provider && (
-                                <p className="text-xs text-gray-400">
+                                <p className="text-xs text-gray-400 dark:text-gray-500">
                                   via {user.provider === 'google' ? 'Google' : user.provider}
                                 </p>
                               )}
@@ -386,17 +386,17 @@ export default function AdminUsersPage() {
                             {user.role}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-50">
                           {user._count.purchases} course{user._count.purchases !== 1 ? 's' : ''}
                         </td>
                         <td className="px-6 py-4 text-sm">
                           {user.affiliate ? (
                             <div>
-                              <p className="text-gray-900">Code: {user.affiliate.referralCode}</p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-gray-900 dark:text-gray-50">Code: {user.affiliate.referralCode}</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
                                 KYC: {user.affiliate.kycStatus}
                               </p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
                                 ₹
                                 {(
                                   user.affiliate.wallet?.totalEarned ??
@@ -406,17 +406,17 @@ export default function AdminUsersPage() {
                               </p>
                             </div>
                           ) : (
-                            <span className="text-gray-400">—</span>
+                            <span className="text-gray-400 dark:text-gray-500">—</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                           {new Date(user.createdAt).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center space-x-2">
                             <button
                               onClick={() => handleView(user)}
-                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition"
+                              className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md transition-colors"
                               title="View Details"
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -426,7 +426,7 @@ export default function AdminUsersPage() {
                             </button>
                             <button
                               onClick={() => handleEdit(user)}
-                              className="p-2 text-green-600 hover:bg-green-50 rounded-md transition"
+                              className="p-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-md transition-colors"
                               title="Edit User"
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -435,7 +435,7 @@ export default function AdminUsersPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(user)}
-                              className="p-2 text-red-600 hover:bg-red-50 rounded-md transition"
+                              className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-md transition-colors"
                               title="Delete User"
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -454,21 +454,21 @@ export default function AdminUsersPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   Showing page {page} of {totalPages} (Total: {total} users)
                 </p>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     Next
                   </button>
@@ -480,14 +480,14 @@ export default function AdminUsersPage() {
 
         {/* View User Modal */}
         {showViewModal && selectedUser && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto transition-colors">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">User Details</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50">User Details</h2>
                   <button
                     onClick={() => setShowViewModal(false)}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   >
                     ✕
                   </button>
@@ -497,29 +497,29 @@ export default function AdminUsersPage() {
                   <div className="flex items-center space-x-4">
                     {renderAvatar(selectedUser.picture, selectedUser.name, selectedUser.email, `selected-user-${selectedUser.id}`)}
                     <div>
-                      <p className="text-lg font-semibold">{selectedUser.name || 'No name'}</p>
-                      <p className="text-gray-600">{selectedUser.email}</p>
+                      <p className="text-lg font-semibold text-gray-900 dark:text-gray-50">{selectedUser.name || 'No name'}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{selectedUser.email}</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-gray-500">Role</p>
-                      <p className="font-medium">{selectedUser.role}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Role</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-50">{selectedUser.role}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Provider</p>
-                      <p className="font-medium">{selectedUser.provider || 'Email'}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Provider</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-50">{selectedUser.provider || 'Email'}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Joined</p>
-                      <p className="font-medium">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Joined</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-50">
                         {new Date(selectedUser.createdAt).toLocaleDateString()}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Purchases</p>
-                      <p className="font-medium">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Purchases</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-50">
                         {(selectedUser as any).purchases
                           ? (selectedUser as any).purchases.length
                           : selectedUser._count
@@ -531,28 +531,28 @@ export default function AdminUsersPage() {
                   </div>
 
                   {selectedUser.affiliate && (
-                    <div className="border-t pt-4">
-                      <h3 className="font-semibold mb-2">Affiliate Information</h3>
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                      <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-50">Affiliate Information</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500">Referral Code</p>
-                          <code className="text-sm bg-gray-100 px-2 py-1 rounded">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Referral Code</p>
+                          <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-50">
                             {selectedUser.affiliate.referralCode}
                           </code>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">KYC Status</p>
-                          <p className="font-medium">{selectedUser.affiliate.kycStatus}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">KYC Status</p>
+                          <p className="font-medium text-gray-900 dark:text-gray-50">{selectedUser.affiliate.kycStatus}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Lifetime Earnings</p>
-                          <p className="font-medium text-green-600">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Lifetime Earnings</p>
+                          <p className="font-medium text-green-600 dark:text-green-400">
                             ₹{selectedUser.affiliate.totalEarnings.toFixed(2)}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Status</p>
-                          <p className="font-medium">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Status</p>
+                          <p className="font-medium text-gray-900 dark:text-gray-50">
                             {selectedUser.affiliate.isActive ? 'Active' : 'Inactive'}
                           </p>
                         </div>
@@ -564,7 +564,7 @@ export default function AdminUsersPage() {
                 <div className="mt-6 flex justify-end">
                   <button
                     onClick={() => setShowViewModal(false)}
-                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                   >
                     Close
                   </button>
@@ -576,14 +576,14 @@ export default function AdminUsersPage() {
 
         {/* Edit User Modal */}
         {showEditModal && selectedUser && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 max-w-md w-full mx-4 transition-colors">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">Edit User</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50">Edit User</h2>
                   <button
                     onClick={() => setShowEditModal(false)}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   >
                     ✕
                   </button>
@@ -591,37 +591,37 @@ export default function AdminUsersPage() {
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Name
                     </label>
                     <input
                       type="text"
                       value={editForm.name}
                       onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Email
                     </label>
                     <input
                       type="email"
                       value={editForm.email}
                       onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Role
                     </label>
                     <select
                       value={editForm.role}
                       onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
                     >
                       <option value="GUEST">Guest</option>
                       <option value="BUYER">Buyer</option>
@@ -634,13 +634,13 @@ export default function AdminUsersPage() {
                 <div className="mt-6 flex justify-end space-x-3">
                   <button
                     onClick={() => setShowEditModal(false)}
-                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleUpdate}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   >
                     Save Changes
                   </button>

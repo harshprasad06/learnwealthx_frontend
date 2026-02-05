@@ -178,7 +178,7 @@ export default function PayoutsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading...</div>
@@ -190,13 +190,13 @@ export default function PayoutsPage() {
   const canRequestPayout = kycStatus === 'approved' && wallet && wallet.balance >= MIN_PAYOUT;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Payouts</h1>
-            <p className="text-gray-600">Request payouts and track your withdrawal history</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">Payouts</h1>
+            <p className="text-gray-600 dark:text-gray-400">Request payouts and track your withdrawal history</p>
           </div>
           <Link
             href="/affiliate/wallet"
@@ -261,9 +261,9 @@ export default function PayoutsPage() {
 
         {/* Request Payout Section */}
         {canRequestPayout && (
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Request Payout</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Request Payout</h2>
               {!showRequestForm && (
                 <button
                   onClick={() => setShowRequestForm(true)}
@@ -300,7 +300,7 @@ export default function PayoutsPage() {
                     value={requestForm.amount}
                     onChange={(e) => setRequestForm({ ...requestForm, amount: e.target.value })}
                     placeholder={`Enter amount (max: ₹${wallet?.balance.toFixed(2) || '0.00'})`}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder:text-gray-400"
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     Available: ₹{wallet?.balance.toFixed(2) || '0.00'}
@@ -319,7 +319,7 @@ export default function PayoutsPage() {
                         paymentMethod: e.target.value as 'bank_transfer' | 'upi' | 'paypal',
                       })
                     }
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
                   >
                     <option value="bank_transfer">Bank Transfer</option>
                     <option value="upi">UPI</option>
@@ -339,7 +339,7 @@ export default function PayoutsPage() {
                         setRequestForm({ ...requestForm, paymentDetails: e.target.value })
                       }
                       placeholder="yourname@upi"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder:text-gray-400"
                     />
                   </div>
                 )}
@@ -370,11 +370,11 @@ export default function PayoutsPage() {
         )}
 
         {/* Payout History */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Payout History</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Payout History</h2>
 
           {payouts.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
               <p>No payout requests yet.</p>
               <p className="text-sm mt-2">
                 {canRequestPayout
@@ -385,35 +385,35 @@ export default function PayoutsPage() {
           ) : (
             <>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Amount
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Method
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Status
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Requested
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Processed
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     {payouts.map((payout) => (
-                      <tr key={payout.id} className="hover:bg-gray-50">
+                      <tr key={payout.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <td className="px-4 py-3">
-                          <span className="font-semibold text-gray-900">
+                          <span className="font-semibold text-gray-900 dark:text-gray-50">
                             ₹{payout.amount.toFixed(2)}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
                           {getPaymentMethodLabel(payout.paymentMethod)}
                         </td>
                         <td className="px-4 py-3">
@@ -425,17 +425,17 @@ export default function PayoutsPage() {
                             {payout.status}
                           </span>
                           {payout.failureReason && (
-                            <p className="text-xs text-red-600 mt-1">{payout.failureReason}</p>
+                            <p className="text-xs text-red-600 dark:text-red-400 mt-1">{payout.failureReason}</p>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                           {new Date(payout.createdAt).toLocaleDateString()}
                           <br />
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-gray-400 dark:text-gray-500">
                             {new Date(payout.createdAt).toLocaleTimeString()}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                           {payout.processedAt
                             ? new Date(payout.processedAt).toLocaleDateString()
                             : '—'}
@@ -449,14 +449,14 @@ export default function PayoutsPage() {
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-6 flex items-center justify-between">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     Showing page {page} of {totalPages}
                   </p>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
                       Previous
                     </button>

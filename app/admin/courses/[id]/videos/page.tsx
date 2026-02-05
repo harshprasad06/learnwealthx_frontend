@@ -10,7 +10,6 @@ interface Video {
   description: string | null;
   bunnyVideoId: string;
   order: number;
-  duration: number | null;
 }
 
 export default function ManageVideosPage() {
@@ -25,7 +24,6 @@ export default function ManageVideosPage() {
     description: '',
     bunnyVideoId: '',
     order: '',
-    duration: '',
   });
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -73,7 +71,7 @@ export default function ManageVideosPage() {
     }
   };
 
-  const uploadVideoToBunny = async (): Promise<{ bunnyVideoId: string; duration: number | null } | null> => {
+  const uploadVideoToBunny = async (): Promise<{ bunnyVideoId: string } | null> => {
     if (!videoFile) {
       return null;
     }
@@ -101,7 +99,6 @@ export default function ManageVideosPage() {
             const data = JSON.parse(xhr.responseText);
             resolve({
               bunnyVideoId: data.bunnyVideoId,
-              duration: data.duration,
             });
           } else {
             const error = JSON.parse(xhr.responseText);
@@ -131,7 +128,6 @@ export default function ManageVideosPage() {
     e.preventDefault();
     
     let bunnyVideoId = formData.bunnyVideoId;
-    let duration = formData.duration ? parseInt(formData.duration) : null;
 
     // If uploading a file, upload to Bunny.net first
     if (uploadMode === 'upload' && videoFile) {
@@ -140,7 +136,6 @@ export default function ManageVideosPage() {
         return; // Upload failed, stop submission
       }
       bunnyVideoId = uploadResult.bunnyVideoId;
-      duration = uploadResult.duration;
     }
 
     // Validate bunnyVideoId
@@ -170,14 +165,13 @@ export default function ManageVideosPage() {
           description: formData.description || null,
           bunnyVideoId,
           order: parseInt(formData.order),
-          duration,
         }),
       });
 
       if (res.ok) {
         setShowForm(false);
         setEditingVideo(null);
-        setFormData({ title: '', description: '', bunnyVideoId: '', order: '', duration: '' });
+        setFormData({ title: '', description: '', bunnyVideoId: '', order: '' });
         setVideoFile(null);
         setUploadMode('upload');
         fetchVideos();
@@ -199,7 +193,6 @@ export default function ManageVideosPage() {
       description: video.description || '',
       bunnyVideoId: video.bunnyVideoId,
       order: video.order.toString(),
-      duration: video.duration ? video.duration.toString() : '',
     });
     setVideoFile(null);
     setUploadMode('manual'); // Default to manual when editing
@@ -243,7 +236,7 @@ export default function ManageVideosPage() {
 
         {showForm && (
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900">
               {editingVideo ? 'Edit Video' : 'Add Video'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -254,7 +247,8 @@ export default function ManageVideosPage() {
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
+                  placeholder="Enter video title"
                 />
               </div>
               <div>
@@ -262,8 +256,9 @@ export default function ManageVideosPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
                   rows={2}
+                  placeholder="Enter video description"
                 />
               </div>
               {/* Upload Mode Toggle - Only show when adding new video */}
@@ -337,7 +332,7 @@ export default function ManageVideosPage() {
                     required
                     value={formData.bunnyVideoId}
                     onChange={(e) => setFormData({ ...formData, bunnyVideoId: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
                     placeholder="Enter Bunny.net video ID (e.g., 0f7c32e5-6f2d-452a-93e3-5be5c2469c59)"
                   />
                 </div>
@@ -350,19 +345,11 @@ export default function ManageVideosPage() {
                   min="1"
                   value={formData.order}
                   onChange={(e) => setFormData({ ...formData, order: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
+                  placeholder="1"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Duration (seconds)</label>
-                <input
-                  type="number"
-                  min="0"
-                  value={formData.duration}
-                  onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
+              {/* Duration is auto-detected during upload (if available). No manual entry needed. */}
               <div className="flex space-x-4">
                 <button
                   type="submit"
@@ -376,7 +363,7 @@ export default function ManageVideosPage() {
                   onClick={() => {
                     setShowForm(false);
                     setEditingVideo(null);
-                    setFormData({ title: '', description: '', bunnyVideoId: '', order: '', duration: '' });
+                    setFormData({ title: '', description: '', bunnyVideoId: '', order: '' });
                     setVideoFile(null);
                   }}
                   className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
@@ -389,7 +376,7 @@ export default function ManageVideosPage() {
         )}
 
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Videos ({videos.length})</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Videos ({videos.length})</h2>
           <button
             onClick={() => {
               setEditingVideo(null);
@@ -398,7 +385,6 @@ export default function ManageVideosPage() {
                 description: '', 
                 bunnyVideoId: '', 
                 order: videos.length > 0 ? (Math.max(...videos.map(v => v.order)) + 1).toString() : '1', 
-                duration: '' 
               });
               setVideoFile(null);
               setUploadMode('upload');
@@ -422,7 +408,6 @@ export default function ManageVideosPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Bunny Video ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Duration</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                 </tr>
               </thead>
@@ -440,13 +425,6 @@ export default function ManageVideosPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900 font-mono text-xs">{video.bunnyVideoId}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        {video.duration
-                          ? `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}`
-                          : 'N/A'}
-                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                       <button

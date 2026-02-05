@@ -271,7 +271,7 @@ export default function AffiliateDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading affiliate dashboard...</div>
@@ -282,7 +282,7 @@ export default function AffiliateDashboardPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
@@ -295,7 +295,7 @@ export default function AffiliateDashboardPage() {
 
   if (!affiliate) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
@@ -373,7 +373,7 @@ export default function AffiliateDashboardPage() {
 
           {/* KYC Form */}
           {(kycStatus === 'not_submitted' || kycStatus === 'rejected') && (
-            <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-colors">
               {/* Form Header */}
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
                 <h2 className="text-2xl font-bold text-white mb-2">Complete Your Verification</h2>
@@ -423,7 +423,7 @@ export default function AffiliateDashboardPage() {
                         <select
                           name="documentType"
                           required
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
                         >
                           <option value="">Select document type</option>
                           <option value="aadhar">Aadhar Card</option>
@@ -468,7 +468,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="As per bank records"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm"
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                       <div>
@@ -480,7 +480,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter account number"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm"
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                       <div>
@@ -492,7 +492,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="e.g., HDFC0001234"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm uppercase"
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm uppercase text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                       <div>
@@ -504,7 +504,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter bank name"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm"
+                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                     </div>
@@ -603,32 +603,32 @@ export default function AffiliateDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Affiliate Dashboard</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">Affiliate Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-400">
             Share your referral link and earn commissions on every sale.
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg shadow p-4">
-            <p className="text-sm text-gray-500">Total Clicks</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Total Clicks</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-1">
               {affiliate.totalClicks}
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <p className="text-sm text-gray-500">Total Signups</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Total Signups</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-1">
               {affiliate.totalSignups}
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <p className="text-sm text-gray-500">Lifetime Earnings</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Lifetime Earnings</p>
             <p className="text-2xl font-bold text-green-600 mt-1">
               ₹{affiliate.totalEarnings.toFixed(2)}
             </p>
@@ -648,7 +648,7 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/affiliate/wallet"
             className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg p-6 text-white hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105"
@@ -677,24 +677,38 @@ export default function AffiliateDashboardPage() {
               </svg>
             </div>
           </Link>
+          <Link
+            href="/affiliate/analytics"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-lg p-6 text-white hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Analytics</h3>
+                <p className="text-purple-100 text-sm">Track performance & insights</p>
+              </div>
+              <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+          </Link>
         </div>
 
         {/* Course-specific Links (only for courses you own) */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Your Course Links</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Your Course Links</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             These links go directly to each course you have purchased. Share them with your
             audience to promote specific courses.
           </p>
           {courseLinks.length === 0 ? (
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
               You haven&apos;t purchased any courses yet. Buy a course to get a unique link for it.
             </p>
           ) : (
             <>
               {/* Course selection and link generation */}
               <div className="mb-4">
-                <p className="text-sm text-gray-600 mb-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                   Select one or more courses below and click &quot;Generate Referral Link&quot;.
                 </p>
                 <button
@@ -709,7 +723,7 @@ export default function AffiliateDashboardPage() {
                       type="text"
                       readOnly
                       value={generatedLink}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 bg-gray-50"
                     />
                     <button
                       onClick={handleCopyGeneratedLink}
@@ -723,25 +737,25 @@ export default function AffiliateDashboardPage() {
 
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                         Select
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Course
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                         Price
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     {courseLinks.map((c) => {
                       const checked = selectedCourseIds.includes(c.courseId);
                       return (
-                        <tr key={c.courseId}>
-                          <td className="px-4 py-2 text-sm text-gray-900">
+                        <tr key={c.courseId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">
                             <input
                               type="checkbox"
                               checked={checked}
@@ -752,11 +766,11 @@ export default function AffiliateDashboardPage() {
                                     : prev.filter((id) => id !== c.courseId)
                                 );
                               }}
-                              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                              className="h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded"
                             />
                           </td>
-                          <td className="px-4 py-2 text-sm text-gray-900">{c.title}</td>
-                          <td className="px-4 py-2 text-sm text-gray-900">
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">{c.title}</td>
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">
                             ₹{c.price.toFixed(2)}
                           </td>
                         </tr>
@@ -770,76 +784,76 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Referrals */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Referred Users ({referrals.length})</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Referred Users ({referrals.length})</h2>
           {referrals.length === 0 ? (
-            <p className="text-gray-500 text-sm">No referred users yet.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">No referred users yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       User
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Signup Date
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Purchases
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Total Spent
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {referrals.map((ref) => (
-                    <tr key={ref.id} className="hover:bg-gray-50">
+                    <tr key={ref.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center space-x-3">
                           {renderAvatar(ref.picture, ref.name, ref.email, `ref-${ref.id}`)}
                           <div>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                               {ref.name || 'No name'}
                             </p>
-                            <p className="text-xs text-gray-500">{ref.email}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">{ref.email}</p>
                             {ref.provider && (
-                              <p className="text-xs text-gray-400">
+                              <p className="text-xs text-gray-400 dark:text-gray-500">
                                 via {ref.provider === 'google' ? 'Google' : ref.provider}
                               </p>
                             )}
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500">
+                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                         {new Date(ref.createdAt).toLocaleDateString()}
                         <br />
-                        <span className="text-xs text-gray-400">
+                        <span className="text-xs text-gray-400 dark:text-gray-500">
                           {new Date(ref.createdAt).toLocaleTimeString()}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         {ref.hasPurchased ? (
-                          <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 font-medium">
+                          <span className="px-2 py-1 rounded-full text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 font-medium">
                             Active Customer
                           </span>
                         ) : (
-                          <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-600 font-medium">
+                          <span className="px-2 py-1 rounded-full text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
                             Not Purchased
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-900">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
                         {ref.purchaseCount > 0 ? (
                           <div>
                             <span className="font-semibold">{ref.purchaseCount}</span> course
                             {ref.purchaseCount > 1 ? 's' : ''}
                             {ref.purchases.length > 0 && (
-                              <div className="mt-1 text-xs text-gray-500">
+                              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                 {ref.purchases.slice(0, 2).map((p, idx) => (
                                   <div key={p.id}>
                                     • {p.course.title} (₹{p.amount.toFixed(2)})
@@ -852,16 +866,16 @@ export default function AffiliateDashboardPage() {
                             )}
                           </div>
                         ) : (
-                          <span className="text-gray-400">—</span>
+                          <span className="text-gray-400 dark:text-gray-500">—</span>
                         )}
                       </td>
                       <td className="px-4 py-3 text-sm">
                         {ref.totalSpent > 0 ? (
-                          <span className="font-semibold text-green-600">
+                          <span className="font-semibold text-green-600 dark:text-green-400">
                             ₹{ref.totalSpent.toFixed(2)}
                           </span>
                         ) : (
-                          <span className="text-gray-400">₹0.00</span>
+                          <span className="text-gray-400 dark:text-gray-500">₹0.00</span>
                         )}
                       </td>
                     </tr>
@@ -873,11 +887,11 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Purchases */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
             Referred Purchases ({purchases.length})
           </h2>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Total Commission: ₹
             {affiliate
               ? (affiliate.totalEarnings || 0).toFixed(2)
@@ -885,37 +899,37 @@ export default function AffiliateDashboardPage() {
             ({(commissionRate * 100).toFixed(0)}% of sales)
           </p>
           {purchases.length === 0 ? (
-            <p className="text-gray-500 text-sm">No referred purchases yet.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">No referred purchases yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Customer
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Course
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Amount
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Commission
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                       Purchase Date
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {purchases.map((p) => {
                     const commission = p.amount * commissionRate;
                     return (
-                      <tr key={p.id} className="hover:bg-gray-50">
+                      <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center space-x-3">
                             {renderAvatar(
@@ -925,11 +939,11 @@ export default function AffiliateDashboardPage() {
                               `purchase-${p.id}`
                             )}
                             <div>
-                              <p className="text-sm font-medium text-gray-900">
+                              <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                                 {p.user.name || 'No name'}
                               </p>
-                              <p className="text-xs text-gray-500">{p.user.email}</p>
-                              <p className="text-xs text-gray-400">
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{p.user.email}</p>
+                              <p className="text-xs text-gray-400 dark:text-gray-500">
                                 Joined:{' '}
                                 {new Date(p.user.signupDate).toLocaleDateString()}
                                 {p.user.provider && (
@@ -939,14 +953,14 @@ export default function AffiliateDashboardPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
                           {p.course.title}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
                           ₹{p.amount.toFixed(2)}
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className="font-semibold text-green-600">
+                          <span className="font-semibold text-green-600 dark:text-green-400">
                             ₹{commission.toFixed(2)}
                           </span>
                         </td>
@@ -954,19 +968,19 @@ export default function AffiliateDashboardPage() {
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
                               p.status === 'success'
-                                ? 'bg-green-100 text-green-800'
+                                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
                                 : p.status === 'pending'
-                                ? 'bg-yellow-100 text-yellow-800'
-                                : 'bg-red-100 text-red-800'
+                                ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                                : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                             }`}
                           >
                             {p.status}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                           {new Date(p.createdAt).toLocaleDateString()}
                           <br />
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-gray-400 dark:text-gray-500">
                             {new Date(p.createdAt).toLocaleTimeString()}
                           </span>
                         </td>

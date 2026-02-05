@@ -219,14 +219,14 @@ export default function AdminPayoutsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Payout Management</h1>
-              <p className="text-gray-600 mt-1">Review and process affiliate payout requests</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Payout Management</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">Review and process affiliate payout requests</p>
             </div>
             <div className="flex space-x-3">
               <button
@@ -252,7 +252,7 @@ export default function AdminPayoutsPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 mb-6 transition-colors">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Filter by Status
@@ -263,7 +263,7 @@ export default function AdminPayoutsPage() {
                 setFilters({ ...filters, status: e.target.value });
                 setPage(1);
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md max-w-xs"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md max-w-xs text-gray-900 bg-white"
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
@@ -284,7 +284,7 @@ export default function AdminPayoutsPage() {
           <div className="text-center py-12">Loading payouts...</div>
         ) : (
           <>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -416,7 +416,7 @@ export default function AdminPayoutsPage() {
         {/* View/Process Modal */}
         {showModal && selectedPayout && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto transition-colors">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-gray-900">Payout Details</h2>
@@ -546,7 +546,7 @@ export default function AdminPayoutsPage() {
                             onChange={(e) =>
                               setProcessStatus(e.target.value as 'completed' | 'failed')
                             }
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 bg-white"
                           >
                             <option value="completed">Mark as Completed</option>
                             <option value="failed">Mark as Failed</option>
@@ -564,7 +564,7 @@ export default function AdminPayoutsPage() {
                               placeholder="Provide a reason for failure..."
                               rows={3}
                               required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
                             />
                           </div>
                         )}

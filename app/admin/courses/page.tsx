@@ -181,11 +181,11 @@ export default function AdminCoursesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Manage Courses</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Manage Courses</h1>
           <button
             onClick={() => {
               setShowForm(true);
@@ -199,32 +199,34 @@ export default function AdminCoursesPage() {
         </div>
 
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
               {editingCourse ? 'Edit Course' : 'New Course'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Title *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title *</label>
                 <input
                   type="text"
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  placeholder="Enter course title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Description</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                   rows={3}
+                  placeholder="Enter course description"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Price (₹) *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Price (₹) *</label>
                 <input
                   type="number"
                   required
@@ -232,7 +234,8 @@ export default function AdminCoursesPage() {
                   min="0"
                   value={formData.price}
                   onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  placeholder="0.00"
                 />
               </div>
               <div>
@@ -278,7 +281,7 @@ export default function AdminCoursesPage() {
                       setThumbnailPreview(e.target.value);
                     }}
                     placeholder="https://example.com/image.jpg"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -318,32 +321,32 @@ export default function AdminCoursesPage() {
         )}
 
         {loading ? (
-          <div className="text-center py-12">Loading courses...</div>
+          <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading courses...</div>
         ) : courses.length === 0 ? (
-          <div className="text-center py-12 text-gray-500">No courses yet</div>
+          <div className="text-center py-12 text-gray-500 dark:text-gray-400">No courses yet</div>
         ) : (
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Videos</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Title</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Videos</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {courses.map((course) => (
                   <tr key={course.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{course.title}</div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-gray-50">{course.title}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">₹{course.price.toFixed(2)}</div>
+                      <div className="text-sm text-gray-900 dark:text-gray-50">₹{course.price.toFixed(2)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{course.videos.length}</div>
+                      <div className="text-sm text-gray-900 dark:text-gray-50">{course.videos.length}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs rounded-full ${

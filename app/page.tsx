@@ -48,7 +48,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white">
               Learn Skills That
               <span className="block text-yellow-300 mt-2">Change Your Life</span>
             </h1>
@@ -87,60 +87,60 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full mb-4 transition-colors">
+                <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Instructors</h3>
-              <p className="text-gray-600">Learn from industry experts with years of real-world experience</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Expert Instructors</h3>
+              <p className="text-gray-600 dark:text-gray-400">Learn from industry experts with years of real-world experience</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full mb-4 transition-colors">
+                <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Lifetime Access</h3>
-              <p className="text-gray-600">Get lifetime access to all course materials after purchase</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Lifetime Access</h3>
+              <p className="text-gray-600 dark:text-gray-400">Get lifetime access to all course materials after purchase</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full mb-4 transition-colors">
+                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Learn at Your Pace</h3>
-              <p className="text-gray-600">Study anytime, anywhere with our flexible learning platform</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Learn at Your Pace</h3>
+              <p className="text-gray-600 dark:text-gray-400">Study anytime, anywhere with our flexible learning platform</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Courses Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
               Featured Courses
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Discover our most popular courses and start your learning journey today
             </p>
           </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-gray-600">Loading courses...</p>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400"></div>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">Loading courses...</p>
             </div>
           ) : courses.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No courses available yet. Check back soon!</p>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">No courses available yet. Check back soon!</p>
             </div>
           ) : (
             <>
@@ -149,7 +149,7 @@ export default function Home() {
                   <Link
                     key={course.id}
                     href={`/courses/${course.id}`}
-                    className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                   >
                     <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
                       {course.thumbnail ? (
@@ -166,22 +166,22 @@ export default function Home() {
                           </svg>
                         </div>
                       )}
-                      <div className="absolute top-4 right-4 bg-white bg-opacity-90 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                      <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 px-3 py-1 rounded-full text-sm font-semibold text-gray-900 dark:text-gray-50">
                         {course.videos.length} Videos
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {course.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
                         {course.description || 'No description available'}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                        <span className="text-2xl font-bold text-blue-600">
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                           ₹{course.price.toFixed(2)}
                         </span>
-                        <span className="text-blue-600 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center">
+                        <span className="text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center">
                           View Course
                           <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="text-center">
                   <Link
                     href="/courses"
-                    className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   >
                     View All Courses
                     <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

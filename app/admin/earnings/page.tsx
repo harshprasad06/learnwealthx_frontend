@@ -62,7 +62,7 @@ export default function AdminEarningsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading earnings...</div>
@@ -73,7 +73,7 @@ export default function AdminEarningsPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
@@ -86,7 +86,7 @@ export default function AdminEarningsPage() {
 
   if (!earnings) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">No earnings data available</div>
@@ -96,13 +96,13 @@ export default function AdminEarningsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Platform Earnings</h1>
-            <p className="text-gray-600 mt-1">Total revenue and earnings breakdown</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Platform Earnings</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">Total revenue and earnings breakdown</p>
           </div>
           <Link
             href="/admin/payouts"

@@ -3,15 +3,45 @@
 @tailwind utilities;
 
 :root {
+  /* Light theme colors */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --bg-card: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --input-bg: #ffffff;
+  --input-text: #111827;
+  --input-placeholder: #9ca3af;
+  --input-border: #d1d5db;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  /* Dark theme colors */
+  --background: #111827;
+  --foreground: #f9fafb;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-card: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --input-bg: #1f2937;
+  --input-text: #f9fafb;
+  --input-placeholder: #6b7280;
+  --input-border: #4b5563;
+}
+
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body {
@@ -20,6 +50,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 @layer utilities {
@@ -32,5 +63,35 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+}
+
+/* Ensure all form inputs have explicit text colors with theme support */
+@layer base {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="url"],
+  input[type="tel"],
+  textarea,
+  select {
+    @apply bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-50 border-gray-300 dark:border-gray-600;
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-gray-400 dark:text-gray-500;
+  }
+  
+  /* Select dropdown options */
+  select option {
+    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50;
+  }
+  
+  /* Ensure headings have explicit colors with theme support */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-900 dark:text-gray-50;
   }
 }

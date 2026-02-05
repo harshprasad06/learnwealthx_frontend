@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import RefTracker from "@/components/RefTracker";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Course Platform - Learn Skills That Change Your Life",
@@ -14,10 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <RefTracker />
-        {children}
+        <ThemeProvider>
+          <RefTracker />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

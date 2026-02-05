@@ -4,22 +4,22 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 dark:bg-black text-gray-300 dark:text-gray-400 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="text-2xl font-bold text-white mb-4 block">
+            <Link href="/" className="text-2xl font-bold text-white dark:text-gray-100 mb-4 block">
               Course Platform
             </Link>
-            <p className="text-gray-400 mb-4 max-w-md">
+            <p className="text-gray-400 dark:text-gray-500 mb-4 max-w-md">
               Your gateway to professional development. Learn new skills, advance your career, 
               and unlock your potential with our comprehensive course library.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-full flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"
+                className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-full flex items-center justify-center hover:bg-blue-400 dark:hover:bg-blue-500 transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+                className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-full flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors"
+                className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-full flex items-center justify-center hover:bg-pink-600 dark:hover:bg-pink-500 transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -58,25 +58,25 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Quick Links</h3>
+            <h3 className="text-white dark:text-gray-100 font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/courses" className="hover:text-white transition-colors">
+                <Link href="/courses" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   All Courses
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/contact" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-white transition-colors">
+                <Link href="/faq" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   FAQ
                 </Link>
               </li>
@@ -85,25 +85,25 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Support</h3>
+            <h3 className="text-white dark:text-gray-100 font-semibold text-lg mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/help" className="hover:text-white transition-colors">
+                <Link href="/help" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-white transition-colors">
+                <Link href="/terms" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-white transition-colors">
+                <Link href="/privacy" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/refund" className="hover:text-white transition-colors">
+                <Link href="/refund" className="hover:text-white dark:hover:text-gray-100 transition-colors">
                   Refund Policy
                 </Link>
               </li>
@@ -112,19 +112,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
+        <div className="border-t border-gray-800 dark:border-gray-900 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 dark:text-gray-500 text-sm">
               © {new Date().getFullYear()} Course Platform. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/terms" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-200 text-sm transition-colors">
                 Terms
               </Link>
-              <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/privacy" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-200 text-sm transition-colors">
                 Privacy
               </Link>
-              <Link href="/cookies" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/cookies" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-200 text-sm transition-colors">
                 Cookies
               </Link>
             </div>
