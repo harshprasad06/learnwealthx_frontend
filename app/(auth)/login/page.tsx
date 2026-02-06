@@ -44,20 +44,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 transition-colors">
+    <div className="app-page">
+      <div className="flex-1 flex items-center justify-center px-4">
+        <div className="max-w-md w-full space-y-8 app-card app-card-padding">
         <div>
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-50">Login</h2>
-          <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-            Sign in to your account
-          </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded transition-colors">
-              {error}
-            </div>
-          )}
+            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-50">
+              Login
+            </h2>
+            <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
+              Sign in to your account
+            </p>
+          </div>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            {error && <div className="state-error">{error}</div>}
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -86,15 +85,23 @@ export default function LoginPage() {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                 placeholder="Enter your password"
               />
+              <div className="mt-2 text-right">
+                <Link
+                  href="/forgot-password"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:opacity-50 transition-colors"
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full btn-primary justify-center"
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -107,13 +114,17 @@ export default function LoginPage() {
 
           <GoogleSignIn />
 
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-            Don't have an account?{' '}
-            <Link href="/signup" className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
-              Sign up
-            </Link>
-          </p>
-        </form>
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+              Don't have an account?{' '}
+              <Link
+                href="/signup"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
+              >
+                Sign up
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

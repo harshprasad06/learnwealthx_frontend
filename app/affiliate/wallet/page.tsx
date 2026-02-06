@@ -125,57 +125,62 @@ export default function WalletPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">Loading wallet...</div>
-        </div>
+        <main className="app-main">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-loading">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <p className="mt-3 text-sm">Loading wallet...</p>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-            {error}
+        <main className="app-main">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-error mb-4">{error}</div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
 
   if (!wallet) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <p className="text-gray-700 mb-4">Wallet not found.</p>
-            <Link href="/affiliate/dashboard" className="text-blue-600 hover:underline">
-              Go to Affiliate Dashboard
-            </Link>
+        <main className="app-main">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-empty">
+              <p className="text-base mb-2">Wallet not found.</p>
+              <Link href="/affiliate/dashboard" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Go to Affiliate Dashboard
+              </Link>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="app-page">
       <Navbar />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="app-main">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">My Wallet</h1>
             <p className="text-gray-600 dark:text-gray-400">Track your earnings and transactions</p>
           </div>
-          <Link
-            href="/affiliate/payouts"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
+          <Link href="/affiliate/payouts" className="btn-primary">
             Request Payout
           </Link>
         </div>
@@ -364,7 +369,8 @@ export default function WalletPage() {
             </>
           )}
         </div>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

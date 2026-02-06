@@ -65,7 +65,10 @@ export default function AdminEarningsPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">Loading earnings...</div>
+          <div className="state-loading">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+            <p className="mt-3 text-sm">Loading earnings...</p>
+          </div>
         </div>
       </div>
     );
@@ -76,7 +79,7 @@ export default function AdminEarningsPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded mb 4">
             {error}
           </div>
         </div>
@@ -89,7 +92,10 @@ export default function AdminEarningsPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">No earnings data available</div>
+          <div className="state-empty">
+            <p className="text-base mb-2">No earnings data available.</p>
+            <p className="text-sm">Once you have purchases and subscriptions, data will appear here.</p>
+          </div>
         </div>
       </div>
     );
@@ -99,21 +105,33 @@ export default function AdminEarningsPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Platform Earnings</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Total revenue and earnings breakdown</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+              Platform Earnings
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">
+              Total revenue, subscription income, and affiliate commission breakdown.
+            </p>
           </div>
           <Link
             href="/admin/payouts"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 text-sm font-medium shadow-sm"
           >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
             View Payouts
           </Link>
         </div>
 
         {/* Total Earnings Card */}
-        <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl shadow-lg p-8 mb-6 text-white">
+        <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl shadow-lg p-6 sm:p-8 mb-6 text-white">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium opacity-90 mb-2">Total Platform Earnings</p>
@@ -139,98 +157,112 @@ export default function AdminEarningsPage() {
         {/* Earnings Breakdown */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* Subscription Earnings */}
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 border-l-4 border-purple-500 dark:border-purple-400 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Subscription Earnings</h3>
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                Subscription Earnings
+              </h3>
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/40 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
             </div>
-            <p className="text-3xl font-bold text-purple-600 mb-2">
+            <p className="text-3xl font-bold text-purple-600 dark:text-purple-300 mb-2">
               ₹{earnings.summary.fromSubscriptions.toFixed(2)}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {earnings.stats.totalSubscriptions} subscription{earnings.stats.totalSubscriptions !== 1 ? 's' : ''} collected
             </p>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               Platform subscription fees (₹999/month)
             </p>
           </div>
 
           {/* Direct Purchase Earnings */}
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 border-l-4 border-blue-500 dark:border-blue-400 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Direct Purchase Earnings</h3>
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                Direct Purchase Earnings
+              </h3>
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               </div>
             </div>
-            <p className="text-3xl font-bold text-blue-600 mb-2">
+            <p className="text-3xl font-bold text-blue-600 dark:text-blue-300 mb-2">
               ₹{earnings.summary.fromDirectPurchases.toFixed(2)}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {earnings.stats.totalDirectPurchases} direct purchase{earnings.stats.totalDirectPurchases !== 1 ? 's' : ''}
             </p>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               100% revenue (no affiliate commission)
             </p>
           </div>
 
           {/* Affiliate Sales Earnings */}
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 border-l-4 border-green-500 dark:border-green-400 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Affiliate Sales Earnings</h3>
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                Affiliate Sales Earnings
+              </h3>
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
             </div>
-            <p className="text-3xl font-bold text-green-600 mb-2">
+            <p className="text-3xl font-bold text-green-600 dark:text-green-300 mb-2">
               ₹{earnings.summary.fromAffiliateSales.toFixed(2)}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {earnings.stats.totalAffiliateSales} affiliate sale{earnings.stats.totalAffiliateSales !== 1 ? 's' : ''}
             </p>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               Platform share: {(earnings.stats.platformShareRate * 100).toFixed(0)}% (Commission: {(earnings.stats.commissionRate * 100).toFixed(0)}%)
             </p>
           </div>
         </div>
 
         {/* Detailed Stats */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Earnings Statistics</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+            Earnings Statistics
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Revenue Sources</h3>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Revenue Sources
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Subscriptions</span>
-                  <span className="font-semibold">
+                  <span className="text-gray-700 dark:text-gray-300">Subscriptions</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
                     ₹{earnings.summary.fromSubscriptions.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Direct Purchases</span>
-                  <span className="font-semibold">
+                  <span className="text-gray-700 dark:text-gray-300">Direct Purchases</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
                     ₹{earnings.summary.fromDirectPurchases.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Affiliate Sales (Platform Share)</span>
-                  <span className="font-semibold">
+                  <span className="text-gray-700 dark:text-gray-300">
+                    Affiliate Sales (Platform Share)
+                  </span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
                     ₹{earnings.summary.fromAffiliateSales.toFixed(2)}
                   </span>
                 </div>
-                <div className="border-t pt-3 mt-3">
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold text-gray-900">Total Earnings</span>
-                    <span className="text-lg font-bold text-green-600">
+                    <span className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                      Total Earnings
+                    </span>
+                    <span className="text-lg font-bold text-green-600 dark:text-green-300">
                       ₹{earnings.total.toFixed(2)}
                     </span>
                   </div>
@@ -238,28 +270,40 @@ export default function AdminEarningsPage() {
               </div>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Transaction Counts</h3>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Transaction Counts
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Total Subscriptions</span>
-                  <span className="font-semibold">{earnings.stats.totalSubscriptions}</span>
+                  <span className="text-gray-700 dark:text-gray-300">Total Subscriptions</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
+                    {earnings.stats.totalSubscriptions}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Direct Purchases</span>
-                  <span className="font-semibold">{earnings.stats.totalDirectPurchases}</span>
+                  <span className="text-gray-700 dark:text-gray-300">Direct Purchases</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
+                    {earnings.stats.totalDirectPurchases}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Affiliate Sales</span>
-                  <span className="font-semibold">{earnings.stats.totalAffiliateSales}</span>
+                  <span className="text-gray-700 dark:text-gray-300">Affiliate Sales</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-50">
+                    {earnings.stats.totalAffiliateSales}
+                  </span>
                 </div>
-                <div className="border-t pt-3 mt-3">
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-700">Commission Rate</span>
-                    <span className="font-semibold">{(earnings.stats.commissionRate * 100).toFixed(0)}%</span>
+                    <span className="text-gray-700 dark:text-gray-300">Commission Rate</span>
+                    <span className="font-semibold text-gray-900 dark:text-gray-50">
+                      {(earnings.stats.commissionRate * 100).toFixed(0)}%
+                    </span>
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-gray-700">Platform Share Rate</span>
-                    <span className="font-semibold">{(earnings.stats.platformShareRate * 100).toFixed(0)}%</span>
+                    <span className="text-gray-700 dark:text-gray-300">Platform Share Rate</span>
+                    <span className="font-semibold text-gray-900 dark:text-gray-50">
+                      {(earnings.stats.platformShareRate * 100).toFixed(0)}%
+                    </span>
                   </div>
                 </div>
               </div>

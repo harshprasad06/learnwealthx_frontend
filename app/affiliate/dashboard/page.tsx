@@ -314,7 +314,7 @@ export default function AffiliateDashboardPage() {
   // If KYC is not approved, show KYC onboarding instead of full affiliate tools
   if (kycStatus !== 'approved') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 transition-colors">
         <Navbar />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header Section */}
@@ -324,46 +324,54 @@ export default function AffiliateDashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">KYC Verification Required</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-50 mb-3">
+              KYC Verification Required
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Complete your Know Your Customer (KYC) verification to unlock affiliate features and receive secure payouts.
             </p>
           </div>
 
           {/* Status Banner */}
           {kycLoading ? (
-            <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-center">
-                <svg className="animate-spin h-5 w-5 text-blue-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-5 w-5 text-blue-500 dark:text-blue-300 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <p className="text-blue-800 font-medium">Checking your KYC status...</p>
+                <p className="text-blue-800 dark:text-blue-100 font-medium">
+                  Checking your KYC status...
+                </p>
               </div>
             </div>
           ) : kycStatus === 'pending' || kycStatus === 'under_review' ? (
-            <div className="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 dark:border-yellow-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-start">
-                <svg className="w-6 h-6 text-yellow-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-300 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <div>
-                  <h3 className="text-yellow-800 font-semibold mb-1">KYC Under Review</h3>
-                  <p className="text-yellow-700 text-sm">
+                  <h3 className="text-yellow-800 dark:text-yellow-100 font-semibold mb-1">
+                    KYC Under Review
+                  </h3>
+                  <p className="text-yellow-700 dark:text-yellow-100/90 text-sm">
                     Your KYC documents have been submitted and are currently under review. Once approved, your affiliate dashboard will be unlocked.
                   </p>
                 </div>
               </div>
             </div>
           ) : kycStatus === 'rejected' ? (
-            <div className="bg-red-50 border-l-4 border-red-500 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-start">
-                <svg className="w-6 h-6 text-red-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-red-600 dark:text-red-300 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <h3 className="text-red-800 font-semibold mb-1">KYC Rejected</h3>
-                  <p className="text-red-700 text-sm">
+                  <h3 className="text-red-800 dark:text-red-100 font-semibold mb-1">
+                    KYC Rejected
+                  </h3>
+                  <p className="text-red-700 dark:text-red-100/90 text-sm">
                     Your previous KYC submission was rejected. Please review your details and submit again with correct information.
                   </p>
                 </div>
@@ -384,22 +392,22 @@ export default function AffiliateDashboardPage() {
 
               <div className="p-8">
                 {kycError && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
                     <div className="flex items-start">
-                      <svg className="w-5 h-5 text-red-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-red-600 dark:text-red-300 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <p className="text-red-800 text-sm">{kycError}</p>
+                      <p className="text-red-800 dark:text-red-100 text-sm">{kycError}</p>
                     </div>
                   </div>
                 )}
                 {kycMessage && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
                     <div className="flex items-start">
-                      <svg className="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-green-600 dark:text-green-300 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <p className="text-green-800 text-sm">{kycMessage}</p>
+                      <p className="text-green-800 dark:text-green-100 text-sm">{kycMessage}</p>
                     </div>
                   </div>
                 )}
@@ -408,16 +416,18 @@ export default function AffiliateDashboardPage() {
                   {/* Identity Section */}
                   <div className="border-b border-gray-200 pb-6">
                     <div className="flex items-center mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mr-3">
+                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900">Identity Information</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                        Identity Information
+                      </h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                           Document Type <span className="text-red-500">*</span>
                         </label>
                         <select
@@ -433,7 +443,7 @@ export default function AffiliateDashboardPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                           Document Number <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -441,8 +451,22 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter document number"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                          Date of Birth <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          name="dob"
+                          type="date"
+                          required
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
+                        />
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          You must be 18 years or older to become an affiliate
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -450,14 +474,18 @@ export default function AffiliateDashboardPage() {
                   {/* Bank Details Section */}
                   <div className="border-b border-gray-200 pb-6">
                     <div className="flex items-center mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="flex-shrink-0 w-10 h-10 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mr-3">
+                        <svg className="w-5 h-5 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900">Bank Account Details</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                        Bank Account Details
+                      </h3>
                     </div>
-                    <p className="text-sm text-gray-600 mb-4 ml-13">This account will be used for affiliate payouts.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 ml-13">
+                      This account will be used for affiliate payouts.
+                    </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -651,12 +679,12 @@ export default function AffiliateDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/affiliate/wallet"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg p-6 text-white hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg px-4 py-5 text-white hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105"
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-1">My Wallet</h3>
-                <p className="text-blue-100 text-sm">View balance and transactions</p>
+                <h3 className="text-lg font-semibold mb-1 text-white">My Wallet</h3>
+                <p className="text-sm text-white/80">View balance and transactions</p>
               </div>
               <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -665,12 +693,12 @@ export default function AffiliateDashboardPage() {
           </Link>
           <Link
             href="/affiliate/payouts"
-            className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg shadow-lg p-6 text-white hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105"
+            className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg shadow-lg px-4 py-5 text-white hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105"
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-1">Request Payout</h3>
-                <p className="text-green-100 text-sm">Withdraw your earnings</p>
+                <h3 className="text-lg font-semibold mb-1 text-white">Request Payout</h3>
+                <p className="text-sm text-white/80">Withdraw your earnings</p>
               </div>
               <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -679,12 +707,12 @@ export default function AffiliateDashboardPage() {
           </Link>
           <Link
             href="/affiliate/analytics"
-            className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-lg p-6 text-white hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-lg px-4 py-5 text-white hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-1">Analytics</h3>
-                <p className="text-purple-100 text-sm">Track performance & insights</p>
+                <h3 className="text-lg font-semibold mb-1 text-white">Analytics</h3>
+                <p className="text-sm text-white/80">Track performance & insights</p>
               </div>
               <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />

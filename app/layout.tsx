@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased bg-[var(--background)] text-[var(--foreground)] transition-colors">
         <ThemeProvider>
           <RefTracker />
           {children}

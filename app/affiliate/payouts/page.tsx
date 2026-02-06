@@ -178,11 +178,16 @@ export default function PayoutsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">Loading...</div>
-        </div>
+        <main className="app-main">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-loading">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <p className="mt-3 text-sm">Loading payouts...</p>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -190,18 +195,16 @@ export default function PayoutsPage() {
   const canRequestPayout = kycStatus === 'approved' && wallet && wallet.balance >= MIN_PAYOUT;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="app-page">
       <Navbar />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="app-main">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">Payouts</h1>
             <p className="text-gray-600 dark:text-gray-400">Request payouts and track your withdrawal history</p>
           </div>
-          <Link
-            href="/affiliate/wallet"
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-          >
+          <Link href="/affiliate/wallet" className="btn-secondary">
             View Wallet
           </Link>
         </div>
@@ -345,24 +348,24 @@ export default function PayoutsPage() {
                 )}
 
                 <div className="flex space-x-3 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowRequestForm(false);
-                      setError('');
-                      setMessage('');
-                    }}
-                    className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
-                  >
-                    {submitting ? 'Submitting...' : 'Submit Request'}
-                  </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowRequestForm(false);
+                    setError('');
+                    setMessage('');
+                  }}
+                  className="flex-1 btn-secondary"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="flex-1 btn-primary"
+                >
+                  {submitting ? 'Submitting...' : 'Submit Request'}
+                </button>
                 </div>
               </form>
             )}
@@ -473,7 +476,8 @@ export default function PayoutsPage() {
             </>
           )}
         </div>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

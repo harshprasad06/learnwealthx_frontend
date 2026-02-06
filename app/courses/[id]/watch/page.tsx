@@ -252,33 +252,46 @@ export default function WatchCoursePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">Loading...</div>
-        </div>
+        <main className="app-main">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-loading">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <p className="mt-3 text-sm">Loading course...</p>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
 
   if (!course || !currentVideo) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="app-page">
         <Navbar />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">Course not found or no videos available</div>
-        </div>
+        <main className="app-main">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="state-empty">
+              <p className="text-base mb-2">Course not found or no videos available.</p>
+              <p className="text-sm">
+                Please go back to the course list and try again.
+              </p>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="app-page">
       <Navbar />
-      <div className="flex h-[calc(100vh-4rem)]">
-        {/* Video Player */}
-        <div className="flex-1 flex flex-col">
-          <div className="flex-1 bg-black flex items-center justify-center">
+      <main className="app-main">
+        <div className="flex h-[calc(100vh-4rem)] bg-gray-100 dark:bg-gray-900">
+          {/* Video Player */}
+          <div className="flex-1 flex flex-col bg-black">
+            <div className="flex-1 flex items-center justify-center">
             {currentVideo.playerUrl ? (
               <iframe
                 key={currentVideo.id}
@@ -288,113 +301,127 @@ export default function WatchCoursePage() {
                 allowFullScreen
               />
             ) : (
-              <video
-                key={currentVideo.id}
-                controls
-                className="w-full h-full max-w-7xl"
-                src={currentVideo.streamUrl}
-                onLoadedMetadata={handleLoadedMetadata}
-                onTimeUpdate={handleProgressTimeUpdate}
-                onEnded={() => markCompleted(currentVideo.id)}
-              >
-                Your browser does not support the video tag.
-              </video>
+                <video
+                  key={currentVideo.id}
+                  controls
+                  className="w-full h-full max-w-7xl bg-black"
+                  src={currentVideo.streamUrl}
+                  onLoadedMetadata={handleLoadedMetadata}
+                  onTimeUpdate={handleProgressTimeUpdate}
+                  onEnded={() => markCompleted(currentVideo.id)}
+                >
+                  Your browser does not support the video tag.
+                </video>
             )}
+            </div>
+            <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
+                {currentVideo.title}
+              </h2>
+              <h3 className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                {course.title}
+              </h3>
+            </div>
           </div>
-          <div className="bg-gray-800 text-white p-6">
-            <h2 className="text-2xl font-bold mb-2">{currentVideo.title}</h2>
-            <h3 className="text-lg text-gray-300">{course.title}</h3>
-          </div>
-        </div>
 
-        {/* Playlist + Reviews Sidebar */}
-        <div className="w-96 bg-gray-800 text-white overflow-y-auto">
-          <div className="p-4 border-b border-gray-700">
-            <h3 className="font-semibold">Course Content</h3>
-          </div>
-          <div className="divide-y divide-gray-700">
-            {course.videos.map((video) => (
-              <button
-                key={video.id}
-                onClick={() => loadVideo(video.id)}
-                className={`w-full text-left p-4 hover:bg-gray-700 transition-colors ${
-                  currentVideo.id === video.id ? 'bg-gray-700' : ''
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium flex items-center gap-2">
-                      {video.title}
-                      {completedVideoIds.has(video.id) && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-green-600/20 text-green-300">
-                          Done
-                        </span>
-                      )}
-                    </p>
-                    {video.duration && (
-                      <p className="text-sm text-gray-400">
-                        {Math.floor(video.duration / 60)}:{(video.duration % 60).toString().padStart(2, '0')}
+          {/* Playlist + Reviews Sidebar */}
+          <div className="w-96 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-l border-gray-200 dark:border-gray-800 overflow-y-auto">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+              <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+                Course Content
+              </h3>
+            </div>
+            <div className="divide-y divide-gray-100 dark:divide-gray-800">
+              {course.videos.map((video) => (
+                <button
+                  key={video.id}
+                  onClick={() => loadVideo(video.id)}
+                  className={`w-full text-left p-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
+                    currentVideo.id === video.id ? 'bg-gray-100 dark:bg-gray-800' : ''
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-50">
+                        {video.title}
+                        {completedVideoIds.has(video.id) && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300">
+                            Done
+                          </span>
+                        )}
                       </p>
-                    )}
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          <div className="p-4 border-t border-gray-700 space-y-3">
-            <h3 className="font-semibold text-sm">Reviews & Ratings</h3>
-
-            {reviewCount === 0 && (
-              <p className="text-xs text-gray-400">
-                No reviews yet. Go to the course page to add your review.
-              </p>
-            )}
-
-            {reviewCount > 0 && (
-              <>
-                <div className="flex items-center justify-between text-xs mb-2">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-lg font-bold">{averageRating.toFixed(1)}</span>
-                    {renderStars(averageRating)}
-                  </div>
-                  <span className="text-gray-400">
-                    {reviewCount} review{reviewCount !== 1 ? 's' : ''}
-                  </span>
-                </div>
-
-                <div className="space-y-2 max-h-40 overflow-y-auto pr-1 mt-2">
-                  {reviews.map((review) => (
-                    <div
-                      key={review.id}
-                      className="border border-gray-700 rounded p-2 text-xs space-y-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-semibold">
-                            {review.user.name || review.user.email}
-                          </p>
-                          <p className="text-[10px] text-gray-500">
-                            {new Date(review.createdAt).toLocaleDateString()}
-                          </p>
-                        </div>
-                        {renderStars(review.rating, 'sm')}
-                      </div>
-                      {review.comment && (
-                        <p className="text-[11px] text-gray-200">{review.comment}</p>
+                      {video.duration && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {Math.floor(video.duration / 60)}:
+                          {(video.duration % 60).toString().padStart(2, '0')}
+                        </p>
                       )}
                     </div>
-                  ))}
-                </div>
-              </>
-            )}
+                  </div>
+                </button>
+              ))}
+            </div>
 
-            <p className="text-[11px] text-gray-500">
-              To add or edit your review, open the course page.
-            </p>
+            <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
+              <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+                Reviews & Ratings
+              </h3>
+
+              {reviewCount === 0 && (
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  No reviews yet. Go to the course page to add your review.
+                </p>
+              )}
+
+              {reviewCount > 0 && (
+                <>
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-gray-900 dark:text-gray-50">
+                        {averageRating.toFixed(1)}
+                      </span>
+                      {renderStars(averageRating)}
+                    </div>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {reviewCount} review{reviewCount !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 max-h-40 overflow-y-auto pr-1 mt-2">
+                    {reviews.map((review) => (
+                      <div
+                        key={review.id}
+                        className="border border-gray-200 dark:border-gray-800 rounded p-2 text-xs space-y-1 bg-gray-50 dark:bg-gray-900/60"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-semibold text-gray-900 dark:text-gray-50">
+                              {review.user.name || review.user.email}
+                            </p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400">
+                              {new Date(review.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          {renderStars(review.rating, 'sm')}
+                        </div>
+                        {review.comment && (
+                          <p className="text-[11px] text-gray-700 dark:text-gray-200">
+                            {review.comment}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                To add or edit your review, open the course page.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

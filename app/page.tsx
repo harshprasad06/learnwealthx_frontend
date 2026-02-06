@@ -14,14 +14,23 @@ interface Course {
   videos: Array<{ id: string; title: string; order: number }>;
 }
 
+interface User {
+  id: string;
+  email: string;
+  name: string | null;
+  role: string;
+}
+
 export default function Home() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchCourses();
+    fetchUser();
   }, []);
 
   const fetchCourses = async () => {
@@ -39,12 +48,28 @@ export default function Home() {
     }
   };
 
+  const fetchUser = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/auth/me`, {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
+      } else {
+        setUser(null);
+      }
+    } catch {
+      setUser(null);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="app-page">
       <Navbar />
-      
-      {/* Hero Banner Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
+      <main className="app-main">
+        {/* Hero Banner Section */}
+        <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="text-center">
@@ -66,12 +91,14 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
-              <Link
-                href="/signup"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105"
-              >
-                Get Started Free
-              </Link>
+              {!user && (
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105"
+                >
+                  Get Started Free
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -84,10 +111,10 @@ export default function Home() {
             <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
           </svg>
         </div>
-      </section>
+        </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+        {/* Features Section */}
+        <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -119,13 +146,108 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* Featured Courses Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+        {/* Stats Strip (moved just before Featured Courses) */}
+        <section className="py-10 bg-white dark:bg-gray-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 text-center">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
+                Trusted by learners worldwide
+              </p>
+              <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-50">
+                Numbers that show our impact
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              <div className="app-card app-card-padding flex flex-col items-center space-y-2">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 20h5V4H2v16h5m10 0v-1a3 3 0 00-3-3H10a3 3 0 00-3 3v1m10 0H7"
+                    />
+                  </svg>
+                </div>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Learners
+                </p>
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                  10K+
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Joining from across the globe
+                </p>
+              </div>
+              <div className="app-card app-card-padding flex flex-col items-center space-y-2">
+                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 10h16M4 14h10M4 18h6"
+                    />
+                  </svg>
+                </div>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Courses
+                </p>
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                  Curated
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Hand-picked, high quality content
+                </p>
+              </div>
+              <div className="app-card app-card-padding flex flex-col items-center space-y-2">
+                <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Completion Rate
+                </p>
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                  92%
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Learners finishing what they start
+                </p>
+              </div>
+              <div className="app-card app-card-padding flex flex-col items-center space-y-2">
+                <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.788 1.402 8.168L12 18.896l-7.336 3.871 1.402-8.168L.132 9.211l8.2-1.193z" />
+                  </svg>
+                </div>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Avg. Rating
+                </p>
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                  4.8/5
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Based on learner reviews
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Courses Section */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+            <h2 className="section-title mb-2">
               Featured Courses
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -134,13 +256,14 @@ export default function Home() {
           </div>
 
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400"></div>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">Loading courses...</p>
+            <div className="state-loading">
+              <div className="inline-block h-10 w-10 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <p className="mt-3 text-sm">Loading courses...</p>
             </div>
           ) : courses.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500 dark:text-gray-400 text-lg">No courses available yet. Check back soon!</p>
+            <div className="state-empty">
+              <p className="text-base mb-1">No courses available yet.</p>
+              <p className="text-sm">Check back soon for new content.</p>
             </div>
           ) : (
             <>
@@ -209,35 +332,144 @@ export default function Home() {
             </>
           )}
         </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        {/* How It Works */}
+        <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="section-title mb-2">How It Works</h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Getting started is simple. Follow these three steps to begin your learning journey.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="app-card app-card-padding flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                  1
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                  Browse Courses
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Explore our catalog and find the course that matches your goals and skill level.
+                </p>
+              </div>
+              <div className="app-card app-card-padding flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                  2
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                  Enroll & Learn
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Purchase once and get lifetime access. Learn at your own pace with structured
+                  modules.
+                </p>
+              </div>
+              <div className="app-card app-card-padding flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                  3
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                  Track Progress
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Resume where you left off, complete lessons, and track your improvement over time.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="section-title mb-3">What Our Learners Say</h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                Real feedback from students who have transformed their skills with our courses.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="app-card app-card-padding flex flex-col h-full">
+                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                  “The course structure is clear and practical. I was able to apply what I learned
+                  to real projects within a week.”
+                </p>
+                <div className="mt-auto flex items-center space-x-3 pt-2">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-semibold">
+                    S
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Shayam</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Video Editing Student</p>
+                  </div>
+                </div>
+              </div>
+              <div className="app-card app-card-padding flex flex-col h-full">
+                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                  “Lifetime access and progress tracking make it easy to learn at my own pace,
+                  without any pressure.”
+                </p>
+                <div className="mt-auto flex items-center space-x-3 pt-2">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-sm font-semibold">
+                    A
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Anita</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Working Professional</p>
+                  </div>
+                </div>
+              </div>
+              <div className="app-card app-card-padding flex flex-col h-full">
+                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                  “The affiliate program is transparent and fair. I can clearly see my earnings and
+                  payouts from referrals.”
+                </p>
+                <div className="mt-auto flex items-center space-x-3 pt-2">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-sm font-semibold">
+                    R
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Rahul</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Affiliate Partner</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             Ready to Start Learning?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
             Join thousands of students already learning with us. Start your journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
-            >
-              Create Free Account
-            </Link>
+            {!user && (
+              <Link
+                href="/signup"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+              >
+                Create Free Account
+              </Link>
+            )}
             <Link
               href="/courses"
               className="inline-flex items-center justify-center px-8 py-4 bg-white bg-opacity-20 text-white font-semibold rounded-lg border-2 border-white hover:bg-opacity-30 transition-all"
             >
-            Browse Courses
-          </Link>
+              Browse Courses
+            </Link>
           </div>
         </div>
-      </section>
-
+        </section>
+      </main>
       <Footer />
-      </div>
+    </div>
   );
 }

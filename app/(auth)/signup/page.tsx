@@ -11,7 +11,6 @@ export default function SignupPage() {
     email: '',
     password: '',
     name: '',
-    dob: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,7 +31,6 @@ export default function SignupPage() {
           email: formData.email,
           password: formData.password,
           name: formData.name || undefined,
-          dob: formData.dob || undefined,
         }),
       });
 
@@ -53,20 +51,19 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 transition-colors">
+    <div className="app-page">
+      <div className="flex-1 flex items-center justify-center px-4">
+        <div className="max-w-md w-full space-y-8 app-card app-card-padding">
         <div>
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-50">Sign Up</h2>
-          <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-            Create your account
-          </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded transition-colors">
-              {error}
-            </div>
-          )}
+            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-50">
+              Sign Up
+            </h2>
+            <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
+              Create your account
+            </p>
+          </div>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            {error && <div className="state-error">{error}</div>}
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -110,26 +107,14 @@ export default function SignupPage() {
                 placeholder="Enter your password (min 6 characters)"
               />
             </div>
-            <div>
-              <label htmlFor="dob" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Date of Birth (Optional)
-              </label>
-              <input
-                id="dob"
-                type="date"
-                value={formData.dob}
-                onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
-              />
-            </div>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-blue-400 disabled:opacity-50 transition-colors"
-          >
-            {loading ? 'Creating account...' : 'Sign Up'}
-          </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full btn-primary justify-center"
+            >
+              {loading ? 'Creating account...' : 'Sign Up'}
+            </button>
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -142,13 +127,17 @@ export default function SignupPage() {
 
           <GoogleSignIn />
 
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-            Already have an account?{' '}
-            <Link href="/login" className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
-              Login
-            </Link>
-          </p>
-        </form>
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+              Already have an account?{' '}
+              <Link
+                href="/login"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
+              >
+                Login
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

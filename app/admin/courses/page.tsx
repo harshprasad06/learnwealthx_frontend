@@ -184,15 +184,17 @@ export default function AdminCoursesPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Manage Courses</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 text-center sm:text-left">
+            Manage Courses
+          </h1>
           <button
             onClick={() => {
               setShowForm(true);
               setEditingCourse(null);
               setFormData({ title: '', description: '', price: '', thumbnail: '', isPublished: false });
             }}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Add Course
           </button>
@@ -326,6 +328,7 @@ export default function AdminCoursesPage() {
           <div className="text-center py-12 text-gray-500 dark:text-gray-400">No courses yet</div>
         ) : (
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
+            <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
@@ -357,30 +360,57 @@ export default function AdminCoursesPage() {
                         {course.isPublished ? 'Published' : 'Draft'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                      <button
-                        onClick={() => handleEdit(course)}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleAddVideo(course.id)}
-                        className="text-green-600 hover:text-green-900"
-                      >
-                        Videos
-                      </button>
-                      <button
-                        onClick={() => handleDelete(course.id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </button>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={() => handleEdit(course)}
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-blue-900/40 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                        >
+                          <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L13 14l-4 1 1-4 8.5-8.5z"
+                            />
+                          </svg>
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleAddVideo(course.id)}
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-green-100 dark:border-green-900/40 text-xs font-medium text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
+                        >
+                          <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 2h5a2 2 0 002-2V8a2 2 0 00-2-2H9m-4 0h5a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"
+                            />
+                          </svg>
+                          Videos
+                        </button>
+                        <button
+                          onClick={() => handleDelete(course.id)}
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/40 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                        >
+                          <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 7h12M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2m-7 4v6m4-6v6M5 7h14l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7z"
+                            />
+                          </svg>
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         )}
       </div>

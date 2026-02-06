@@ -66,6 +66,61 @@ body {
   }
 }
 
+@layer components {
+  /* Shared layout shells */
+  .app-page {
+    @apply min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors;
+  }
+
+  .app-main {
+    @apply flex-1;
+  }
+
+  /* Cards */
+  .app-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 transition-colors;
+  }
+
+  .app-card-padding {
+    @apply p-4 sm:p-6;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-gray-100 text-gray-800 text-sm font-medium hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 disabled:opacity-60 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
+  }
+
+  /* Section headings */
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-50;
+  }
+
+  .section-subtitle {
+    @apply mt-1 text-sm text-gray-600 dark:text-gray-400;
+  }
+
+  /* Standard states */
+  .state-loading {
+    @apply flex flex-col items-center justify-center py-12 text-gray-600 dark:text-gray-400;
+  }
+
+  .state-empty {
+    @apply text-center py-12 text-gray-500 dark:text-gray-400;
+  }
+
+  .state-error {
+    @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded;
+  }
+}
+
 /* Ensure all form inputs have explicit text colors with theme support */
 @layer base {
   input[type="text"],
