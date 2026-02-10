@@ -6,11 +6,13 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Script from 'next/script';
 import CheckoutModal from '@/components/CheckoutModal';
+import PricingDisplay from '@/components/PricingDisplay';
 
 interface Course {
   id: string;
   title: string;
   description: string | null;
+  mrp: number;
   price: number;
   thumbnail: string | null;
   videos: Array<{
@@ -52,6 +54,7 @@ export default function CourseDetailPage() {
   const [purchasing, setPurchasing] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [averageRating, setAverageRating] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -75,9 +78,13 @@ export default function CourseDetailPage() {
       if (res.ok) {
         const data = await res.json();
         setUserRole(data.user?.role || null);
+        setIsLoggedIn(!!data.user);
+      } else {
+        setIsLoggedIn(false);
       }
     } catch (error) {
       console.error('Error fetching user role:', error);
+      setIsLoggedIn(false);
     }
   };
 
@@ -160,7 +167,7 @@ export default function CourseDetailPage() {
         key: orderData.key,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Course Platform',
+        name: 'LearnWealthX',
         description: `Purchase: ${course?.title}`,
         order_id: orderData.orderId,
         handler: async function (response: any) {
@@ -306,21 +313,39 @@ export default function CourseDetailPage() {
           <div className="p-8">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">{course.title}</h1>
             <p className="text-gray-600 dark:text-gray-400 mb-6">{course.description || 'No description'}</p>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-              <div className="flex items-center space-x-4">
-                <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                  ₹{course.price.toFixed(2)}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Course Price
                 </span>
-                {reviewCount > 0 && (
-                  <div className="flex items-center space-x-2">
-                    {renderStars(averageRating)}
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {averageRating.toFixed(1)} ({reviewCount} review{reviewCount !== 1 ? 's' : ''})
-                    </span>
-                  </div>
-                )}
+                <div className="flex items-center gap-3">
+                  <PricingDisplay
+                    mrp={course.mrp}
+                    actualPrice={course.price}
+                    discountPercentage={
+                      course.mrp && course.mrp > course.price
+                        ? Math.round(((course.mrp - course.price) / course.mrp) * 100)
+                        : 0
+                    }
+                    isLoggedIn={isLoggedIn}
+                    size="lg"
+                  />
+                  {reviewCount > 0 && (
+                    <div className="flex flex-col items-start gap-0.5">
+                      <div className="flex items-center gap-1">
+                        {renderStars(averageRating)}
+                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                          {averageRating.toFixed(1)}
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-gray-500 dark:text-gray-400">
+                        {reviewCount} review{reviewCount !== 1 ? 's' : ''}
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center gap-3">
                 {!hasAccess && (
                   <button
                     onClick={() => setShowCheckout(true)}

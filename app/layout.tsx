@@ -4,7 +4,7 @@ import RefTracker from "@/components/RefTracker";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "Course Platform - Learn Skills That Change Your Life",
+  title: "LearnWealthX - Learn Skills That Change Your Life",
   description:
     "Master in-demand skills with our comprehensive courses. Start learning today and unlock your potential.",
 };

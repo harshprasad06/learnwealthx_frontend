@@ -206,29 +206,44 @@ export default function WalletPage() {
 
         {/* Recent Transactions */}
         {wallet.recentTransactions && wallet.recentTransactions.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Recent Transactions</h2>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow dark:shadow-gray-900/60 p-6 transition-colors">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+                Recent Transactions
+              </h2>
+              <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-200">
+                Last {Math.min(wallet.recentTransactions.length, 5)} activities
+              </span>
+            </div>
             <div className="space-y-3">
               {wallet.recentTransactions.map((tx) => (
                 <div
                   key={tx.id}
-                  className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors"
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-gray-50 dark:bg-gray-800/80 rounded-lg border border-gray-100 dark:border-gray-700 transition-all hover:border-blue-200 dark:hover:border-blue-500/70 hover:shadow-sm"
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-full ${getTransactionTypeColor(tx.type)}`}>
+                  <div className="flex items-start space-x-3">
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-full ${getTransactionTypeColor(
+                        tx.type
+                      )}`}
+                    >
                       {getTransactionIcon(tx.type)}
                     </div>
-                    <div>
-                      <p className="font-medium text-gray-900 dark:text-gray-50 capitalize">
+                    <div className="min-w-0">
+                      <p className="font-semibold text-gray-900 dark:text-gray-50 capitalize text-sm">
                         {tx.type.replace('_', ' ')}
                       </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{tx.description || 'Transaction'}</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500">
-                        {new Date(tx.createdAt).toLocaleString()}
+                      <p className="text-xs text-gray-600 dark:text-gray-400 break-words mt-0.5">
+                        {tx.description || 'Transaction'}
+                      </p>
+                      <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">
+                        {new Date(tx.createdAt).toLocaleDateString()}{' '}
+                        <span className="mx-1">•</span>
+                        {new Date(tx.createdAt).toLocaleTimeString()}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="flex items-center justify-between sm:flex-col sm:items-end sm:justify-center gap-1 text-sm">
                     <p
                       className={`font-semibold ${
                         tx.type === 'credit' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
@@ -237,10 +252,12 @@ export default function WalletPage() {
                       {tx.type === 'credit' ? '+' : '-'}₹{tx.amount.toFixed(2)}
                     </p>
                     <span
-                      className={`text-xs px-2 py-1 rounded ${
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium ${
                         tx.status === 'completed'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                          : tx.status === 'pending'
+                          ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                          : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                       }`}
                     >
                       {tx.status}
@@ -271,7 +288,59 @@ export default function WalletPage() {
             </div>
           ) : (
             <>
-              <div className="overflow-x-auto">
+              {/* Mobile-friendly stacked cards */}
+              <div className="space-y-3 md:hidden">
+                {transactions.map((tx) => (
+                  <div
+                    key={tx.id}
+                    className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 text-sm"
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-medium capitalize ${getTransactionTypeColor(
+                          tx.type
+                        )}`}
+                      >
+                        {tx.type.replace('_', ' ')}
+                      </span>
+                      <span
+                        className={`font-semibold text-sm ${
+                          tx.type === 'credit'
+                            ? 'text-green-600 dark:text-green-400'
+                            : 'text-red-600 dark:text-red-400'
+                        }`}
+                      >
+                        {tx.type === 'credit' ? '+' : '-'}₹{tx.amount.toFixed(2)}
+                      </span>
+                    </div>
+                    <p className="text-gray-900 dark:text-gray-50 text-xs mb-1">
+                      {tx.description || 'Transaction'}
+                    </p>
+                    <div className="flex items-center justify-between mt-1">
+                      <div className="text-[11px] text-gray-500 dark:text-gray-400">
+                        <div>{new Date(tx.createdAt).toLocaleDateString()}</div>
+                        <div className="text-[10px]">
+                          {new Date(tx.createdAt).toLocaleTimeString()}
+                        </div>
+                      </div>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-medium ${
+                          tx.status === 'completed'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                            : tx.status === 'pending'
+                            ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                        }`}
+                      >
+                        {tx.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop table */}
+              <div className="overflow-x-auto hidden md:block">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>

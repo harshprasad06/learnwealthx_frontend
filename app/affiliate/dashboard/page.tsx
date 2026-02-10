@@ -78,12 +78,49 @@ export default function AffiliateDashboardPage() {
     totalEarned: number;
     totalPaid: number;
   } | null>(null);
+  const [milestones, setMilestones] = useState<{
+    subscriptionCount: number;
+    nextMilestone: {
+      id: string;
+      targetCount: number;
+      reward: string;
+      description: string | null;
+      progress: number;
+      remaining: number;
+      startDate: string;
+      endDate: string;
+    } | null;
+    highestUnlocked: {
+      id: string;
+      targetCount: number;
+      reward: string;
+      description: string | null;
+      unlockedAt: string | null;
+      startDate: string;
+      endDate: string;
+    } | null;
+  } | null>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchDashboard();
+    fetchMilestones();
   }, []);
+
+  const fetchMilestones = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/milestones/affiliate`, {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setMilestones(data);
+      }
+    } catch (err) {
+      console.error('Milestones fetch error:', err);
+    }
+  };
 
   const fetchDashboard = async () => {
     setLoading(true);
@@ -720,6 +757,81 @@ export default function AffiliateDashboardPage() {
             </div>
           </Link>
         </div>
+
+        {/* Milestones & Offers */}
+        {milestones && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Milestones & Offers</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Track your progress toward unlocking rewards within each milestone&apos;s valid period.
+            </p>
+
+            {/* Highest Unlocked Milestone */}
+            {milestones.highestUnlocked && (
+              <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    🏆
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Highest Milestone Unlocked</p>
+                    <p className="text-lg font-bold text-gray-900 dark:text-gray-50">{milestones.highestUnlocked.reward}</p>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {milestones.highestUnlocked.targetCount} subscriptions • Unlocked on{' '}
+                  {milestones.highestUnlocked.unlockedAt
+                    ? new Date(milestones.highestUnlocked.unlockedAt).toLocaleDateString()
+                    : 'N/A'}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                  Valid from{' '}
+                  {new Date(milestones.highestUnlocked.startDate).toLocaleDateString()} to{' '}
+                  {new Date(milestones.highestUnlocked.endDate).toLocaleDateString()}
+                </p>
+              </div>
+            )}
+
+            {/* Next Milestone Progress */}
+            {milestones.nextMilestone ? (
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Next Milestone</p>
+                    <p className="text-lg font-bold text-gray-900 dark:text-gray-50">{milestones.nextMilestone.reward}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {milestones.subscriptionCount} / {milestones.nextMilestone.targetCount}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                      {milestones.nextMilestone.remaining} remaining
+                    </p>
+                  </div>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-2">
+                  <div
+                    className="bg-gradient-to-r from-yellow-500 to-orange-500 h-3 rounded-full transition-all duration-300"
+                    style={{ width: `${Math.min(milestones.nextMilestone.progress, 100)}%` }}
+                  ></div>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                  {milestones.nextMilestone.progress.toFixed(1)}% complete • Valid{' '}
+                  {new Date(milestones.nextMilestone.startDate).toLocaleDateString()} –{' '}
+                  {new Date(milestones.nextMilestone.endDate).toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <div className="text-center py-4">
+                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                  {milestones.highestUnlocked
+                    ? '🎉 You\'ve unlocked all available milestones!'
+                    : 'No milestones available yet.'}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Course-specific Links (only for courses you own) */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">

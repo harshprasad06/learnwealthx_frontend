@@ -189,7 +189,7 @@ function InnerCheckoutModal({
         key: orderData.key,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Course Platform',
+        name: 'LearnWealthX',
         description: `Purchase: ${title}`,
         order_id: orderData.orderId,
         handler: async function (response: any) {
@@ -247,45 +247,56 @@ function InnerCheckoutModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/70 backdrop-blur-sm transition-colors"
       onClick={closeOnBackground}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 relative border border-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 relative border border-gray-200 dark:border-gray-700 transition-colors">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+          className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+          aria-label="Close"
         >
-          ✕
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
 
-        <h2 className="text-xl font-semibold mb-1">Smart Checkout</h2>
-        <p className="text-xs uppercase tracking-wide text-gray-400 mb-4">
-          One continuous flow for account + payment
-        </p>
-        <div className="mb-4 rounded-lg bg-gray-50 px-4 py-3 flex items-center justify-between">
-          <div>
-            <p className="text-sm font-medium text-gray-900">{title}</p>
-            <p className="text-xs text-gray-500">You will get lifetime access</p>
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">Checkout</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Complete your purchase to get lifetime access
+          </p>
+        </div>
+
+        <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 px-5 py-4 border border-blue-100 dark:border-blue-800/50">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <p className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-1">{title}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Lifetime access included</p>
+            </div>
+            <div className="ml-4 text-right">
+              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">₹{totalPrice.toFixed(2)}</p>
+            </div>
           </div>
-        <p className="text-sm text-gray-600">
-          {title} &middot; <span className="font-semibold">₹{totalPrice.toFixed(2)}</span>
-        </p>
         </div>
 
         {step === 'checking' && (
-          <div className="py-6 text-center text-gray-500">Checking your account...</div>
+          <div className="py-8 text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400 mb-3" />
+            <p className="text-sm text-gray-600 dark:text-gray-400">Checking your account...</p>
+          </div>
         )}
 
         {step === 'auth' && (
           <form onSubmit={handleAuthSubmit} className="space-y-4">
-            <div className="flex space-x-2 mb-1">
+            <div className="flex space-x-3 mb-4">
               <button
                 type="button"
                 onClick={() => setAuthMode('signup')}
-                className={`flex-1 py-2 text-sm font-medium rounded-md border ${
+                className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'signup'
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white text-gray-700 border-gray-300'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
                 }`}
               >
                 New here
@@ -293,10 +304,10 @@ function InnerCheckoutModal({
               <button
                 type="button"
                 onClick={() => setAuthMode('login')}
-                className={`flex-1 py-2 text-sm font-medium rounded-md border ${
+                className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'login'
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white text-gray-700 border-gray-300'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
                 }`}
               >
                 I have an account
@@ -304,49 +315,55 @@ function InnerCheckoutModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Email
+              </label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                placeholder="your@email.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Password
+              </label>
               <input
                 type="password"
                 required
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                placeholder="Minimum 6 characters"
               />
             </div>
 
             {authError && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-sm">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                 {authError}
               </div>
             )}
             {GOOGLE_CLIENT_ID && (
               <>
                 {googleError && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-sm mb-2">
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm mb-3">
                     {googleError}
                   </div>
                 )}
-                <div className="flex items-center my-1">
-                  <div className="flex-1 h-px bg-gray-200" />
-                  <span className="px-2 text-xs text-gray-400">or</span>
-                  <div className="flex-1 h-px bg-gray-200" />
+                <div className="flex items-center my-4">
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                  <span className="px-3 text-xs text-gray-500 dark:text-gray-400 font-medium">or</span>
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
                 </div>
                 <button
                   type="button"
                   onClick={() => googleLogin()}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path
@@ -373,52 +390,76 @@ function InnerCheckoutModal({
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
-              {loading
-                ? 'Processing...'
-                : authMode === 'signup'
-                ? 'Create account & pay'
-                : 'Login & pay'}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Processing...
+                </>
+              ) : authMode === 'signup' ? (
+                'Create account & continue'
+              ) : (
+                'Login & continue'
+              )}
             </button>
           </form>
         )}
 
         {step === 'paying' && (
-          <div className="py-6 text-center text-gray-500">
-            Processing your payment, please wait...
+          <div className="py-8 text-center">
+            <div className="inline-block h-10 w-10 animate-spin rounded-full border-3 border-b-transparent border-blue-600 dark:border-blue-400 mb-4" />
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Processing your payment
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Please wait while we complete your purchase...
+            </p>
           </div>
         )}
 
         {step === 'success' && (
-          <div className="py-6 text-center">
-            <p className="text-green-600 font-semibold mb-2">
-              Payment successful! You now own this course.
+          <div className="py-8 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+              <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+              Payment Successful!
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              You now have lifetime access to this course.
             </p>
             <button
               onClick={onClose}
-              className="mt-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 shadow-md hover:shadow-lg transition-all"
             >
-              Close
+              Continue Learning
             </button>
           </div>
         )}
 
         {step === 'error' && (
           <div className="py-6">
-            <p className="text-red-600 text-sm mb-3">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+              <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <p className="text-center text-red-600 dark:text-red-400 text-sm font-medium mb-6">
               {payError || 'Something went wrong during checkout.'}
             </p>
-            <div className="flex justify-end space-x-2">
+            <div className="flex gap-3">
               <button
                 onClick={() => setStep('auth')}
-                className="px-3 py-1.5 text-sm rounded-md border border-gray-300 text-gray-700 bg-white hover:bg-gray-50"
+                className="flex-1 py-2.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
               >
                 Try again
               </button>
               <button
                 onClick={onClose}
-                className="px-3 py-1.5 text-sm rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300"
+                className="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               >
                 Close
               </button>

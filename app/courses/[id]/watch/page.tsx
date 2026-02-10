@@ -288,31 +288,33 @@ export default function WatchCoursePage() {
     <div className="app-page">
       <Navbar />
       <main className="app-main">
-        <div className="flex h-[calc(100vh-4rem)] bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-900">
           {/* Video Player */}
           <div className="flex-1 flex flex-col bg-black">
-            <div className="flex-1 flex items-center justify-center">
-            {currentVideo.playerUrl ? (
-              <iframe
-                key={currentVideo.id}
-                src={currentVideo.playerUrl}
-                className="w-full h-full max-w-7xl"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-                <video
-                  key={currentVideo.id}
-                  controls
-                  className="w-full h-full max-w-7xl bg-black"
-                  src={currentVideo.streamUrl}
-                  onLoadedMetadata={handleLoadedMetadata}
-                  onTimeUpdate={handleProgressTimeUpdate}
-                  onEnded={() => markCompleted(currentVideo.id)}
-                >
-                  Your browser does not support the video tag.
-                </video>
-            )}
+            <div className="w-full bg-black">
+              <div className="relative w-full aspect-video">
+                {currentVideo.playerUrl ? (
+                  <iframe
+                    key={currentVideo.id}
+                    src={currentVideo.playerUrl}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <video
+                    key={currentVideo.id}
+                    controls
+                    className="absolute inset-0 w-full h-full bg-black"
+                    src={currentVideo.streamUrl}
+                    onLoadedMetadata={handleLoadedMetadata}
+                    onTimeUpdate={handleProgressTimeUpdate}
+                    onEnded={() => markCompleted(currentVideo.id)}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+              </div>
             </div>
             <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
@@ -325,7 +327,7 @@ export default function WatchCoursePage() {
           </div>
 
           {/* Playlist + Reviews Sidebar */}
-          <div className="w-96 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-l border-gray-200 dark:border-gray-800 overflow-y-auto">
+          <div className="w-full md:w-96 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-800 md:max-h-[calc(100vh-4rem)] md:overflow-y-auto">
             <div className="p-4 border-b border-gray-200 dark:border-gray-800">
               <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
                 Course Content

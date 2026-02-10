@@ -44,6 +44,7 @@ export default function RefLandingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
 
   // Track click by affiliateId and set cookie with course IDs
   useEffect(() => {
@@ -161,11 +162,12 @@ export default function RefLandingPage() {
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-lg shadow-md overflow-hidden">
-              {affiliate?.user.picture ? (
+              {affiliate?.user.picture && !avatarError ? (
                 <img
                   src={affiliate.user.picture}
                   alt={displayName || 'Affiliate'}
                   className="w-full h-full object-cover"
+                  onError={() => setAvatarError(true)}
                 />
               ) : (
                 avatarInitial

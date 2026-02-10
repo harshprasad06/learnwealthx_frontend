@@ -3,11 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import PricingDisplay from '@/components/PricingDisplay';
 
 interface Course {
   id: string;
   title: string;
   description: string | null;
+  mrp: number;
   price: number;
   thumbnail: string | null;
   videos: Array<{ id: string; title: string; order: number }>;
@@ -18,12 +20,31 @@ export default function CoursesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<'newest' | 'price_low' | 'price_high'>('newest');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
+    fetchAuthState();
     fetchCourses();
   }, []);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  const fetchAuthState = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/auth/me`, {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setIsLoggedIn(!!data.user);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error('Error checking auth state:', error);
+      setIsLoggedIn(false);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -191,9 +212,17 @@ export default function CoursesPage() {
                         {course.description || 'No description available'}
                       </p>
                       <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
-                        <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                          ₹{course.price.toFixed(2)}
-                        </span>
+                        <PricingDisplay
+                          mrp={course.mrp}
+                          actualPrice={course.price}
+                          discountPercentage={
+                            course.mrp && course.mrp > course.price
+                              ? Math.round(((course.mrp - course.price) / course.mrp) * 100)
+                              : 0
+                          }
+                          isLoggedIn={isLoggedIn}
+                          size="md"
+                        />
                         <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
                           Lifetime access
                         </span>

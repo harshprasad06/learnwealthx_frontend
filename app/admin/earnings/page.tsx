@@ -21,6 +21,7 @@ interface EarningsData {
     totalSubscriptions: number;
     totalDirectPurchases: number;
     totalAffiliateSales: number;
+    totalAffiliateRevenue?: number;
     commissionRate: number;
     platformShareRate: number;
   };
@@ -177,6 +178,15 @@ export default function AdminEarningsPage() {
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               Platform subscription fees (₹999/month)
             </p>
+            <Link
+              href="/admin/subscription-users"
+              className="mt-4 inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+            >
+              View All Subscribers
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
 
           {/* Direct Purchase Earnings */}
@@ -200,6 +210,15 @@ export default function AdminEarningsPage() {
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
               100% revenue (no affiliate commission)
             </p>
+            <Link
+              href="/admin/direct-purchase-users"
+              className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+            >
+              View All Buyers
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
 
           {/* Affiliate Sales Earnings */}
@@ -215,14 +234,25 @@ export default function AdminEarningsPage() {
               </div>
             </div>
             <p className="text-3xl font-bold text-green-600 dark:text-green-300 mb-2">
-              ₹{earnings.summary.fromAffiliateSales.toFixed(2)}
+              ₹{earnings.stats.totalAffiliateRevenue !== undefined && earnings.stats.totalAffiliateRevenue > 0 
+                ? earnings.stats.totalAffiliateRevenue.toFixed(2) 
+                : earnings.summary.fromAffiliateSales.toFixed(2)}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {earnings.stats.totalAffiliateSales} affiliate sale{earnings.stats.totalAffiliateSales !== 1 ? 's' : ''}
             </p>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-              Platform share: {(earnings.stats.platformShareRate * 100).toFixed(0)}% (Commission: {(earnings.stats.commissionRate * 100).toFixed(0)}%)
+              Commission: {(earnings.stats.commissionRate * 100).toFixed(0)}%
             </p>
+            <Link
+              href="/admin/earning-affiliates"
+              className="mt-4 inline-flex items-center text-sm font-medium text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors"
+            >
+              View Earning Affiliates
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
 

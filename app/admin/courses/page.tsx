@@ -8,6 +8,7 @@ interface Course {
   id: string;
   title: string;
   description: string | null;
+  mrp: number;
   price: number;
   thumbnail: string | null;
   isPublished: boolean;
@@ -23,6 +24,7 @@ export default function AdminCoursesPage() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    mrp: '',
     price: '',
     thumbnail: '',
     isPublished: false,
@@ -120,6 +122,7 @@ export default function AdminCoursesPage() {
         body: JSON.stringify({
           ...formData,
           thumbnail: thumbnailUrl,
+          mrp: formData.mrp ? parseFloat(formData.mrp) : undefined,
           price: parseFloat(formData.price),
           isPublished: formData.isPublished,
         }),
@@ -128,7 +131,7 @@ export default function AdminCoursesPage() {
       if (res.ok) {
         setShowForm(false);
         setEditingCourse(null);
-        setFormData({ title: '', description: '', price: '', thumbnail: '', isPublished: false });
+        setFormData({ title: '', description: '', mrp: '', price: '', thumbnail: '', isPublished: false });
         setThumbnailFile(null);
         setThumbnailPreview('');
         fetchCourses();
@@ -147,6 +150,7 @@ export default function AdminCoursesPage() {
     setFormData({
       title: course.title,
       description: course.description || '',
+      mrp: (course.mrp ?? course.price).toString(),
       price: course.price.toString(),
       thumbnail: course.thumbnail || '',
       isPublished: course.isPublished,
@@ -192,7 +196,7 @@ export default function AdminCoursesPage() {
             onClick={() => {
               setShowForm(true);
               setEditingCourse(null);
-              setFormData({ title: '', description: '', price: '', thumbnail: '', isPublished: false });
+              setFormData({ title: '', description: '', mrp: '', price: '', thumbnail: '', isPublished: false });
             }}
             className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
@@ -228,7 +232,20 @@ export default function AdminCoursesPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Price (₹) *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">M.R.P. (₹) *</label>
+                <input
+                  type="number"
+                  required
+                  step="0.01"
+                  min="0"
+                  value={formData.mrp}
+                  onChange={(e) => setFormData({ ...formData, mrp: e.target.value })}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  placeholder="e.g., 899.00"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Sale Price (₹) *</label>
                 <input
                   type="number"
                   required
@@ -237,7 +254,7 @@ export default function AdminCoursesPage() {
                   value={formData.price}
                   onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
-                  placeholder="0.00"
+                  placeholder="e.g., 589.00"
                 />
               </div>
               <div>
