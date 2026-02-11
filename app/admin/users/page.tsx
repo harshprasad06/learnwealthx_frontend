@@ -46,24 +46,6 @@ interface UserDetails extends User {
     status: string;
     amount: number;
   }>;
-  affiliate?: {
-    id: string;
-    referralCode: string;
-    kycStatus: string;
-    totalClicks: number;
-    totalSignups: number;
-    totalEarnings: number;
-    isActive: boolean;
-    wallet?: {
-      balance: number;
-      totalEarned: number;
-      totalPaid: number;
-    };
-    kyc?: {
-      status: string;
-      submittedAt: string;
-    };
-  } | null;
 }
 
 export default function AdminUsersPage() {
