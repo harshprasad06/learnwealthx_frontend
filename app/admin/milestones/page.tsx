@@ -117,7 +117,14 @@ export default function AdminMilestonesPage() {
       if (res.ok) {
         setShowForm(false);
         setEditingMilestone(null);
-        setFormData({ targetCount: '', rewardType: '', reward: '', description: '' });
+        setFormData({
+          targetCount: '',
+          rewardType: '',
+          reward: '',
+          description: '',
+          startDate: '',
+          endDate: '',
+        });
         fetchMilestones();
       } else {
         const data = await res.json();
@@ -217,11 +224,18 @@ export default function AdminMilestonesPage() {
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Milestones & Offers</h1>
             <button
-                    onClick={() => {
-                      setShowForm(true);
-                      setEditingMilestone(null);
-                      setFormData({ targetCount: '', rewardType: '', reward: '', description: '' });
-                    }}
+              onClick={() => {
+                setShowForm(true);
+                setEditingMilestone(null);
+                setFormData({
+                  targetCount: '',
+                  rewardType: '',
+                  reward: '',
+                  description: '',
+                  startDate: '',
+                  endDate: '',
+                });
+              }}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Add Milestone
@@ -335,7 +349,14 @@ export default function AdminMilestonesPage() {
                     onClick={() => {
                       setShowForm(false);
                       setEditingMilestone(null);
-                      setFormData({ targetCount: '', rewardType: '', reward: '', description: '' });
+                      setFormData({
+                        targetCount: '',
+                        rewardType: '',
+                        reward: '',
+                        description: '',
+                        startDate: '',
+                        endDate: '',
+                      });
                     }}
                     className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                   >
