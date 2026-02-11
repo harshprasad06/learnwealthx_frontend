@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import RefTracker from "@/components/RefTracker";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "LearnWealthX - Learn Skills That Change Your Life",
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased bg-[var(--background)] text-[var(--foreground)] transition-colors">
         <ThemeProvider>
-          <RefTracker />
+          <Suspense fallback={null}>
+            <RefTracker />
+          </Suspense>
           {children}
         </ThemeProvider>
       </body>
