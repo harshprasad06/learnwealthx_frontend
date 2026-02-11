@@ -344,6 +344,9 @@ export default function CourseDetailPage() {
                     </div>
                   )}
                 </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Price shown excludes GST (18%) and payment gateway fees (2%)
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 {!hasAccess && (

@@ -24,6 +24,9 @@ interface EarningsData {
     totalAffiliateRevenue?: number;
     commissionRate: number;
     platformShareRate: number;
+    totalGstCollected?: number;
+    totalGatewayFees?: number;
+    totalChargedToUsers?: number;
   };
 }
 
@@ -255,6 +258,63 @@ export default function AdminEarningsPage() {
             </Link>
           </div>
         </div>
+
+        {/* Price Breakdown Stats */}
+        {earnings.stats.totalGstCollected !== undefined && earnings.stats.totalGstCollected > 0 && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 mb-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+              Price Breakdown Statistics
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  Platform Revenue
+                </p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-50">
+                  ₹{earnings.total.toFixed(2)}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                  Base course prices only
+                </p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  GST Collected
+                </p>
+                <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                  ₹{earnings.stats.totalGstCollected.toFixed(2)}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                  18% on base price
+                </p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
+                  Gateway Fees
+                </p>
+                <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+                  ₹{earnings.stats.totalGatewayFees?.toFixed(2) || '0.00'}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                  2% on (base + GST)
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Total Charged to Users
+                </span>
+                <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  ₹{earnings.stats.totalChargedToUsers?.toFixed(2) || '0.00'}
+                </span>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                Platform Revenue + GST + Gateway Fees
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Detailed Stats */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 transition-colors">

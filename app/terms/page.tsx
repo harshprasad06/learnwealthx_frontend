@@ -117,7 +117,7 @@ export default function TermsOfServicePage() {
                   <li>Use the platform for any illegal or unauthorized purpose</li>
                   <li>Violate any laws in your jurisdiction</li>
                   <li>Transmit any viruses, malware, or harmful code</li>
-                  <li>Interfere with or disrupt the platform's security or functionality</li>
+                  <li>Interfere with or disrupt the platform&apos;s security or functionality</li>
                   <li>Attempt to gain unauthorized access to any part of the platform</li>
                   <li>Harass, abuse, or harm other users</li>
                   <li>Post false, misleading, or defamatory content</li>

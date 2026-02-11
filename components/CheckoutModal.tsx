@@ -11,6 +11,13 @@ interface CheckoutModalProps {
   onSuccess: () => void;
 }
 
+interface PriceBreakdown {
+  baseAmount: number;
+  gstAmount: number;
+  gatewayFeeAmount: number;
+  totalAmount: number;
+}
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
 
@@ -38,6 +45,7 @@ function InnerCheckoutModal({
   const [payError, setPayError] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleError, setGoogleError] = useState('');
+  const [priceBreakdown, setPriceBreakdown] = useState<PriceBreakdown | null>(null);
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -171,6 +179,25 @@ function InnerCheckoutModal({
         return;
       }
 
+      // Parse breakdown from API response or calculate client-side as fallback
+      if (orderData.breakdown) {
+        setPriceBreakdown(orderData.breakdown);
+      } else {
+        // Fallback: calculate client-side if breakdown not provided (backward compatibility)
+        const GST_RATE = 0.18;
+        const GATEWAY_FEE_RATE = 0.02;
+        const gstAmount = Math.round(totalPrice * GST_RATE);
+        const subtotalBeforeGatewayFee = totalPrice + gstAmount;
+        const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
+        const totalAmount = totalPrice + gstAmount + gatewayFeeAmount;
+        setPriceBreakdown({
+          baseAmount: totalPrice,
+          gstAmount,
+          gatewayFeeAmount,
+          totalAmount,
+        });
+      }
+
       // Bypass mode
       if (orderData.bypass) {
         setStep('success');
@@ -269,15 +296,37 @@ function InnerCheckoutModal({
         </div>
 
         <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 px-5 py-4 border border-blue-100 dark:border-blue-800/50">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between mb-3">
             <div className="flex-1">
               <p className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-1">{title}</p>
               <p className="text-xs text-gray-600 dark:text-gray-400">Lifetime access included</p>
             </div>
             <div className="ml-4 text-right">
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">₹{totalPrice.toFixed(2)}</p>
+              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                ₹{priceBreakdown ? priceBreakdown.totalAmount.toFixed(2) : totalPrice.toFixed(2)}
+              </p>
             </div>
           </div>
+          {priceBreakdown && (
+            <div className="pt-3 border-t border-blue-200 dark:border-blue-800/50 space-y-1.5">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                <span>Course Price:</span>
+                <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                <span>GST (18%):</span>
+                <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                <span>Payment Gateway Fee (2%):</span>
+                <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-blue-200 dark:border-blue-800/50">
+                <span>Total:</span>
+                <span>₹{priceBreakdown.totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {step === 'checking' && (
@@ -428,9 +477,30 @@ function InnerCheckoutModal({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
               Payment Successful!
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               You now have lifetime access to this course.
             </p>
+            {priceBreakdown && (
+              <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg text-left space-y-1.5">
+                <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Payment Receipt:</p>
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span>Course Price:</span>
+                  <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span>GST (18%):</span>
+                  <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span>Payment Gateway Fee (2%):</span>
+                  <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-gray-200 dark:border-gray-600">
+                  <span>Total Paid:</span>
+                  <span>₹{priceBreakdown.totalAmount.toFixed(2)}</span>
+                </div>
+              </div>
+            )}
             <button
               onClick={onClose}
               className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 shadow-md hover:shadow-lg transition-all"

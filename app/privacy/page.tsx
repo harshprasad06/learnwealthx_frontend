@@ -161,7 +161,7 @@ export default function PrivacyPolicyPage() {
 
               <section>
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
-                  8. Children's Privacy
+                  8. Children&apos;s Privacy
                 </h2>
                 <p>
                   LearnWealthX is not intended for users under the age of 18. We do not knowingly collect 
@@ -189,7 +189,7 @@ export default function PrivacyPolicyPage() {
                 <p>
                   We may update this Privacy Policy from time to time to reflect changes in our practices 
                   or for legal, operational, or regulatory reasons. We will notify you of material changes 
-                  by posting the updated policy on this page and updating the "Last updated" date. 
+                  by posting the updated policy on this page and updating the &quot;Last updated&quot; date. 
                   Continued use of the platform after changes become effective constitutes acceptance of 
                   the revised policy.
                 </p>
