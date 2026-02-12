@@ -892,7 +892,6 @@ export default function AffiliateDashboardPage() {
                   </thead>
                   <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     {courseLinks.map((c) => {
-                      console.log("course",c);
                       const checked = selectedCourseIds.includes(c.courseId);
                       return (
                         <tr key={c.courseId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
