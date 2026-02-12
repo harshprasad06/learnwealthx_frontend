@@ -150,6 +150,15 @@ export default function RefLandingPage() {
 
   const totalPrice = courses.reduce((sum, c) => sum + c.price, 0);
 
+  // Estimate GST and gateway fee breakdown client-side for display.
+  // The exact amounts will be confirmed by the backend during checkout.
+  const GST_RATE = 0.18;
+  const GATEWAY_FEE_RATE = 0.02;
+  const gstAmount = Math.round(totalPrice * GST_RATE);
+  const subtotalBeforeGatewayFee = totalPrice + gstAmount;
+  const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
+  const totalAmount = totalPrice + gstAmount + gatewayFeeAmount;
+
   const displayName =
     affiliate?.user.name || (affiliate?.user.email ? affiliate.user.email.split('@')[0] : '');
   const avatarInitial = displayName ? displayName.charAt(0).toUpperCase() : '?';
@@ -193,9 +202,15 @@ export default function RefLandingPage() {
               <p className="text-xs uppercase tracking-wide opacity-80 mb-1">
                 Bundle total ({courses.length} courses)
               </p>
-              <p className="text-2xl font-bold mb-1">₹{totalPrice.toFixed(2)}</p>
+              <p className="text-2xl font-bold mb-1">
+                ₹{totalAmount.toFixed(2)}
+              </p>
               <p className="text-xs opacity-80">
                 Secure checkout in one step. Lifetime access to all selected courses.
+              </p>
+              <p className="text-[11px] mt-1 opacity-90">
+                Course price ₹{totalPrice.toFixed(2)} + GST ₹{gstAmount.toFixed(2)} + payment
+                gateway fee ₹{gatewayFeeAmount.toFixed(2)} = Total ₹{totalAmount.toFixed(2)}
               </p>
             </div>
           )}

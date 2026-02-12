@@ -30,6 +30,37 @@ declare global {
 type Step = 'checking' | 'auth' | 'paying' | 'success' | 'error';
 type AuthMode = 'signup' | 'login';
 
+// Helper to calculate a local price breakdown from the base total.
+const calculateBreakdownFromBase = (baseAmount: number): PriceBreakdown => {
+  const GST_RATE = 0.18;
+  const GATEWAY_FEE_RATE = 0.02;
+  const gstAmount = Math.round(baseAmount * GST_RATE);
+  const subtotalBeforeGatewayFee = baseAmount + gstAmount;
+  const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
+  const totalAmount = baseAmount + gstAmount + gatewayFeeAmount;
+  return {
+    baseAmount,
+    gstAmount,
+    gatewayFeeAmount,
+    totalAmount,
+  };
+};
+
+// Dynamically load Razorpay script to avoid "gateway is loading" errors.
+const loadRazorpayScript = async (): Promise<boolean> => {
+  if (typeof window === 'undefined') return false;
+  if (window.Razorpay) return true;
+
+  return new Promise<boolean>((resolve) => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 function InnerCheckoutModal({
   courseIds,
   title,
@@ -117,6 +148,13 @@ function InnerCheckoutModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Pre-calculate a breakdown for display even before contacting the backend.
+  useEffect(() => {
+    if (!priceBreakdown && totalPrice > 0) {
+      setPriceBreakdown(calculateBreakdownFromBase(totalPrice));
+    }
+  }, [totalPrice, priceBreakdown]);
+
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError('');
@@ -164,6 +202,15 @@ function InnerCheckoutModal({
     setPayError('');
     setLoading(true);
     try {
+      // Ensure Razorpay script is loaded before we start payment flow.
+      const razorpayLoaded = await loadRazorpayScript();
+      if (!razorpayLoaded || typeof window.Razorpay === 'undefined') {
+        setPayError('Payment gateway is loading. Please try again in a moment.');
+        setStep('error');
+        return;
+      }
+
+      const clientBreakdown = calculateBreakdownFromBase(totalPrice);
       const orderRes = await fetch(`${API_URL}/api/payments/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -179,36 +226,17 @@ function InnerCheckoutModal({
         return;
       }
 
-      // Parse breakdown from API response or calculate client-side as fallback
+      // Parse breakdown from API response or use client-calculated as fallback
       if (orderData.breakdown) {
         setPriceBreakdown(orderData.breakdown);
       } else {
-        // Fallback: calculate client-side if breakdown not provided (backward compatibility)
-        const GST_RATE = 0.18;
-        const GATEWAY_FEE_RATE = 0.02;
-        const gstAmount = Math.round(totalPrice * GST_RATE);
-        const subtotalBeforeGatewayFee = totalPrice + gstAmount;
-        const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
-        const totalAmount = totalPrice + gstAmount + gatewayFeeAmount;
-        setPriceBreakdown({
-          baseAmount: totalPrice,
-          gstAmount,
-          gatewayFeeAmount,
-          totalAmount,
-        });
+        setPriceBreakdown(clientBreakdown);
       }
 
       // Bypass mode
       if (orderData.bypass) {
         setStep('success');
         onSuccess();
-        return;
-      }
-
-      // Razorpay flow
-      if (typeof window.Razorpay === 'undefined') {
-        setPayError('Payment gateway is loading. Please try again in a moment.');
-        setStep('error');
         return;
       }
 
