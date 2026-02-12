@@ -1068,7 +1068,10 @@ export default function AffiliateDashboardPage() {
                 </thead>
                 <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {purchases.map((p) => {
-                    const commission = p.amount * commissionRate;
+                    // Commission is calculated only on the base course price (course table price),
+                    // excluding GST and payment gateway fees.
+                    const commissionBase = p.course.price ?? p.amount;
+                    const commission = commissionBase * commissionRate;
                     return (
                       <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <td className="px-4 py-3">
