@@ -713,7 +713,7 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link
             href="/affiliate/wallet"
             className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg px-4 py-5 text-white hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105"
@@ -725,20 +725,6 @@ export default function AffiliateDashboardPage() {
               </div>
               <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-              </svg>
-            </div>
-          </Link>
-          <Link
-            href="/affiliate/payouts"
-            className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg shadow-lg px-4 py-5 text-white hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-semibold mb-1 text-white">Request Payout</h3>
-                <p className="text-sm text-white/80">Withdraw your earnings</p>
-              </div>
-              <svg className="w-8 h-8 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
           </Link>
