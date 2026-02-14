@@ -53,6 +53,16 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Logo image transparency fix */
+img[src*="logo"],
+img[alt*="Logo"],
+img[alt*="logo"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

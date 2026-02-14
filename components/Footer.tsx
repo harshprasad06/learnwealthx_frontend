@@ -6,12 +6,17 @@ import Logo from './Logo';
 export default function Footer() {
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-1 lg:col-span-2">
             <div className="mb-4">
-              <Logo size="lg" />
+              {/* <Logo size="sm" /> */}
+              <div style={{ marginBottom: '-68px',marginTop: '-68px' , marginLeft: '-20px' }}>
+              <Link href="/" className="flex-shrink-0">
+              <Logo size="md" />
+            </Link>
+            </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md leading-relaxed">
               Your gateway to professional development. Learn new skills, advance your career, 
