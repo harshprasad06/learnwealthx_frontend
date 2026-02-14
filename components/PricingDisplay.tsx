@@ -54,7 +54,7 @@ export default function PricingDisplay({
           </span>
         </div>
         <span className={`${mrpSizeClass} text-gray-500 dark:text-gray-400 mt-0.5`}>
-          Login for member discount
+          Use referral link for discount
         </span>
       </div>
     );
