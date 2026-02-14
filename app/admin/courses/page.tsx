@@ -84,7 +84,15 @@ export default function AdminCoursesPage() {
 
       const data = await res.json();
       if (res.ok && data.url) {
-        return `${API_URL}${data.url}`;
+        // Store the path exactly as returned by backend (e.g. /api/upload/thumbnail-proxy?key=...)
+        const uploadedUrl = data.url as string;
+        // Update preview to show the uploaded image
+        if (!uploadedUrl.startsWith('http') && !uploadedUrl.startsWith('data:')) {
+          setThumbnailPreview(`${API_URL}${uploadedUrl}`);
+        } else {
+          setThumbnailPreview(uploadedUrl);
+        }
+        return uploadedUrl;
       } else {
         throw new Error(data.error || 'Upload failed');
       }
@@ -156,7 +164,13 @@ export default function AdminCoursesPage() {
       isPublished: course.isPublished,
     });
     setThumbnailFile(null);
-    setThumbnailPreview(course.thumbnail || '');
+    // Set preview with proper URL handling
+    const thumbUrl = course.thumbnail || '';
+    if (thumbUrl && !thumbUrl.startsWith('http') && !thumbUrl.startsWith('data:')) {
+      setThumbnailPreview(`${API_URL}${thumbUrl}`);
+    } else {
+      setThumbnailPreview(thumbUrl);
+    }
     setShowForm(true);
   };
 
@@ -197,6 +211,8 @@ export default function AdminCoursesPage() {
               setShowForm(true);
               setEditingCourse(null);
               setFormData({ title: '', description: '', mrp: '', price: '', thumbnail: '', isPublished: false });
+              setThumbnailFile(null);
+              setThumbnailPreview('');
             }}
             className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
@@ -278,29 +294,46 @@ export default function AdminCoursesPage() {
                 {/* Preview */}
                 {(thumbnailPreview || formData.thumbnail) && (
                   <div className="mt-4">
-                    <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Preview:</p>
                     <img
-                      src={thumbnailPreview || formData.thumbnail}
+                      src={
+                        thumbnailPreview
+                          ? thumbnailPreview
+                          : formData.thumbnail.startsWith('http') || formData.thumbnail.startsWith('data:')
+                          ? formData.thumbnail
+                          : `${API_URL}${formData.thumbnail}`
+                      }
                       alt="Thumbnail preview"
-                      className="w-full h-48 object-cover rounded-lg border border-gray-300"
+                      className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                      onError={(e) => {
+                        // Fallback if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
                     />
                   </div>
                 )}
 
                 {/* Or use URL (fallback) */}
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Or enter thumbnail URL:
                   </label>
                   <input
                     type="url"
                     value={formData.thumbnail}
                     onChange={(e) => {
-                      setFormData({ ...formData, thumbnail: e.target.value });
-                      setThumbnailPreview(e.target.value);
+                      const url = e.target.value;
+                      setFormData({ ...formData, thumbnail: url });
+                      // Update preview - if it's a relative path, prepend API_URL
+                      if (url && !url.startsWith('http') && !url.startsWith('data:')) {
+                        setThumbnailPreview(`${API_URL}${url}`);
+                      } else {
+                        setThumbnailPreview(url);
+                      }
                     }}
                     placeholder="https://example.com/image.jpg"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
                   />
                 </div>
               </div>

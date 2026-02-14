@@ -243,7 +243,11 @@ export default function RefLandingPage() {
                   <div className="h-44 bg-gray-200 dark:bg-gray-800 overflow-hidden">
                     {course.thumbnail ? (
                       <img
-                        src={course.thumbnail}
+                        src={
+                          course.thumbnail.startsWith('http')
+                            ? course.thumbnail
+                            : `${API_URL}${course.thumbnail}`
+                        }
                         alt={course.title}
                         className="w-full h-full object-cover"
                       />

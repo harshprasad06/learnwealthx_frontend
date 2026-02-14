@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import PricingDisplay from '@/components/PricingDisplay';
@@ -20,14 +20,18 @@ export default function CoursesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<'newest' | 'price_low' | 'price_high'>('newest');
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
-    fetchAuthState();
-    fetchCourses();
+    void fetchAuthState();
   }, []);
+
+  useEffect(() => {
+    void fetchCourses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sort]);
 
   const fetchAuthState = async () => {
     try {
@@ -60,13 +64,10 @@ export default function CoursesPage() {
       const data = await res.json();
       let list: Course[] = data.courses || [];
 
-      // Simple client-side sort for nicer UX
       if (sort === 'price_low') {
         list = [...list].sort((a, b) => a.price - b.price);
       } else if (sort === 'price_high') {
         list = [...list].sort((a, b) => b.price - a.price);
-      } else {
-        // newest: assume API returns newest first, so keep order
       }
 
       setCourses(list);
@@ -77,7 +78,7 @@ export default function CoursesPage() {
     }
   };
 
-  const filteredCourses = courses; // server-side already filtered by search
+  const filteredCourses = courses;
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
@@ -85,7 +86,6 @@ export default function CoursesPage() {
       <main className="flex-1">
         <section className="py-8 sm:py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Header + search/sort */}
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">All Courses</h1>
@@ -114,7 +114,7 @@ export default function CoursesPage() {
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         setLoading(true);
-                        fetchCourses();
+                        void fetchCourses();
                       }
                     }}
                     placeholder="Search courses..."
@@ -124,9 +124,9 @@ export default function CoursesPage() {
                 <select
                   value={sort}
                   onChange={(e) => {
-                    setSort(e.target.value as typeof sort);
+                    setSort(e.target.value as 'newest' | 'price_low' | 'price_high');
                     setLoading(true);
-                    fetchCourses();
+                    void fetchCourses();
                   }}
                   className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800"
                 >
@@ -137,7 +137,7 @@ export default function CoursesPage() {
                 <button
                   onClick={() => {
                     setLoading(true);
-                    fetchCourses();
+                    void fetchCourses();
                   }}
                   className="btn-primary"
                 >
@@ -164,72 +164,79 @@ export default function CoursesPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredCourses.map((course) => (
-                  <Link
-                    key={course.id}
-                    href={`/courses/${course.id}`}
-                    className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                  >
-                    <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
-                      {course.thumbnail ? (
-                        <img
-                          src={course.thumbnail}
-                          alt={course.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <svg
-                            className="w-16 h-16 text-white opacity-60"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
+                {filteredCourses.map((course) => {
+                  const imageSrc =
+                    course.thumbnail && !course.thumbnail.startsWith('http')
+                      ? `${API_URL}${course.thumbnail}`
+                      : course.thumbnail || '';
+
+                  return (
+                    <Link
+                      key={course.id}
+                      href={`/courses/${course.id}`}
+                      className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+                        {imageSrc ? (
+                          <img
+                            src={imageSrc}
+                            alt={course.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <svg
+                              className="w-16 h-16 text-white opacity-60"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                              />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                        <div className="absolute top-3 right-3 bg-white dark:bg-gray-900/90 px-3 py-1 rounded-full text-xs font-medium text-gray-900 dark:text-gray-100">
+                          {course.videos.length} Videos
                         </div>
-                      )}
-                      <div className="absolute top-3 right-3 bg-white dark:bg-gray-900/90 px-3 py-1 rounded-full text-xs font-medium text-gray-900 dark:text-gray-100">
-                        {course.videos.length} Videos
                       </div>
-                    </div>
-                    <div className="p-5">
-                      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {course.title}
-                      </h2>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
-                        {course.description || 'No description available'}
-                      </p>
-                      <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
-                        <PricingDisplay
-                          mrp={course.mrp}
-                          actualPrice={course.price}
-                          discountPercentage={
-                            course.mrp && course.mrp > course.price
-                              ? Math.round(((course.mrp - course.price) / course.mrp) * 100)
-                              : 0
-                          }
-                          isLoggedIn={isLoggedIn}
-                          size="md"
-                        />
-                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                          Lifetime access
-                        </span>
+                      <div className="p-5">
+                        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {course.title}
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
+                          {course.description || 'No description available'}
+                        </p>
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+                          <PricingDisplay
+                            mrp={course.mrp}
+                            actualPrice={course.price}
+                            discountPercentage={
+                              course.mrp && course.mrp > course.price
+                                ? Math.round(((course.mrp - course.price) / course.mrp) * 100)
+                                : 0
+                            }
+                            isLoggedIn={isLoggedIn}
+                            size="md"
+                          />
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                            Lifetime access
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

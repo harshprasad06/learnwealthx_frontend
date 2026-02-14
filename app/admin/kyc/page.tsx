@@ -224,6 +224,11 @@ export default function AdminKYCPage() {
     );
   };
 
+  // Helper: build secure backend URL to serve KYC files (keeps S3/private storage hidden)
+  const getDocumentUrl = (kycId: string, field: 'documentFront' | 'documentBack' | 'addressProof') => {
+    return `${API_URL}/api/kyc/admin/file/${kycId}/${field}`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Navbar />
@@ -489,12 +494,12 @@ export default function AdminKYCPage() {
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Document Front</p>
                           <a
-                            href={`${API_URL}${selectedKyc.documentFront}`}
+                            href={getDocumentUrl(selectedKyc.id, 'documentFront')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
                           >
-                            View Document →
+                            Open full document →
                           </a>
                         </div>
                       )}
@@ -502,12 +507,12 @@ export default function AdminKYCPage() {
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Document Back</p>
                           <a
-                            href={`${API_URL}${selectedKyc.documentBack}`}
+                            href={getDocumentUrl(selectedKyc.id, 'documentBack')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
                           >
-                            View Document →
+                            Open full document →
                           </a>
                         </div>
                       )}
@@ -515,12 +520,12 @@ export default function AdminKYCPage() {
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Address Proof</p>
                           <a
-                            href={`${API_URL}${selectedKyc.addressProof}`}
+                            href={getDocumentUrl(selectedKyc.id, 'addressProof')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
                           >
-                            View Document →
+                            Open full document →
                           </a>
                         </div>
                       )}

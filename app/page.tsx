@@ -286,16 +286,22 @@ export default function Home() {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {courses.map((course) => (
+              {courses.map((course) => {
+                const imageSrc =
+                  course.thumbnail && !course.thumbnail.startsWith('http')
+                    ? `${API_URL}${course.thumbnail}`
+                    : course.thumbnail || '';
+
+                return (
                   <Link
                     key={course.id}
                     href={`/courses/${course.id}`}
                     className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                   >
                     <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
-                      {course.thumbnail ? (
+                      {imageSrc ? (
                         <img
-                          src={course.thumbnail}
+                          src={imageSrc}
                           alt={course.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
@@ -338,8 +344,8 @@ export default function Home() {
                         </span>
                       </div>
                     </div>
-                  </Link>
-                ))}
+                </Link>
+              )})}
               </div>
               
               {courses.length >= 6 && (

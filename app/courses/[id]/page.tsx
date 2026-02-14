@@ -305,7 +305,11 @@ export default function CourseDetailPage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
           {course.thumbnail && (
             <img
-              src={course.thumbnail}
+              src={
+                course.thumbnail.startsWith('http')
+                  ? course.thumbnail
+                  : `${API_URL}${course.thumbnail}`
+              }
               alt={course.title}
               className="w-full h-64 object-cover"
             />
