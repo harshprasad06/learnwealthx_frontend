@@ -296,7 +296,7 @@ export default function AdminEarningsPage() {
                   ₹{earnings.stats.totalGatewayFees?.toFixed(2) || '0.00'}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  2% on (base + GST)
+                  3.1% on (base + GST)
                 </p>
               </div>
             </div>
