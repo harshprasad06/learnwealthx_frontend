@@ -30,20 +30,27 @@ declare global {
 type Step = 'checking' | 'auth' | 'paying' | 'success' | 'error';
 type AuthMode = 'signup' | 'login';
 
-// Helper to calculate a local price breakdown from the base total.
-const calculateBreakdownFromBase = (baseAmount: number): PriceBreakdown => {
-  const GST_RATE = 0.18;
-  const GATEWAY_FEE_RATE = 0.02;
-  const gstAmount = Math.round(baseAmount * GST_RATE);
-  const subtotalBeforeGatewayFee = baseAmount + gstAmount;
-  const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
-  const totalAmount = baseAmount + gstAmount + gatewayFeeAmount;
-  return {
-    baseAmount,
-    gstAmount,
-    gatewayFeeAmount,
-    totalAmount,
-  };
+// Fetch price breakdown from backend (uses GATEWAY_FEE_RATE and GST_RATE from backend .env).
+const fetchPriceBreakdown = async (baseAmount: number): Promise<PriceBreakdown | null> => {
+  try {
+    const res = await fetch(
+      `${API_URL}/api/payments/price-breakdown?baseAmount=${encodeURIComponent(baseAmount)}`,
+      { credentials: 'include' }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (
+      typeof data?.baseAmount === 'number' &&
+      typeof data?.gstAmount === 'number' &&
+      typeof data?.gatewayFeeAmount === 'number' &&
+      typeof data?.totalAmount === 'number'
+    ) {
+      return data as PriceBreakdown;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 };
 
 // Dynamically load Razorpay script to avoid "gateway is loading" errors.
@@ -148,12 +155,20 @@ function InnerCheckoutModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Pre-calculate a breakdown for display even before contacting the backend.
+  // Fetch price breakdown from backend so it uses GATEWAY_FEE_RATE and GST_RATE from .env.
   useEffect(() => {
-    if (!priceBreakdown && totalPrice > 0) {
-      setPriceBreakdown(calculateBreakdownFromBase(totalPrice));
+    if (totalPrice <= 0) {
+      setPriceBreakdown(null);
+      return;
     }
-  }, [totalPrice, priceBreakdown]);
+    let cancelled = false;
+    fetchPriceBreakdown(totalPrice).then((breakdown) => {
+      if (!cancelled && breakdown) setPriceBreakdown(breakdown);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [totalPrice]);
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -210,7 +225,6 @@ function InnerCheckoutModal({
         return;
       }
 
-      const clientBreakdown = calculateBreakdownFromBase(totalPrice);
       const orderRes = await fetch(`${API_URL}/api/payments/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -226,11 +240,9 @@ function InnerCheckoutModal({
         return;
       }
 
-      // Parse breakdown from API response or use client-calculated as fallback
+      // Use breakdown from create-order (backend uses GATEWAY_FEE_RATE and GST_RATE from .env)
       if (orderData.breakdown) {
         setPriceBreakdown(orderData.breakdown);
-      } else {
-        setPriceBreakdown(clientBreakdown);
       }
 
       // Bypass mode

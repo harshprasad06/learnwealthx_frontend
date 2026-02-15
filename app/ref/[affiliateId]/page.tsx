@@ -45,6 +45,12 @@ export default function RefLandingPage() {
   const [error, setError] = useState<string | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
+  const [priceBreakdown, setPriceBreakdown] = useState<{
+    baseAmount: number;
+    gstAmount: number;
+    gatewayFeeAmount: number;
+    totalAmount: number;
+  } | null>(null);
 
   // Track click by affiliateId and set cookie with course IDs
   useEffect(() => {
@@ -150,14 +156,36 @@ export default function RefLandingPage() {
 
   const totalPrice = courses.reduce((sum, c) => sum + c.price, 0);
 
-  // Estimate GST and gateway fee breakdown client-side for display.
-  // The exact amounts will be confirmed by the backend during checkout.
-  const GST_RATE = 0.18;
-  const GATEWAY_FEE_RATE = 0.02;
-  const gstAmount = Math.round(totalPrice * GST_RATE);
-  const subtotalBeforeGatewayFee = totalPrice + gstAmount;
-  const gatewayFeeAmount = Math.round(subtotalBeforeGatewayFee * GATEWAY_FEE_RATE);
-  const totalAmount = totalPrice + gstAmount + gatewayFeeAmount;
+  // Fetch price breakdown from backend (uses GATEWAY_FEE_RATE and GST_RATE from .env).
+  useEffect(() => {
+    if (totalPrice <= 0 || courses.length === 0) {
+      setPriceBreakdown(null);
+      return;
+    }
+    let cancelled = false;
+    fetch(
+      `${API_URL}/api/payments/price-breakdown?baseAmount=${encodeURIComponent(totalPrice)}`,
+      { credentials: 'include' }
+    )
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (cancelled || !data) return;
+        if (
+          typeof data.baseAmount === 'number' &&
+          typeof data.gstAmount === 'number' &&
+          typeof data.gatewayFeeAmount === 'number' &&
+          typeof data.totalAmount === 'number'
+        ) {
+          setPriceBreakdown(data);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [totalPrice, courses.length]);
+
+  const totalAmount = priceBreakdown?.totalAmount ?? totalPrice;
 
   const displayName =
     affiliate?.user.name || (affiliate?.user.email ? affiliate.user.email.split('@')[0] : '');
@@ -208,10 +236,16 @@ export default function RefLandingPage() {
               <p className="text-xs opacity-80">
                 Secure checkout in one step. Lifetime access to all selected courses.
               </p>
-              <p className="text-[11px] mt-1 opacity-90">
-                Course price ₹{totalPrice.toFixed(2)} + GST ₹{gstAmount.toFixed(2)} + payment
-                gateway fee ₹{gatewayFeeAmount.toFixed(2)} = Total ₹{totalAmount.toFixed(2)}
-              </p>
+              {priceBreakdown ? (
+                <p className="text-[11px] mt-1 opacity-90">
+                  Course price ₹{totalPrice.toFixed(2)} + GST ₹{priceBreakdown.gstAmount.toFixed(2)} + payment
+                  gateway fee ₹{priceBreakdown.gatewayFeeAmount.toFixed(2)} = Total ₹{totalAmount.toFixed(2)}
+                </p>
+              ) : (
+                <p className="text-[11px] mt-1 opacity-90">
+                  Total ₹{totalAmount.toFixed(2)} (incl. GST & gateway fee)
+                </p>
+              )}
             </div>
           )}
         </div>

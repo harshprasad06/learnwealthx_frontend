@@ -29,9 +29,9 @@ export default function PricingDisplay({
       ? 'text-[11px]'
       : 'text-xs';
 
-  // Safety: fall back to actualPrice if mrp is undefined/null/NaN
+  // Safety: fall back to actualPrice if mrp is undefined/null/NaN/zero (never show ₹0 when course has a price)
   const safeMrp =
-    typeof mrp === 'number' && !Number.isNaN(mrp) ? mrp : actualPrice;
+    typeof mrp === 'number' && !Number.isNaN(mrp) && mrp > 0 ? mrp : actualPrice;
   const safeActual =
     typeof actualPrice === 'number' && !Number.isNaN(actualPrice) ? actualPrice : 0;
 
