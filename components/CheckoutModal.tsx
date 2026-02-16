@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
 interface CheckoutModalProps {
@@ -27,7 +28,7 @@ declare global {
   }
 }
 
-type Step = 'checking' | 'auth' | 'paying' | 'success' | 'error';
+type Step = 'checking' | 'auth' | 'confirm' | 'paying' | 'success' | 'error';
 type AuthMode = 'signup' | 'login';
 
 // Fetch price breakdown from backend (uses GATEWAY_FEE_RATE and GST_RATE from backend .env).
@@ -84,6 +85,8 @@ function InnerCheckoutModal({
   const [loading, setLoading] = useState(false);
   const [googleError, setGoogleError] = useState('');
   const [priceBreakdown, setPriceBreakdown] = useState<PriceBreakdown | null>(null);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [agreedToRefundPolicy, setAgreedToRefundPolicy] = useState(false);
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -116,9 +119,8 @@ function InnerCheckoutModal({
           return;
         }
 
-        // After successful Google login, go straight to payment
-        setStep('paying');
-        await startPayment();
+        // After successful Google login, show confirm step (terms already required before Google)
+        setStep('confirm');
       } catch (err: any) {
         console.error('Google sign-in error:', err);
         setGoogleError(err.message || 'Google sign-in failed');
@@ -140,9 +142,8 @@ function InnerCheckoutModal({
           credentials: 'include',
         });
         if (res.ok) {
-          // Already logged in -> go directly to payment
-          setStep('paying');
-          await startPayment();
+          // Already logged in -> show confirm step (terms + proceed to payment)
+          setStep('confirm');
         } else {
           setStep('auth');
         }
@@ -202,9 +203,8 @@ function InnerCheckoutModal({
         }
       }
 
-      // Auth successful -> start payment
-      setStep('paying');
-      await startPayment();
+      // Auth successful -> show confirm step (terms + proceed to payment)
+      setStep('confirm');
     } catch (err) {
       console.error('Auth error:', err);
       setAuthError('Something went wrong. Please try again.');
@@ -431,6 +431,35 @@ function InnerCheckoutModal({
               />
             </div>
 
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+              />
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                I agree to the{' '}
+                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                  Terms & Conditions
+                </Link>
+              </span>
+            </label>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreedToRefundPolicy}
+                onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
+                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+              />
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                I have read and agree to the{' '}
+                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                  Refund Policy
+                </Link>
+              </span>
+            </label>
+
             {authError && (
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                 {authError}
@@ -451,7 +480,7 @@ function InnerCheckoutModal({
                 <button
                   type="button"
                   onClick={() => googleLogin()}
-                  disabled={loading}
+                  disabled={loading || !agreedToTerms || !agreedToRefundPolicy}
                   className="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -478,7 +507,7 @@ function InnerCheckoutModal({
             )}
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !agreedToTerms || !agreedToRefundPolicy}
               className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               {loading ? (
@@ -493,6 +522,51 @@ function InnerCheckoutModal({
               )}
             </button>
           </form>
+        )}
+
+        {step === 'confirm' && (
+          <div className="space-y-4">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+              />
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                I agree to the{' '}
+                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                  Terms & Conditions
+                </Link>
+              </span>
+            </label>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreedToRefundPolicy}
+                onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
+                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+              />
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                I have read and agree to the{' '}
+                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                  Refund Policy
+                </Link>
+              </span>
+            </label>
+            <button
+              type="button"
+              onClick={async () => {
+                if (!agreedToTerms || !agreedToRefundPolicy) return;
+                setStep('paying');
+                await startPayment();
+              }}
+              disabled={!agreedToTerms || !agreedToRefundPolicy}
+              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
+            >
+              Proceed to payment
+            </button>
+          </div>
         )}
 
         {step === 'paying' && (
