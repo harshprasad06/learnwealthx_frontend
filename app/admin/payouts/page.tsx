@@ -245,10 +245,13 @@ export default function AdminPayoutsPage() {
             </div>
           </div>
           {nextPayoutDate && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 text-sm text-blue-800 dark:text-blue-200">
               <strong>Next automatic payout generation:</strong> {nextPayoutDate}
             </div>
           )}
+          <div className="mt-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-sm text-amber-800 dark:text-amber-200">
+            <strong>Manual payouts:</strong> 1) Generate weekly payouts → 2) Pay each affiliate via UPI/bank (use their KYC bank details) → 3) Click Process → Mark as completed.
+          </div>
         </div>
 
         {/* Filters */}
