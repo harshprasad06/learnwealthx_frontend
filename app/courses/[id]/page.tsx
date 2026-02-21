@@ -349,7 +349,7 @@ export default function CourseDetailPage() {
                   )}
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Price shown excludes GST (18%) and payment gateway fees (3.1%)
+                  Price shown excludes payment gateway fees
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -361,7 +361,7 @@ export default function CourseDetailPage() {
                     Checkout
                   </button>
                 )}
-                {hasAccess && userRole !== 'ADMIN' && (
+                {hasAccess && (
                   <Link
                     href={`/courses/${course.id}/watch`}
                     className="bg-green-600 dark:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 dark:hover:bg-green-600 transition-colors"

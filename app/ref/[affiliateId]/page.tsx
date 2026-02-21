@@ -238,12 +238,14 @@ export default function RefLandingPage() {
               </p>
               {priceBreakdown ? (
                 <p className="text-[11px] mt-1 opacity-90">
-                  Course price ₹{totalPrice.toFixed(2)} + GST ₹{priceBreakdown.gstAmount.toFixed(2)} + payment
-                  gateway fee ₹{priceBreakdown.gatewayFeeAmount.toFixed(2)} = Total ₹{totalAmount.toFixed(2)}
+                  Course price ₹{totalPrice.toFixed(2)}
+                  {priceBreakdown.gstAmount > 0 && ` + GST ₹${priceBreakdown.gstAmount.toFixed(2)}`}
+                  {' + payment gateway fee ₹' + priceBreakdown.gatewayFeeAmount.toFixed(2)}
+                  {' = Total ₹' + totalAmount.toFixed(2)}
                 </p>
               ) : (
                 <p className="text-[11px] mt-1 opacity-90">
-                  Total ₹{totalAmount.toFixed(2)} (incl. GST & gateway fee)
+                  Total ₹{totalAmount.toFixed(2)} (incl. gateway fee)
                 </p>
               )}
             </div>

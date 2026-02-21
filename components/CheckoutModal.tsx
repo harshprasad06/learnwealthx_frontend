@@ -353,12 +353,14 @@ function InnerCheckoutModal({
                 <span>Course Price:</span>
                 <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
               </div>
+              {priceBreakdown.gstAmount > 0 && (
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span>GST (18%):</span>
+                  <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-                <span>GST (18%):</span>
-                <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-                <span>Payment Gateway Fee (3.1%):</span>
+                <span>Payment Gateway Fee:</span>
                 <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-blue-200 dark:border-blue-800/50">
@@ -601,12 +603,14 @@ function InnerCheckoutModal({
                   <span>Course Price:</span>
                   <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
                 </div>
+                {priceBreakdown.gstAmount > 0 && (
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                    <span>GST (18%):</span>
+                    <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-                  <span>GST (18%):</span>
-                  <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-                  <span>Payment Gateway Fee (3.1%):</span>
+                  <span>Payment Gateway Fee:</span>
                   <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-gray-200 dark:border-gray-600">

@@ -285,7 +285,7 @@ export default function AdminEarningsPage() {
                   ₹{earnings.stats.totalGstCollected.toFixed(2)}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  18% on base price
+                  Not applied currently
                 </p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
@@ -296,7 +296,7 @@ export default function AdminEarningsPage() {
                   ₹{earnings.stats.totalGatewayFees?.toFixed(2) || '0.00'}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  3.1% on (base + GST)
+                  Fee on base price
                 </p>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function AdminEarningsPage() {
                 </span>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                Platform Revenue + GST + Gateway Fees
+                Platform Revenue + Gateway Fees
               </p>
             </div>
           </div>
