@@ -1,9 +1,13 @@
-import { getBlogPost, getAllBlogPosts } from '@/lib/blog';
+import { getBlogPost } from '@/lib/blog';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+
+// Always render on-demand — blog posts are added after build time
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 interface Props {
   params: { slug: string };
@@ -24,11 +28,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.frontmatter.date,
     },
   };
-}
-
-export async function generateStaticParams() {
-  const posts = await getAllBlogPosts();
-  return posts.map(p => ({ slug: p.slug }));
 }
 
 export default async function BlogPostPage({ params }: Props) {

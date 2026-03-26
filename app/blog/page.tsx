@@ -4,6 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'Blog – LearnWealthX',
   description: 'Tips, guides and insights on online learning, affiliate marketing, and wealth building in India.',
