@@ -59,6 +59,10 @@ export default async function BlogPostPage({ params }: Props) {
             alt={frontmatter.title}
             className="w-full rounded-xl mb-8 object-cover max-h-80"
             loading="eager"
+            onError={(e) => {
+              // Fallback to a solid color placeholder if image fails to load
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
           />
         )}
 

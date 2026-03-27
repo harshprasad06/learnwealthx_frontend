@@ -36,6 +36,7 @@ export default async function BlogIndexPage() {
                     alt={post.title}
                     className="w-full h-48 object-cover"
                     loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 )}
                 <div className="p-5">
