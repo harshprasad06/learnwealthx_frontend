@@ -1,4 +1,5 @@
 import { getAllBlogPosts } from '@/lib/blog';
+import { BlogImage } from './BlogImage';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -31,13 +32,7 @@ export default async function BlogIndexPage() {
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
               <article className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                 {post.image && (
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                    loading="lazy"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
+                  <BlogImage src={post.image} alt={post.title} className="w-full h-48 object-cover" />
                 )}
                 <div className="p-5">
                   <p className="text-xs text-gray-400 mb-1">{post.date}</p>

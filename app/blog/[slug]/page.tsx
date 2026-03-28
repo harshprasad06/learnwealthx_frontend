@@ -1,4 +1,5 @@
 import { getBlogPost } from '@/lib/blog';
+import { BlogImage } from '../BlogImage';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -52,18 +53,8 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
 
-        {/* Featured image */}
         {frontmatter.image && (
-          <img
-            src={frontmatter.image}
-            alt={frontmatter.title}
-            className="w-full rounded-xl mb-8 object-cover max-h-80"
-            loading="eager"
-            onError={(e) => {
-              // Fallback to a solid color placeholder if image fails to load
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
-          />
+          <BlogImage src={frontmatter.image} alt={frontmatter.title} className="w-full rounded-xl mb-8 object-cover max-h-80" />
         )}
 
         {/* MDX content */}
