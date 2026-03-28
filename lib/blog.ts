@@ -21,52 +21,66 @@ export interface BlogPost {
 
 /** Get all blog post slugs from the filesystem */
 export async function getAllBlogPosts(): Promise<BlogPostMeta[]> {
-  if (!fs.existsSync(BLOG_DIR)) return [];
+  try {
+    if (!fs.existsSync(BLOG_DIR)) return [];
 
-  const entries = fs.readdirSync(BLOG_DIR, { withFileTypes: true });
-  const posts: BlogPostMeta[] = [];
+    const entries = fs.readdirSync(BLOG_DIR, { withFileTypes: true });
+    const posts: BlogPostMeta[] = [];
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const mdxPath = path.join(BLOG_DIR, entry.name, 'page.mdx');
-    if (!fs.existsSync(mdxPath)) continue;
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const mdxPath = path.join(BLOG_DIR, entry.name, 'page.mdx');
+      if (!fs.existsSync(mdxPath)) continue;
 
-    const raw = fs.readFileSync(mdxPath, 'utf-8');
-    const { data } = matter(raw);
+      try {
+        const raw = fs.readFileSync(mdxPath, 'utf-8');
+        const { data } = matter(raw);
 
-    posts.push({
-      slug: entry.name,
-      title: data.title ?? entry.name,
-      description: data.description ?? '',
-      date: data.date ?? '',
-      image: data.image,
-      keywords: data.keywords,
-      author: data.author,
-    });
+        posts.push({
+          slug: entry.name,
+          title: data.title ?? entry.name,
+          description: data.description ?? '',
+          date: data.date ?? '',
+          image: data.image,
+          keywords: data.keywords,
+          author: data.author,
+        });
+      } catch {
+        // Skip malformed MDX files
+        console.warn(`[blog] Skipping malformed post: ${entry.name}`);
+      }
+    }
+
+    return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  } catch (err) {
+    console.error('[blog] Failed to read blog posts:', err);
+    return [];
   }
-
-  // Sort by date descending
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 /** Get a single blog post by slug */
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const mdxPath = path.join(BLOG_DIR, slug, 'page.mdx');
-  if (!fs.existsSync(mdxPath)) return null;
+  try {
+    const mdxPath = path.join(BLOG_DIR, slug, 'page.mdx');
+    if (!fs.existsSync(mdxPath)) return null;
 
-  const raw = fs.readFileSync(mdxPath, 'utf-8');
-  const { data, content } = matter(raw);
+    const raw = fs.readFileSync(mdxPath, 'utf-8');
+    const { data, content } = matter(raw);
 
-  return {
-    frontmatter: {
-      slug,
-      title: data.title ?? slug,
-      description: data.description ?? '',
-      date: data.date ?? '',
-      image: data.image,
-      keywords: data.keywords,
-      author: data.author,
-    },
-    content,
-  };
+    return {
+      frontmatter: {
+        slug,
+        title: data.title ?? slug,
+        description: data.description ?? '',
+        date: data.date ?? '',
+        image: data.image,
+        keywords: data.keywords,
+        author: data.author,
+      },
+      content,
+    };
+  } catch (err) {
+    console.error(`[blog] Failed to read post "${slug}":`, err);
+    return null;
+  }
 }
