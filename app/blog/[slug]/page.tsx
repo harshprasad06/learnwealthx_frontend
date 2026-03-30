@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* MDX content */}
-        <article className="prose prose-gray dark:prose-invert max-w-none">
+        <article className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 prose-img:rounded-xl prose-img:w-full prose-strong:text-gray-900 dark:prose-strong:text-white">
           <MDXRemote source={content} />
         </article>
 
