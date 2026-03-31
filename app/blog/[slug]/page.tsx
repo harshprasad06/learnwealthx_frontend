@@ -63,12 +63,12 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
 
         {/* CTA */}
-        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-950 rounded-xl text-center">
-          <h3 className="text-xl font-bold mb-2">Ready to start learning?</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">Explore courses on LearnWealthX and start your journey today.</p>
+        <div className="mt-12 p-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl text-center text-white">
+          <h3 className="text-2xl font-bold mb-3">Ready to start your learning journey?</h3>
+          <p className="text-blue-100 mb-6 text-lg">Explore expert-led courses on LearnWealthX and unlock your potential today.</p>
           <a
-            href="/courses"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            href="https://www.learnwealthx.in/courses"
+            className="inline-block bg-white text-blue-700 px-8 py-3 rounded-xl font-bold text-lg hover:bg-blue-50 transition-colors shadow-md"
           >
             Browse Courses →
           </a>
