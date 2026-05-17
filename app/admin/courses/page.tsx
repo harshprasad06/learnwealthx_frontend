@@ -117,6 +117,12 @@ export default function AdminCoursesPage() {
         }
         thumbnailUrl = uploadedUrl;
       }
+      // The URL field carries the full URL (host included) for display, but the
+      // DB should store the path relative to the backend so it stays portable
+      // across environments. Strip the API host before persisting.
+      if (thumbnailUrl && thumbnailUrl.startsWith(API_URL)) {
+        thumbnailUrl = thumbnailUrl.slice(API_URL.length);
+      }
 
       const url = editingCourse
         ? `${API_URL}/api/courses/${editingCourse.id}`
@@ -155,22 +161,24 @@ export default function AdminCoursesPage() {
 
   const handleEdit = (course: Course) => {
     setEditingCourse(course);
+    // Build the full URL for relative paths so the URL field shows a valid,
+    // complete URL (matching the preview) instead of a relative path that
+    // fails the browser's native <input type="url"> validation.
+    const thumbUrl = course.thumbnail || '';
+    const fullThumbUrl =
+      thumbUrl && !thumbUrl.startsWith('http') && !thumbUrl.startsWith('data:')
+        ? `${API_URL}${thumbUrl}`
+        : thumbUrl;
     setFormData({
       title: course.title,
       description: course.description || '',
       mrp: (course.mrp ?? course.price).toString(),
       price: course.price.toString(),
-      thumbnail: course.thumbnail || '',
+      thumbnail: fullThumbUrl,
       isPublished: course.isPublished,
     });
     setThumbnailFile(null);
-    // Set preview with proper URL handling
-    const thumbUrl = course.thumbnail || '';
-    if (thumbUrl && !thumbUrl.startsWith('http') && !thumbUrl.startsWith('data:')) {
-      setThumbnailPreview(`${API_URL}${thumbUrl}`);
-    } else {
-      setThumbnailPreview(thumbUrl);
-    }
+    setThumbnailPreview(fullThumbUrl);
     setShowForm(true);
   };
 
