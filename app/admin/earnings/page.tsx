@@ -160,7 +160,8 @@ export default function AdminEarningsPage() {
 
         {/* Earnings Breakdown */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {/* Subscription Earnings */}
+          {/* Subscription Earnings - DISABLED */}
+          {/* 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 border-l-4 border-purple-500 dark:border-purple-400 transition-colors">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
@@ -191,6 +192,7 @@ export default function AdminEarningsPage() {
               </svg>
             </Link>
           </div>
+          */}
 
           {/* Direct Purchase Earnings */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/40 p-6 border-l-4 border-blue-500 dark:border-blue-400 transition-colors">
@@ -327,12 +329,15 @@ export default function AdminEarningsPage() {
                 Revenue Sources
               </h3>
               <div className="space-y-3">
+                {/* Subscriptions - DISABLED */}
+                {/* 
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700 dark:text-gray-300">Subscriptions</span>
                   <span className="font-semibold text-gray-900 dark:text-gray-50">
                     ₹{earnings.summary.fromSubscriptions.toFixed(2)}
                   </span>
                 </div>
+                */}
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700 dark:text-gray-300">Direct Purchases</span>
                   <span className="font-semibold text-gray-900 dark:text-gray-50">
@@ -364,12 +369,15 @@ export default function AdminEarningsPage() {
                 Transaction Counts
               </h3>
               <div className="space-y-3">
+                {/* Total Subscriptions - DISABLED */}
+                {/*
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700 dark:text-gray-300">Total Subscriptions</span>
                   <span className="font-semibold text-gray-900 dark:text-gray-50">
                     {earnings.stats.totalSubscriptions}
                   </span>
                 </div>
+                */}
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700 dark:text-gray-300">Direct Purchases</span>
                   <span className="font-semibold text-gray-900 dark:text-gray-50">
