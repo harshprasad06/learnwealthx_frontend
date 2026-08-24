@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { useTheme } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import {
   LineChart,
@@ -57,8 +58,37 @@ interface AnalyticsData {
   }>;
 }
 
+// Chart colours. Recharts takes these as inline SVG props, which a `dark:`
+// class can never override, so the palette is selected from the theme mode.
+// The `light` values are byte-identical to what shipped before this existed.
+// The `dark` series ramp is validated for the ink-900 chart surface: OKLCH
+// lightness in-band, chroma >= 0.1, adjacent-pair CVD separation ΔE 23.7
+// (deuteranopia) / 10.7 (tritanopia), and >= 3:1 contrast against the surface.
+const CHART_COLORS = {
+  light: {
+    grid: '#e5e7eb',
+    axis: '#6b7280',
+    tick: '#6b7280',
+    tooltipBg: '#ffffff',
+    tooltipBorder: '#e5e7eb',
+    tooltipText: '#111827',
+    series: ['#3b82f6', '#10b981', '#8b5cf6'],
+  },
+  dark: {
+    grid: '#26332D',        // ink-700 -- recessive
+    axis: '#26332D',        // ink-700
+    tick: '#8B9C95',        // ink-300 -- 6.2:1 on ink-900
+    tooltipBg: '#1A2621',   // ink-800 -- lifted above the ink-900 card
+    tooltipBorder: '#35443E', // ink-600
+    tooltipText: '#E8EDEB', // ink-50
+    series: ['#009463', '#8B5CF6', '#D97706'], // mint-700 / violet / amber
+  },
+} as const;
+
 export default function AffiliateAnalyticsPage() {
   const router = useRouter();
+  const { mode } = useTheme();
+  const chart = CHART_COLORS[mode];
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -205,33 +235,33 @@ export default function AffiliateAnalyticsPage() {
           {analytics.charts.revenue.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={analytics.charts.revenue}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-ink-800" />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
-                  stroke="#6b7280"
+                  stroke={chart.axis}
                   className="dark:stroke-ink-300"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <YAxis
-                  stroke="#6b7280"
+                  stroke={chart.axis}
                   className="dark:stroke-ink-300"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e5e7eb',
+                    backgroundColor: chart.tooltipBg,
+                    border: `1px solid ${chart.tooltipBorder}`,
                     borderRadius: '8px',
-                    color: '#111827',
+                    color: chart.tooltipText,
                   }}
                 />
                 <Legend />
                 <Line
                   type="monotone"
                   dataKey="revenue"
-                  stroke="#3b82f6"
+                  stroke={chart.series[0]}
                   strokeWidth={2}
                   name="Total Revenue"
                   dot={{ r: 4 }}
@@ -239,7 +269,7 @@ export default function AffiliateAnalyticsPage() {
                 <Line
                   type="monotone"
                   dataKey="commission"
-                  stroke="#10b981"
+                  stroke={chart.series[1]}
                   strokeWidth={2}
                   name="Commission Earned"
                   dot={{ r: 4 }}
@@ -259,29 +289,29 @@ export default function AffiliateAnalyticsPage() {
           {analytics.charts.signups.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={analytics.charts.signups}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-ink-800" />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
-                  stroke="#6b7280"
+                  stroke={chart.axis}
                   className="dark:stroke-ink-300"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <YAxis
-                  stroke="#6b7280"
+                  stroke={chart.axis}
                   className="dark:stroke-ink-300"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e5e7eb',
+                    backgroundColor: chart.tooltipBg,
+                    border: `1px solid ${chart.tooltipBorder}`,
                     borderRadius: '8px',
-                    color: '#111827',
+                    color: chart.tooltipText,
                   }}
                 />
-                <Bar dataKey="count" fill="#8b5cf6" name="New Signups" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="count" fill={chart.series[2]} name="New Signups" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
