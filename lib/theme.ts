@@ -59,57 +59,59 @@ export const lightTheme = {
 export const darkTheme = {
   // Background colors
   background: {
-    primary: '#111827', // gray-900
-    secondary: '#1f2937', // gray-800
-    tertiary: '#374151', // gray-700
-    card: '#1f2937', // gray-800
-    hover: '#374151', // gray-700
+    primary: '#0A0F0D', // ink-950
+    secondary: '#111A16', // ink-900
+    tertiary: '#1A2621', // ink-800
+    card: '#111A16', // ink-900
+    hover: '#1A2621', // ink-800
   },
   // Text colors
   text: {
-    primary: '#f9fafb', // gray-50
-    secondary: '#d1d5db', // gray-300
-    tertiary: '#9ca3af', // gray-400
-    muted: '#6b7280', // gray-500
-    inverse: '#111827',
+    primary: '#E8EDEB', // ink-50
+    secondary: '#9CACA6', // ink-200
+    tertiary: '#8B9C95', // ink-300
+    muted: '#778A83', // ink-400
+    inverse: '#0A0F0D', // ink-950
   },
   // Border colors
   border: {
-    primary: '#374151', // gray-700
-    secondary: '#4b5563', // gray-600
-    focus: '#60a5fa', // blue-400
+    primary: '#1A2621', // ink-800
+    secondary: '#26332D', // ink-700
+    focus: '#00D68F', // mint-500
   },
   // Brand colors
   brand: {
-    primary: '#3b82f6', // blue-500
-    primaryHover: '#2563eb', // blue-600
-    secondary: '#8b5cf6', // violet-500
-    accent: '#fbbf24', // amber-400
+    primary: '#00D68F', // mint-500
+    primaryHover: '#16E0A5', // mint-400
+    secondary: '#43F0BC', // mint-300
+    accent: '#fbbf24', // amber-400 (warm highlight, intentionally not mint)
   },
   // Status colors
   status: {
-    success: '#34d399', // green-400
-    successBg: '#064e3b', // green-900
+    // Success stays on the yellower `green` hue so it remains distinguishable
+    // from the blue-green `mint` brand accent.
+    success: '#4ade80', // green-400
+    successBg: '#052e16', // green-950
     warning: '#fbbf24', // amber-400
-    warningBg: '#78350f', // amber-900
+    warningBg: '#451a03', // amber-950
     error: '#f87171', // red-400
-    errorBg: '#7f1d1d', // red-900
-    info: '#60a5fa', // blue-400
-    infoBg: '#1e3a8a', // blue-900
+    errorBg: '#450a0a', // red-950
+    info: '#16E0A5', // mint-400
+    infoBg: '#00301F', // mint-950
   },
   // Input colors
   input: {
-    bg: '#1f2937', // gray-800
-    text: '#f9fafb', // gray-50
-    placeholder: '#6b7280', // gray-500
-    border: '#4b5563', // gray-600
-    borderFocus: '#60a5fa', // blue-400
+    bg: '#111A16', // ink-900
+    text: '#E8EDEB', // ink-50
+    placeholder: '#778A83', // ink-400
+    border: '#26332D', // ink-700
+    borderFocus: '#00D68F', // mint-500
   },
   // Shadow
   shadow: {
-    sm: '0 1px 2px 0 rgb(0 0 0 / 0.3)',
-    md: '0 4px 6px -1px rgb(0 0 0 / 0.4)',
-    lg: '0 10px 15px -3px rgb(0 0 0 / 0.5)',
+    sm: '0 1px 2px 0 rgb(0 0 0 / 0.5)',
+    md: '0 4px 6px -1px rgb(0 0 0 / 0.6)',
+    lg: '0 10px 15px -3px rgb(0 0 0 / 0.7)',
   },
 };
 
