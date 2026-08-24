@@ -71,7 +71,7 @@ export default function Home() {
       <Navbar />
       <main className="app-main">
         {/* Hero Banner Section */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
+        <section className="relative bg-gradient-to-br from-blue-600 dark:from-mint-900 via-blue-700 dark:via-mint-950 to-indigo-800 dark:to-ink-950 text-white">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="text-center">
@@ -79,14 +79,14 @@ export default function Home() {
               Learn Skills That
               <span className="block text-yellow-300 mt-2">Change Your Life</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-blue-100 dark:text-mint-100 mb-8 max-w-3xl mx-auto">
               Master in-demand skills with our comprehensive courses. 
               Start learning today and unlock your potential.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/courses"
-                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 dark:text-ink-50 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
               >
                 Browse All Courses
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ export default function Home() {
               {!user && (
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-mint-500 text-blue-700 dark:text-ink-950 font-semibold rounded-lg shadow-lg hover:bg-gray-100 dark:hover:bg-mint-400 transition-all transform hover:scale-105"
                 >
                   Get Started Free
                 </Link>
@@ -108,7 +108,7 @@ export default function Home() {
         {/* Decorative animated wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg
-            className="w-full h-12 text-white"
+            className="w-full h-12 text-white dark:text-ink-950"
             fill="currentColor"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
@@ -132,54 +132,54 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+        <section className="py-16 bg-white dark:bg-ink-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full mb-4 transition-colors">
-                <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-mint-900 rounded-full mb-4 transition-colors">
+                <svg className="w-8 h-8 text-blue-600 dark:text-mint-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Expert Instructors</h3>
-              <p className="text-gray-600 dark:text-gray-400">Learn from industry experts with years of real-world experience</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-ink-50 mb-2">Expert Instructors</h3>
+              <p className="text-gray-600 dark:text-ink-300">Learn from industry experts with years of real-world experience</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full mb-4 transition-colors">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-950 rounded-full mb-4 transition-colors">
                 <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Lifetime Access</h3>
-              <p className="text-gray-600 dark:text-gray-400">Get lifetime access to all course materials after purchase</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-ink-50 mb-2">Lifetime Access</h3>
+              <p className="text-gray-600 dark:text-ink-300">Get lifetime access to all course materials after purchase</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full mb-4 transition-colors">
-                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 dark:bg-mint-900 rounded-full mb-4 transition-colors">
+                <svg className="w-8 h-8 text-purple-600 dark:text-mint-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">Learn at Your Pace</h3>
-              <p className="text-gray-600 dark:text-gray-400">Study anytime, anywhere with our flexible learning platform</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-ink-50 mb-2">Learn at Your Pace</h3>
+              <p className="text-gray-600 dark:text-ink-300">Study anytime, anywhere with our flexible learning platform</p>
             </div>
           </div>
         </div>
         </section>
 
         {/* Stats Strip (moved just before Featured Courses) */}
-        <section className="py-10 bg-white dark:bg-gray-900 transition-colors">
+        <section className="py-10 bg-white dark:bg-ink-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8 text-center">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-mint-400">
                 Trusted by learners worldwide
               </p>
-              <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-50">
+              <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900 dark:text-ink-50">
                 Numbers that show our impact
               </h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div className="app-card app-card-padding flex flex-col items-center space-y-2">
-                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-mint-900 flex items-center justify-center text-blue-600 dark:text-mint-400">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -189,18 +189,18 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                <p className="text-xs font-medium text-gray-500 dark:text-ink-300 uppercase tracking-wide">
                   Learners
                 </p>
-                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-ink-50">
                   10K+
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-ink-300">
                   Joining from across the india
                 </p>
               </div>
               <div className="app-card app-card-padding flex flex-col items-center space-y-2">
-                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-mint-900 flex items-center justify-center text-emerald-600 dark:text-mint-400">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -210,18 +210,18 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                <p className="text-xs font-medium text-gray-500 dark:text-ink-300 uppercase tracking-wide">
                   Courses
                 </p>
-                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-ink-50">
                   Curated
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-ink-300">
                   Hand-picked, high quality content
                 </p>
               </div>
               <div className="app-card app-card-padding flex flex-col items-center space-y-2">
-                <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-mint-900 flex items-center justify-center text-purple-600 dark:text-mint-400">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -231,29 +231,29 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                <p className="text-xs font-medium text-gray-500 dark:text-ink-300 uppercase tracking-wide">
                   Completion Rate
                 </p>
-                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-ink-50">
                   92%
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-ink-300">
                   Learners finishing what they start
                 </p>
               </div>
               <div className="app-card app-card-padding flex flex-col items-center space-y-2">
-                <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-950 flex items-center justify-center text-amber-600 dark:text-amber-400">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.788 1.402 8.168L12 18.896l-7.336 3.871 1.402-8.168L.132 9.211l8.2-1.193z" />
                   </svg>
                 </div>
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                <p className="text-xs font-medium text-gray-500 dark:text-ink-300 uppercase tracking-wide">
                   Avg. Rating
                 </p>
-                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-50">
+                <p className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-ink-50">
                   4.8/5
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-ink-300">
                   Based on learner reviews
                 </p>
               </div>
@@ -262,20 +262,20 @@ export default function Home() {
         </section>
 
         {/* Featured Courses Section */}
-        <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+        <section className="py-16 bg-gray-50 dark:bg-ink-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title mb-2">
               Featured Courses
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-ink-300 max-w-2xl mx-auto">
               Discover our most popular courses and start your learning journey today
             </p>
           </div>
 
           {loading ? (
             <div className="state-loading">
-              <div className="inline-block h-10 w-10 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <div className="inline-block h-10 w-10 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
               <p className="mt-3 text-sm">Loading courses...</p>
             </div>
           ) : courses.length === 0 ? (
@@ -296,9 +296,9 @@ export default function Home() {
                   <Link
                     key={course.id}
                     href={`/courses/${course.id}`}
-                    className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group bg-white dark:bg-ink-900 rounded-xl shadow-md dark:shadow-black/40 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                   >
-                    <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-blue-400 dark:from-mint-800 to-indigo-600 dark:to-mint-950 overflow-hidden">
                       {imageSrc ? (
                         <img
                           src={imageSrc}
@@ -313,18 +313,18 @@ export default function Home() {
                           </svg>
                         </div>
                       )}
-                      <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 px-3 py-1 rounded-full text-sm font-semibold text-gray-900 dark:text-gray-50">
+                      <div className="absolute top-4 right-4 bg-white dark:bg-ink-900 bg-opacity-90 dark:bg-opacity-90 px-3 py-1 rounded-full text-sm font-semibold text-gray-900 dark:text-ink-50">
                         {course.videos.length} Videos
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-ink-50 mb-2 group-hover:text-blue-600 dark:group-hover:text-mint-400 transition-colors">
                         {course.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
+                      <p className="text-gray-600 dark:text-ink-300 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
                         {course.description || 'No description available'}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-ink-800">
                         <PricingDisplay
                           mrp={course.mrp}
                           actualPrice={course.price}
@@ -336,7 +336,7 @@ export default function Home() {
                           isLoggedIn={!!user}
                           size="md"
                         />
-                        <span className="text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center">
+                        <span className="text-blue-600 dark:text-mint-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center">
                           View Course
                           <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -352,7 +352,7 @@ export default function Home() {
                 <div className="text-center">
                   <Link
                     href="/courses"
-                    className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
                   >
                     View All Courses
                     <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -367,46 +367,46 @@ export default function Home() {
         </section>
 
         {/* How It Works */}
-        <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+        <section className="py-16 bg-white dark:bg-ink-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <h2 className="section-title mb-2">How It Works</h2>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-ink-300 max-w-2xl mx-auto">
                 Getting started is simple. Follow these three steps to begin your learning journey.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="app-card app-card-padding flex flex-col items-center text-center">
-                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-mint-900 flex items-center justify-center text-blue-600 dark:text-mint-400 font-semibold mb-4">
                   1
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   Browse Courses
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-ink-300">
                   Explore our catalog and find the course that matches your goals and skill level.
                 </p>
               </div>
               <div className="app-card app-card-padding flex flex-col items-center text-center">
-                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-mint-900 flex items-center justify-center text-blue-600 dark:text-mint-400 font-semibold mb-4">
                   2
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   Enroll & Learn
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-ink-300">
                   Purchase once and get lifetime access. Learn at your own pace with structured
                   modules.
                 </p>
               </div>
               <div className="app-card app-card-padding flex flex-col items-center text-center">
-                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-mint-900 flex items-center justify-center text-blue-600 dark:text-mint-400 font-semibold mb-4">
                   3
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   Track Progress
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-ink-300">
                   Resume where you left off, complete lessons, and track your improvement over time.
                 </p>
               </div>
@@ -415,32 +415,32 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors">
+        <section className="py-16 bg-gray-50 dark:bg-ink-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="section-title mb-3">What Our Learners Say</h2>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+              <p className="text-gray-600 dark:text-ink-300 max-w-2xl mx-auto text-sm sm:text-base">
                 Real feedback from students who have transformed their skills with our courses.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="app-card app-card-padding flex flex-col h-full">
-                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                <p className="text-sm text-gray-700 dark:text-ink-100 mb-6 leading-relaxed">
                   “The course structure is clear and practical. I was able to apply what I learned
                   to real projects within a week.”
                 </p>
                 <div className="mt-auto flex items-center space-x-3 pt-2">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white text-sm font-semibold">
                     S
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Shayam</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Video Editing Student</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-ink-50">Shayam</p>
+                    <p className="text-xs text-gray-500 dark:text-ink-300">Video Editing Student</p>
                   </div>
                 </div>
               </div>
               <div className="app-card app-card-padding flex flex-col h-full">
-                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                <p className="text-sm text-gray-700 dark:text-ink-100 mb-6 leading-relaxed">
                   “Lifetime access and progress tracking make it easy to learn at my own pace,
                   without any pressure.”
                 </p>
@@ -449,23 +449,23 @@ export default function Home() {
                     A
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Anita</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Working Professional</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-ink-50">Anita</p>
+                    <p className="text-xs text-gray-500 dark:text-ink-300">Working Professional</p>
                   </div>
                 </div>
               </div>
               <div className="app-card app-card-padding flex flex-col h-full">
-                <p className="text-sm text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+                <p className="text-sm text-gray-700 dark:text-ink-100 mb-6 leading-relaxed">
                   “The affiliate program is transparent and fair. I can clearly see my earnings and
                   payouts from referrals.”
                 </p>
                 <div className="mt-auto flex items-center space-x-3 pt-2">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-sm font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 dark:from-mint-900 to-pink-500 dark:to-mint-800 flex items-center justify-center text-white text-sm font-semibold">
                     R
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Rahul</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Affiliate Partner</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-ink-50">Rahul</p>
+                    <p className="text-xs text-gray-500 dark:text-ink-300">Affiliate Partner</p>
                   </div>
                 </div>
               </div>
@@ -474,19 +474,19 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <section className="py-16 bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-700 dark:to-mint-950 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             Ready to Start Learning?
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-blue-100 dark:text-mint-100 mb-8">
             Join thousands of students already learning with us. Start your journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {!user && (
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 dark:text-ink-50 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
               >
                 Create Free Account
               </Link>

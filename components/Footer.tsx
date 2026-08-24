@@ -5,7 +5,7 @@ import Logo from './Logo';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors">
+    <footer className="bg-gray-50 dark:bg-ink-950 border-t border-gray-200 dark:border-ink-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Column */}
@@ -18,14 +18,14 @@ export default function Footer() {
             </Link>
             </div>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md leading-relaxed">
+            <p className="text-gray-600 dark:text-ink-300 mb-6 max-w-md leading-relaxed">
               Your gateway to professional development. Learn new skills, advance your career, 
               and unlock your potential with our comprehensive course library.
             </p>
             <div className="flex space-x-3">
               <a
                 href="#"
-                className="w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="w-10 h-10 bg-white dark:bg-ink-900 border border-gray-200 dark:border-ink-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-ink-300 hover:bg-blue-50 dark:hover:bg-mint-900/20 hover:text-blue-600 dark:hover:text-mint-400 hover:border-blue-300 dark:hover:border-mint-700 transition-all duration-200 shadow-sm hover:shadow-md"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -34,7 +34,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-400 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="w-10 h-10 bg-white dark:bg-ink-900 border border-gray-200 dark:border-ink-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-ink-300 hover:bg-blue-50 dark:hover:bg-mint-900/20 hover:text-blue-400 dark:hover:text-mint-400 hover:border-blue-300 dark:hover:border-mint-700 transition-all duration-200 shadow-sm hover:shadow-md"
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -43,7 +43,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="w-10 h-10 bg-white dark:bg-ink-900 border border-gray-200 dark:border-ink-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-ink-300 hover:bg-blue-50 dark:hover:bg-mint-900/20 hover:text-blue-700 dark:hover:text-mint-400 hover:border-blue-300 dark:hover:border-mint-700 transition-all duration-200 shadow-sm hover:shadow-md"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:text-pink-600 dark:hover:text-pink-400 hover:border-pink-300 dark:hover:border-pink-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="w-10 h-10 bg-white dark:bg-ink-900 border border-gray-200 dark:border-ink-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-ink-300 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:text-pink-600 dark:hover:text-pink-400 hover:border-pink-300 dark:hover:border-pink-700 transition-all duration-200 shadow-sm hover:shadow-md"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -64,20 +64,20 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-gray-900 dark:text-gray-100 font-semibold text-base mb-4">Quick Links</h3>
+            <h3 className="text-gray-900 dark:text-ink-50 font-semibold text-base mb-4">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/courses" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/courses" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   All Courses
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/about" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/contact" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   Contact
                 </Link>
               </li>
@@ -86,20 +86,20 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-gray-900 dark:text-gray-100 font-semibold text-base mb-4">Support</h3>
+            <h3 className="text-gray-900 dark:text-ink-50 font-semibold text-base mb-4">Support</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/terms" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/privacy" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/refund" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm inline-block">
+                <Link href="/refund" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   Refund Policy
                 </Link>
               </li>
@@ -108,16 +108,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-gray-800 mt-10 pt-8">
+        <div className="border-t border-gray-200 dark:border-ink-900 mt-10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 dark:text-gray-400 text-sm text-center md:text-left">
+            <p className="text-gray-500 dark:text-ink-300 text-sm text-center md:text-left">
               © {new Date().getFullYear()} LearnWealthX. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-              <Link href="/terms" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+              <Link href="/terms" className="text-gray-500 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 text-sm transition-colors">
                 Terms
               </Link>
-              <Link href="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+              <Link href="/privacy" className="text-gray-500 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 text-sm transition-colors">
                 Privacy
               </Link>
             </div>

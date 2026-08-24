@@ -79,6 +79,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/*
+          Theme bootstrap. MUST stay the very first thing in <head> and MUST be a
+          plain synchronous script: it has to set the class before the first
+          paint, otherwise the server-rendered HTML paints light and snaps to
+          dark on every route load. Dark is the default, so anything other than
+          an explicit stored 'light' -- including a localStorage access that
+          throws in private mode -- resolves to dark. The key and this fallback
+          order must match contexts/ThemeContext.tsx.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme-v2');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();",
+          }}
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />

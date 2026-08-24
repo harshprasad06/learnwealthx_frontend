@@ -231,21 +231,21 @@ export default function ManageVideosPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="relative min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-4">
           <button
             onClick={() => router.push('/admin/courses')}
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mb-4 text-sm font-medium"
+            className="text-blue-600 hover:text-blue-800 dark:text-mint-400 dark:hover:text-mint-300 mb-4 text-sm font-medium"
           >
             ← Back to Courses
           </button>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Manage Videos</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Manage Videos</h1>
             {submitting && (
-              <span className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1 text-xs font-medium border border-blue-200 dark:border-blue-700">
-                <span className="mr-2 h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-300 animate-pulse" />
+              <span className="inline-flex items-center rounded-full bg-blue-50 dark:bg-mint-900/30 text-blue-700 dark:text-mint-300 px-3 py-1 text-xs font-medium border border-blue-200 dark:border-mint-700">
+                <span className="mr-2 h-2 w-2 rounded-full bg-blue-500 dark:bg-mint-300 animate-pulse" />
                 {uploadMode === 'upload' && videoFile
                   ? 'Uploading video to Bunny.net…'
                   : 'Saving video details…'}
@@ -255,13 +255,13 @@ export default function ManageVideosPage() {
         </div>
 
         {showForm && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 p-6 mb-8 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
               {editingVideo ? 'Edit Video' : 'Add Video'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">
                   Title *
                 </label>
                 <input
@@ -269,18 +269,18 @@ export default function ManageVideosPage() {
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   placeholder="Enter video title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">
                   Description
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   rows={2}
                   placeholder="Enter video description"
                 />
@@ -295,7 +295,7 @@ export default function ManageVideosPage() {
                       onChange={() => setUploadMode('upload')}
                       className="mr-2"
                     />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-medium text-gray-700 dark:text-ink-200">
                       Upload Video
                     </span>
                   </label>
@@ -306,7 +306,7 @@ export default function ManageVideosPage() {
                       onChange={() => setUploadMode('manual')}
                       className="mr-2"
                     />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-medium text-gray-700 dark:text-ink-200">
                       Enter Video ID
                     </span>
                   </label>
@@ -316,27 +316,27 @@ export default function ManageVideosPage() {
               {/* Upload Video Option */}
               {uploadMode === 'upload' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                     Video File *
                   </label>
                   <input
                     type="file"
                     accept="video/*"
                     onChange={handleVideoFileChange}
-                    className="mt-1 block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    className="mt-1 block w-full text-sm text-gray-500 dark:text-ink-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-mint-900/20 file:text-blue-700 dark:file:text-mint-400 hover:file:bg-blue-100 dark:hover:file:bg-mint-900/30"
                   />
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="mt-1 text-xs text-gray-500 dark:text-ink-300">
                     Supported formats: MP4, WebM, MOV, AVI, MKV (Max 2GB)
                   </p>
                   {submitting && uploadMode === 'upload' && videoFile && (
                     <div className="mt-2">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <div className="w-full bg-gray-200 dark:bg-ink-800 rounded-full h-2.5">
                         <div
-                          className="bg-blue-600 h-2.5 rounded-full transition-all"
+                          className="bg-blue-600 dark:bg-mint-500 h-2.5 rounded-full transition-all"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                      <p className="text-xs text-gray-600 dark:text-ink-200 mt-1">
                         Uploading...{' '}
                         {uploadProgress > 0 ? `${Math.round(uploadProgress)}%` : 'Starting...'}
                       </p>
@@ -353,7 +353,7 @@ export default function ManageVideosPage() {
               {/* Manual Video ID Option - Show when manual mode or editing */}
               {(uploadMode === 'manual' || editingVideo) && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">
                     Bunny.net Video ID *
                   </label>
                   <input
@@ -361,13 +361,13 @@ export default function ManageVideosPage() {
                     required
                     value={formData.bunnyVideoId}
                     onChange={(e) => setFormData({ ...formData, bunnyVideoId: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                     placeholder="Enter Bunny.net video ID (e.g., 0f7c32e5-6f2d-452a-93e3-5be5c2469c59)"
                   />
                 </div>
               )}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">
                   Order *
                 </label>
                 <input
@@ -376,7 +376,7 @@ export default function ManageVideosPage() {
                   min="1"
                   value={formData.order}
                   onChange={(e) => setFormData({ ...formData, order: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   placeholder="1"
                 />
               </div>
@@ -385,7 +385,7 @@ export default function ManageVideosPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting
                     ? uploadMode === 'upload' && videoFile
@@ -405,7 +405,7 @@ export default function ManageVideosPage() {
                     setFormData({ title: '', description: '', bunnyVideoId: '', order: '' });
                     setVideoFile(null);
                   }}
-                  className="bg-gray-300 text-gray-700 dark:bg-gray-700 dark:text-gray-100 px-4 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-600"
+                  className="bg-gray-300 text-gray-700 dark:bg-ink-800 dark:text-ink-50 px-4 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-ink-700"
                 >
                   Cancel
                 </button>
@@ -415,7 +415,7 @@ export default function ManageVideosPage() {
         )}
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-ink-50">
             Videos ({videos.length})
           </h2>
           <button
@@ -431,58 +431,58 @@ export default function ManageVideosPage() {
               setUploadMode('upload');
               setShowForm(true);
             }}
-            className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="w-full sm:w-auto bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400"
           >
             Add Video
           </button>
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-gray-600 dark:text-gray-400">
+          <div className="text-center py-12 text-gray-600 dark:text-ink-300">
             Loading videos...
           </div>
         ) : videos.length === 0 ? (
-          <div className="text-center py-12 text-gray-500 dark:text-gray-400">No videos yet</div>
+          <div className="text-center py-12 text-gray-500 dark:text-ink-300">No videos yet</div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 overflow-hidden transition-colors">
             <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-700">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+              <thead className="bg-gray-50 dark:bg-ink-800">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                     Order
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                     Title
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                     Bunny Video ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                 {videos.map((video) => (
                   <tr key={video.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                      <div className="text-sm font-medium text-gray-900 dark:text-ink-50">
                         {video.order}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                      <div className="text-sm font-medium text-gray-900 dark:text-ink-50">
                         {video.title}
                       </div>
                       {video.description && (
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-gray-500 dark:text-ink-300">
                           {video.description}
                         </div>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-gray-100 font-mono text-xs">
+                      <div className="text-sm text-gray-900 dark:text-ink-50 font-mono text-xs">
                         {video.bunnyVideoId}
                       </div>
                     </td>
@@ -490,7 +490,7 @@ export default function ManageVideosPage() {
                       <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => handleEdit(video)}
-                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-blue-900/40 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-mint-900/40 text-xs font-medium text-blue-700 dark:text-mint-300 bg-blue-50 dark:bg-mint-900/20 hover:bg-blue-100 dark:hover:bg-mint-900/40 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -504,7 +504,7 @@ export default function ManageVideosPage() {
                         </button>
                         <button
                           onClick={() => handleDelete(video.id)}
-                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/40 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/50 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-950/60 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -530,14 +530,14 @@ export default function ManageVideosPage() {
       {/* Full-screen loading overlay during full submit flow */}
       {submitting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg px-6 py-4 flex flex-col items-center space-y-3">
-            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <p className="text-sm font-medium text-gray-800 dark:text-gray-100">
+          <div className="bg-white dark:bg-ink-950 rounded-xl shadow-lg px-6 py-4 flex flex-col items-center space-y-3">
+            <div className="w-10 h-10 border-4 border-blue-500 dark:border-mint-400 border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm font-medium text-gray-800 dark:text-ink-50">
               {uploadMode === 'upload' && videoFile
                 ? 'Uploading video to Bunny.net...'
                 : 'Saving video details...'}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-gray-500 dark:text-ink-300">
               {uploadMode === 'upload' && videoFile
                 ? uploadProgress > 0
                   ? `${Math.round(uploadProgress)}% completed. Please keep this tab open.`

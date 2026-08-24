@@ -255,10 +255,10 @@ export default function CourseDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600 dark:text-gray-400">Loading...</div>
+          <div className="text-center text-gray-600 dark:text-ink-300">Loading...</div>
         </div>
       </div>
     );
@@ -266,10 +266,10 @@ export default function CourseDetailPage() {
 
   if (!course) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600 dark:text-gray-400">Course not found</div>
+          <div className="text-center text-gray-600 dark:text-ink-300">Course not found</div>
         </div>
       </div>
     );
@@ -285,7 +285,7 @@ export default function CourseDetailPage() {
           <svg
             key={star}
             className={`w-4 h-4 ${
-              star <= full ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'
+              star <= full ? 'text-yellow-400' : 'text-gray-300 dark:text-ink-700'
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -298,11 +298,11 @@ export default function CourseDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 overflow-hidden transition-colors">
           {course.thumbnail && (
             <img
               src={
@@ -315,11 +315,11 @@ export default function CourseDetailPage() {
             />
           )}
           <div className="p-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">{course.title}</h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">{course.description || 'No description'}</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-4">{course.title}</h1>
+            <p className="text-gray-600 dark:text-ink-300 mb-6">{course.description || 'No description'}</p>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
               <div className="flex flex-col gap-2">
-                <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-ink-300">
                   Course Price
                 </span>
                 <div className="flex items-center gap-3">
@@ -338,17 +338,17 @@ export default function CourseDetailPage() {
                     <div className="flex flex-col items-start gap-0.5">
                       <div className="flex items-center gap-1">
                         {renderStars(averageRating)}
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                        <span className="text-xs text-gray-600 dark:text-ink-300">
                           {averageRating.toFixed(1)}
                         </span>
                       </div>
-                      <span className="text-[11px] text-gray-500 dark:text-gray-400">
+                      <span className="text-[11px] text-gray-500 dark:text-ink-300">
                         {reviewCount} review{reviewCount !== 1 ? 's' : ''}
                       </span>
                     </div>
                   )}
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                   Price shown excludes payment gateway fees
                 </p>
               </div>
@@ -356,7 +356,7 @@ export default function CourseDetailPage() {
                 {!hasAccess && (
                   <button
                     onClick={() => setShowCheckout(true)}
-                    className="bg-blue-600 dark:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                    className="bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
                   >
                     Checkout
                   </button>
@@ -374,16 +374,16 @@ export default function CourseDetailPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Course Content</h2>
+                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Course Content</h2>
                 <div className="space-y-2">
                   {course.videos.map((video, index) => (
                     <div
                       key={video.id}
-                      className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors"
+                      className="flex items-center justify-between p-4 bg-gray-50 dark:bg-ink-800 rounded-lg transition-colors"
                     >
                       <div className="flex items-center space-x-4">
-                        <span className="text-gray-500 dark:text-gray-400 font-medium">{index + 1}</span>
-                        <span className="text-gray-900 dark:text-gray-50">{video.title}</span>
+                        <span className="text-gray-500 dark:text-ink-300 font-medium">{index + 1}</span>
+                        <span className="text-gray-900 dark:text-ink-50">{video.title}</span>
                       </div>
                     </div>
                   ))}
@@ -391,26 +391,26 @@ export default function CourseDetailPage() {
               </div>
 
               <div className="lg:col-span-1">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
                   Reviews & Ratings
                 </h2>
 
                 {reviewCount === 0 && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-sm text-gray-600 dark:text-ink-300 mb-4">
                     No reviews yet. Be the first to rate this course!
                   </p>
                 )}
 
                 {reviewCount > 0 && (
-                  <div className="mb-6 p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex items-center justify-between">
+                  <div className="mb-6 p-4 rounded-lg bg-gray-50 dark:bg-ink-800 flex items-center justify-between">
                     <div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+                        <span className="text-3xl font-bold text-gray-900 dark:text-ink-50">
                           {averageRating.toFixed(1)}
                         </span>
                         {renderStars(averageRating)}
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                         Based on {reviewCount} review{reviewCount !== 1 ? 's' : ''}
                       </p>
                     </div>
@@ -420,7 +420,7 @@ export default function CourseDetailPage() {
                 {canReview && (
                   <form onSubmit={handleSubmitReview} className="mb-6 space-y-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-ink-100 mb-1">
                         Your Rating
                       </label>
                       <div className="flex items-center space-x-1">
@@ -435,7 +435,7 @@ export default function CourseDetailPage() {
                               className={`w-5 h-5 ${
                                 star <= myRating
                                   ? 'text-yellow-400'
-                                  : 'text-gray-300 dark:text-gray-600'
+                                  : 'text-gray-300 dark:text-ink-700'
                               }`}
                               fill="currentColor"
                               viewBox="0 0 20 20"
@@ -448,14 +448,14 @@ export default function CourseDetailPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-ink-100 mb-1">
                         Your Review (optional)
                       </label>
                       <textarea
                         value={myComment}
                         onChange={(e) => setMyComment(e.target.value)}
                         rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 text-sm"
                         placeholder="Share your experience with this course..."
                       />
                     </div>
@@ -463,7 +463,7 @@ export default function CourseDetailPage() {
                     <button
                       type="submit"
                       disabled={submittingReview}
-                      className="w-full bg-blue-600 dark:bg-blue-500 text-white py-2 rounded-md text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-60 transition-colors"
+                      className="w-full bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-60 transition-colors"
                     >
                       {submittingReview ? 'Saving...' : 'Save Review'}
                     </button>
@@ -475,21 +475,21 @@ export default function CourseDetailPage() {
                     {reviews.map((review) => (
                       <div
                         key={review.id}
-                        className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+                        className="p-3 rounded-lg border border-gray-200 dark:border-ink-800 bg-white dark:bg-ink-900"
                       >
                         <div className="flex items-center justify-between mb-1">
                           <div>
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                            <p className="text-sm font-semibold text-gray-900 dark:text-ink-50">
                               {review.user.name || review.user.email}
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-gray-500 dark:text-ink-300">
                               {new Date(review.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                           {renderStars(review.rating)}
                         </div>
                         {review.comment && (
-                          <p className="text-sm text-gray-700 dark:text-gray-200 mt-1">
+                          <p className="text-sm text-gray-700 dark:text-ink-100 mt-1">
                             {review.comment}
                           </p>
                         )}

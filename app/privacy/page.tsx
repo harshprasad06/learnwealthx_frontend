@@ -5,27 +5,27 @@ import Footer from '@/components/Footer';
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <main className="flex-1">
         <section className="py-10 sm:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50 mb-4">
               Privacy Policy
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">
+            <p className="text-gray-600 dark:text-ink-300 mb-2">
               Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-ink-300 mb-8">
               We respect your privacy and are committed to protecting your personal information.
               This Privacy Policy explains how we collect, use, and safeguard your data when you use
               LearnWealthX platform. By using our services, you agree to the collection and use of 
               information in accordance with this policy.
             </p>
 
-            <div className="space-y-6 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+            <div className="space-y-6 text-gray-700 dark:text-ink-200 text-sm sm:text-base">
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   1. Information We Collect
                 </h2>
                 <p className="mb-2">We collect several types of information:</p>
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   2. How We Use Your Information
                 </h2>
                 <p className="mb-2">We use the collected information for the following purposes:</p>
@@ -67,7 +67,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   3. Data Security
                 </h2>
                 <p className="mb-2">
@@ -88,7 +88,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   4. Cookies & Tracking Technologies
                 </h2>
                 <p className="mb-2">We use cookies and similar tracking technologies for:</p>
@@ -108,7 +108,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   5. Data Sharing and Disclosure
                 </h2>
                 <p className="mb-2">We do not sell your personal data. We may share your information with:</p>
@@ -125,7 +125,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   6. Your Rights and Choices
                 </h2>
                 <p className="mb-2">You have the following rights regarding your personal information:</p>
@@ -139,7 +139,7 @@ export default function PrivacyPolicyPage() {
                 </ul>
                 <p>
                   To exercise these rights, please contact us through our{' '}
-                  <a href="/contact" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  <a href="/contact" className="text-blue-600 dark:text-mint-400 hover:underline">
                     Contact page
                   </a>
                   . We will respond to your request within a reasonable timeframe.
@@ -147,7 +147,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   7. Data Retention
                 </h2>
                 <p>
@@ -160,7 +160,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   8. Children&apos;s Privacy
                 </h2>
                 <p>
@@ -171,7 +171,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   9. International Data Transfers
                 </h2>
                 <p>
@@ -183,7 +183,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   10. Changes to This Policy
                 </h2>
                 <p>
@@ -196,7 +196,7 @@ export default function PrivacyPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   11. Contact Us
                 </h2>
                 <p>
@@ -204,7 +204,7 @@ export default function PrivacyPolicyPage() {
                   handle your personal information, please contact us through our{' '}
                   <a
                     href="/contact"
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="text-blue-600 dark:text-mint-400 hover:underline"
                   >
                     Contact page
                   </a>

@@ -238,7 +238,7 @@ export default function WatchCoursePage() {
           <svg
             key={star}
             className={`${cls} ${
-              star <= full ? 'text-yellow-400' : 'text-gray-600'
+              star <= full ? 'text-yellow-400' : 'text-gray-600 dark:text-ink-300'
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -257,7 +257,7 @@ export default function WatchCoursePage() {
         <main className="app-main">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="state-loading">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
               <p className="mt-3 text-sm">Loading course...</p>
             </div>
           </div>
@@ -288,7 +288,7 @@ export default function WatchCoursePage() {
     <div className="app-page">
       <Navbar />
       <main className="app-main">
-        <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-ink-950">
           {/* Video Player */}
           <div className="flex-1 flex flex-col bg-black">
             <div className="w-full bg-black">
@@ -316,44 +316,44 @@ export default function WatchCoursePage() {
                 )}
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
+            <div className="bg-white dark:bg-ink-950 border-t border-gray-200 dark:border-ink-900 px-6 py-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-ink-50 mb-1">
                 {currentVideo.title}
               </h2>
-              <h3 className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+              <h3 className="text-sm sm:text-base text-gray-600 dark:text-ink-300">
                 {course.title}
               </h3>
             </div>
           </div>
 
           {/* Playlist + Reviews Sidebar */}
-          <div className="w-full md:w-96 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-800 md:max-h-[calc(100vh-4rem)] md:overflow-y-auto">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-800">
-              <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+          <div className="w-full md:w-96 bg-white dark:bg-ink-950 text-gray-900 dark:text-ink-50 border-t md:border-t-0 md:border-l border-gray-200 dark:border-ink-900 md:max-h-[calc(100vh-4rem)] md:overflow-y-auto">
+            <div className="p-4 border-b border-gray-200 dark:border-ink-900">
+              <h3 className="font-semibold text-sm text-gray-900 dark:text-ink-50">
                 Course Content
               </h3>
             </div>
-            <div className="divide-y divide-gray-100 dark:divide-gray-800">
+            <div className="divide-y divide-gray-100 dark:divide-ink-900">
               {course.videos.map((video) => (
                 <button
                   key={video.id}
                   onClick={() => loadVideo(video.id)}
-                  className={`w-full text-left p-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
-                    currentVideo.id === video.id ? 'bg-gray-100 dark:bg-gray-800' : ''
+                  className={`w-full text-left p-4 text-sm hover:bg-gray-100 dark:hover:bg-ink-900 transition-colors ${
+                    currentVideo.id === video.id ? 'bg-gray-100 dark:bg-ink-900' : ''
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-50">
+                      <p className="font-medium flex items-center gap-2 text-gray-900 dark:text-ink-50">
                         {video.title}
                         {completedVideoIds.has(video.id) && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-300">
                             Done
                           </span>
                         )}
                       </p>
                       {video.duration && (
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                        <p className="text-xs text-gray-500 dark:text-ink-300">
                           {Math.floor(video.duration / 60)}:
                           {(video.duration % 60).toString().padStart(2, '0')}
                         </p>
@@ -364,13 +364,13 @@ export default function WatchCoursePage() {
               ))}
             </div>
 
-            <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
-              <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100">
+            <div className="p-4 border-t border-gray-200 dark:border-ink-900 space-y-3">
+              <h3 className="font-semibold text-sm text-gray-900 dark:text-ink-50">
                 Reviews & Ratings
               </h3>
 
               {reviewCount === 0 && (
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-ink-300">
                   No reviews yet. Go to the course page to add your review.
                 </p>
               )}
@@ -379,12 +379,12 @@ export default function WatchCoursePage() {
                 <>
                   <div className="flex items-center justify-between text-xs mb-2">
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-gray-900 dark:text-gray-50">
+                      <span className="text-lg font-bold text-gray-900 dark:text-ink-50">
                         {averageRating.toFixed(1)}
                       </span>
                       {renderStars(averageRating)}
                     </div>
-                    <span className="text-gray-500 dark:text-gray-400">
+                    <span className="text-gray-500 dark:text-ink-300">
                       {reviewCount} review{reviewCount !== 1 ? 's' : ''}
                     </span>
                   </div>
@@ -393,21 +393,21 @@ export default function WatchCoursePage() {
                     {reviews.map((review) => (
                       <div
                         key={review.id}
-                        className="border border-gray-200 dark:border-gray-800 rounded p-2 text-xs space-y-1 bg-gray-50 dark:bg-gray-900/60"
+                        className="border border-gray-200 dark:border-ink-900 rounded p-2 text-xs space-y-1 bg-gray-50 dark:bg-ink-950/60"
                       >
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="font-semibold text-gray-900 dark:text-gray-50">
+                            <p className="font-semibold text-gray-900 dark:text-ink-50">
                               {review.user.name || review.user.email}
                             </p>
-                            <p className="text-[10px] text-gray-500 dark:text-gray-400">
+                            <p className="text-[10px] text-gray-500 dark:text-ink-300">
                               {new Date(review.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                           {renderStars(review.rating, 'sm')}
                         </div>
                         {review.comment && (
-                          <p className="text-[11px] text-gray-700 dark:text-gray-200">
+                          <p className="text-[11px] text-gray-700 dark:text-ink-100">
                             {review.comment}
                           </p>
                         )}
@@ -417,7 +417,7 @@ export default function WatchCoursePage() {
                 </>
               )}
 
-              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+              <p className="text-[11px] text-gray-500 dark:text-ink-300">
                 To add or edit your review, open the course page.
               </p>
             </div>

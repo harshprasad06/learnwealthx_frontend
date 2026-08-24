@@ -72,8 +72,8 @@ export default function Logo({ className = '', showText = false, size = 'md' }: 
       
       {/* Premium Typography - Only shown if showText is true */}
       {showText && (
-        <span className={`font-bold ${textSize} ${letterSpacing} leading-tight text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors duration-300`}>
-          LearnWealth<span className="font-black bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent">X</span>
+        <span className={`font-bold ${textSize} ${letterSpacing} leading-tight text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-ink-50 transition-colors duration-300`}>
+          LearnWealth<span className="font-black bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-mint-300 dark:to-mint-500 bg-clip-text text-transparent">X</span>
         </span>
       )}
     </div>

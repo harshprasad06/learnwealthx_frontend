@@ -88,15 +88,15 @@ export default function WalletPage() {
   const getTransactionTypeColor = (type: string) => {
     switch (type) {
       case 'credit':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40';
       case 'debit':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40';
       case 'payout_request':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-blue-600 dark:text-mint-400 bg-blue-50 dark:bg-mint-900/20';
       case 'payout_processed':
-        return 'text-purple-600 bg-purple-50';
+        return 'text-purple-600 dark:text-mint-400 bg-purple-50 dark:bg-mint-900/20';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-gray-600 dark:text-ink-300 bg-gray-50 dark:bg-ink-900';
     }
   };
 
@@ -130,7 +130,7 @@ export default function WalletPage() {
         <main className="app-main">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="state-loading">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
               <p className="mt-3 text-sm">Loading wallet...</p>
             </div>
           </div>
@@ -160,7 +160,7 @@ export default function WalletPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="state-empty">
               <p className="text-base mb-2">Wallet not found.</p>
-              <Link href="/affiliate/dashboard" className="text-blue-600 dark:text-blue-400 hover:underline">
+              <Link href="/affiliate/dashboard" className="text-blue-600 dark:text-mint-400 hover:underline">
                 Go to Affiliate Dashboard
               </Link>
             </div>
@@ -177,8 +177,8 @@ export default function WalletPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">My Wallet</h1>
-            <p className="text-gray-600 dark:text-gray-400">Track your earnings and transactions</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-2">My Wallet</h1>
+            <p className="text-gray-600 dark:text-ink-300">Track your earnings and transactions</p>
           </div>
           <Link href="/affiliate/payouts" className="btn-primary">
             Request Payout
@@ -192,12 +192,12 @@ export default function WalletPage() {
             <p className="text-3xl font-bold">₹{wallet.balance.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Ready for payout</p>
           </div>
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-500 dark:from-mint-800 to-blue-600 dark:to-mint-950 rounded-xl shadow-lg p-6 text-white">
             <p className="text-sm font-medium opacity-90 mb-1">Lifetime Earnings</p>
             <p className="text-3xl font-bold">₹{wallet.totalEarned.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Total commissions earned</p>
           </div>
-          <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="bg-gradient-to-br from-purple-500 dark:from-mint-900 to-purple-600 dark:to-mint-800 rounded-xl shadow-lg p-6 text-white">
             <p className="text-sm font-medium opacity-90 mb-1">Total Paid Out</p>
             <p className="text-3xl font-bold">₹{wallet.totalPaid.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Amount withdrawn</p>
@@ -206,12 +206,12 @@ export default function WalletPage() {
 
         {/* Recent Transactions */}
         {wallet.recentTransactions && wallet.recentTransactions.length > 0 && (
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow dark:shadow-gray-900/60 p-6 transition-colors">
+          <div className="bg-white dark:bg-ink-950 rounded-xl shadow dark:shadow-black/50 p-6 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-ink-50">
                 Recent Transactions
               </h2>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-200">
+              <span className="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-ink-900 text-gray-600 dark:text-ink-100">
                 Last {Math.min(wallet.recentTransactions.length, 5)} activities
               </span>
             </div>
@@ -219,7 +219,7 @@ export default function WalletPage() {
               {wallet.recentTransactions.map((tx) => (
                 <div
                   key={tx.id}
-                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-gray-50 dark:bg-gray-800/80 rounded-lg border border-gray-100 dark:border-gray-700 transition-all hover:border-blue-200 dark:hover:border-blue-500/70 hover:shadow-sm"
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-gray-50 dark:bg-ink-900/80 rounded-lg border border-gray-100 dark:border-ink-800 transition-all hover:border-blue-200 dark:hover:border-mint-500/70 hover:shadow-sm"
                 >
                   <div className="flex items-start space-x-3">
                     <div
@@ -230,13 +230,13 @@ export default function WalletPage() {
                       {getTransactionIcon(tx.type)}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-semibold text-gray-900 dark:text-gray-50 capitalize text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-ink-50 capitalize text-sm">
                         {tx.type.replace('_', ' ')}
                       </p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 break-words mt-0.5">
+                      <p className="text-xs text-gray-600 dark:text-ink-300 break-words mt-0.5">
                         {tx.description || 'Transaction'}
                       </p>
-                      <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">
+                      <p className="text-[11px] text-gray-400 dark:text-ink-400 mt-1">
                         {new Date(tx.createdAt).toLocaleDateString()}{' '}
                         <span className="mx-1">•</span>
                         {new Date(tx.createdAt).toLocaleTimeString()}
@@ -254,10 +254,10 @@ export default function WalletPage() {
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium ${
                         tx.status === 'completed'
-                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                          ? 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300'
                           : tx.status === 'pending'
-                          ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
-                          : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                          ? 'bg-yellow-100 dark:bg-yellow-950/50 text-yellow-800 dark:text-yellow-300'
+                          : 'bg-red-100 dark:bg-red-950/50 text-red-800 dark:text-red-300'
                       }`}
                     >
                       {tx.status}
@@ -270,19 +270,19 @@ export default function WalletPage() {
         )}
 
         {/* Full Transaction History */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">Transaction History</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-ink-50">Transaction History</h2>
             <Link
               href="/affiliate/dashboard"
-              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-sm text-blue-600 dark:text-mint-400 hover:underline"
             >
               Back to Dashboard
             </Link>
           </div>
 
           {transactions.length === 0 ? (
-            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            <div className="text-center py-8 text-gray-500 dark:text-ink-300">
               <p>No transactions yet.</p>
               <p className="text-sm mt-2">Transactions will appear here when you earn commissions.</p>
             </div>
@@ -293,7 +293,7 @@ export default function WalletPage() {
                 {transactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 text-sm"
+                    className="rounded-lg border border-gray-200 dark:border-ink-800 bg-white dark:bg-ink-900 p-3 text-sm"
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span
@@ -313,11 +313,11 @@ export default function WalletPage() {
                         {tx.type === 'credit' ? '+' : '-'}₹{tx.amount.toFixed(2)}
                       </span>
                     </div>
-                    <p className="text-gray-900 dark:text-gray-50 text-xs mb-1">
+                    <p className="text-gray-900 dark:text-ink-50 text-xs mb-1">
                       {tx.description || 'Transaction'}
                     </p>
                     <div className="flex items-center justify-between mt-1">
-                      <div className="text-[11px] text-gray-500 dark:text-gray-400">
+                      <div className="text-[11px] text-gray-500 dark:text-ink-300">
                         <div>{new Date(tx.createdAt).toLocaleDateString()}</div>
                         <div className="text-[10px]">
                           {new Date(tx.createdAt).toLocaleTimeString()}
@@ -326,10 +326,10 @@ export default function WalletPage() {
                       <span
                         className={`px-2 py-0.5 rounded-full text-[11px] font-medium ${
                           tx.status === 'completed'
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                            ? 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300'
                             : tx.status === 'pending'
-                            ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                            ? 'bg-yellow-100 dark:bg-yellow-950/50 text-yellow-800 dark:text-yellow-300'
+                            : 'bg-red-100 dark:bg-red-950/50 text-red-800 dark:text-red-300'
                         }`}
                       >
                         {tx.status}
@@ -341,29 +341,29 @@ export default function WalletPage() {
 
               {/* Desktop table */}
               <div className="overflow-x-auto hidden md:block">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                  <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Type
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Description
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Amount
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Status
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Date
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {transactions.map((tx) => (
-                      <tr key={tx.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={tx.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                         <td className="px-4 py-3">
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getTransactionTypeColor(
@@ -373,7 +373,7 @@ export default function WalletPage() {
                             {tx.type.replace('_', ' ')}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                           {tx.description || 'Transaction'}
                         </td>
                         <td className="px-4 py-3">
@@ -389,19 +389,19 @@ export default function WalletPage() {
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
                               tx.status === 'completed'
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                                ? 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300'
                                 : tx.status === 'pending'
-                                ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
-                                : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                                ? 'bg-yellow-100 dark:bg-yellow-950/50 text-yellow-800 dark:text-yellow-300'
+                                : 'bg-red-100 dark:bg-red-950/50 text-red-800 dark:text-red-300'
                             }`}
                           >
                             {tx.status}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-ink-300">
                           {new Date(tx.createdAt).toLocaleDateString()}
                           <br />
-                          <span className="text-xs text-gray-400 dark:text-gray-500">
+                          <span className="text-xs text-gray-400 dark:text-ink-400">
                             {new Date(tx.createdAt).toLocaleTimeString()}
                           </span>
                         </td>
@@ -414,21 +414,21 @@ export default function WalletPage() {
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-6 flex items-center justify-between">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-ink-200">
                     Showing page {page} of {totalPages} (Total: {total} transactions)
                   </p>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                     >
                       Next
                     </button>

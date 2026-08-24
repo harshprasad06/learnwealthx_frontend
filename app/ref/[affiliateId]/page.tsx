@@ -142,7 +142,7 @@ export default function RefLandingPage() {
           <svg
             key={star}
             className={`w-3.5 h-3.5 ${
-              star <= rounded ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'
+              star <= rounded ? 'text-yellow-400' : 'text-gray-300 dark:text-ink-700'
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -198,7 +198,7 @@ export default function RefLandingPage() {
         {/* Hero / Affiliate intro */}
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-lg shadow-md overflow-hidden">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-lg shadow-md overflow-hidden">
               {affiliate?.user.picture && !avatarError ? (
                 <img
                   src={affiliate.user.picture}
@@ -226,7 +226,7 @@ export default function RefLandingPage() {
             </div>
           </div>
           {courses.length > 0 && (
-            <div className="px-5 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+            <div className="px-5 py-4 rounded-2xl bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-600 dark:to-mint-950 text-white shadow-lg">
               <p className="text-xs uppercase tracking-wide opacity-80 mb-1">
                 Bundle total ({courses.length} courses)
               </p>
@@ -257,7 +257,7 @@ export default function RefLandingPage() {
         )}
 
         {error && !loading && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-6">
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-6">
             {error}
           </div>
         )}
@@ -276,7 +276,7 @@ export default function RefLandingPage() {
                   key={course.id}
                   className="bg-cardBackground rounded-xl shadow-lg dark:shadow-none dark:border dark:border-border overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <div className="h-44 bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                  <div className="h-44 bg-gray-200 dark:bg-ink-900 overflow-hidden">
                     {course.thumbnail ? (
                       <img
                         src={
@@ -288,7 +288,7 @@ export default function RefLandingPage() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm">
+                      <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-ink-400 text-sm">
                         No image
                       </div>
                     )}
@@ -310,7 +310,7 @@ export default function RefLandingPage() {
                       {course.description || 'No description available.'}
                     </p>
                     <div className="mt-4 flex items-center justify-between">
-                      <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                      <span className="text-xl font-bold text-blue-600 dark:text-mint-400">
                         ₹{course.price.toFixed(2)}
                       </span>
                     </div>
@@ -322,7 +322,7 @@ export default function RefLandingPage() {
             <div className="mt-10 flex justify-center">
               <button
                 onClick={() => setShowCheckout(true)}
-                className="px-8 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                className="px-8 py-3 rounded-full bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 text-sm font-semibold shadow-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
               >
                 Checkout All Courses
               </button>

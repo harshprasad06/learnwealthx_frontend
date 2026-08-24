@@ -81,26 +81,26 @@ export default function CoursesPage() {
   const filteredCourses = courses;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <main className="flex-1">
         <section className="py-8 sm:py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">All Courses</h1>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 max-w-xl">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">All Courses</h1>
+                <p className="mt-2 text-sm text-gray-600 dark:text-ink-300 max-w-xl">
                   Browse our complete catalog of courses. Filter by topic or search to find the
                   perfect next step in your learning journey.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                  <span className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-900/40 px-3 py-1 text-blue-700 dark:text-blue-300">
+                  <span className="inline-flex items-center rounded-full bg-blue-50 dark:bg-mint-900/40 px-3 py-1 text-blue-700 dark:text-mint-300">
                     Lifetime access
                   </span>
-                  <span className="inline-flex items-center rounded-full bg-emerald-50 dark:bg-emerald-900/40 px-3 py-1 text-emerald-700 dark:text-emerald-300">
+                  <span className="inline-flex items-center rounded-full bg-emerald-50 dark:bg-mint-900/40 px-3 py-1 text-emerald-700 dark:text-mint-300">
                     Beginner friendly
                   </span>
-                  <span className="inline-flex items-center rounded-full bg-purple-50 dark:bg-purple-900/40 px-3 py-1 text-purple-700 dark:text-purple-300">
+                  <span className="inline-flex items-center rounded-full bg-purple-50 dark:bg-mint-900/40 px-3 py-1 text-purple-700 dark:text-mint-300">
                     Hands-on projects
                   </span>
                 </div>
@@ -118,7 +118,7 @@ export default function CoursesPage() {
                       }
                     }}
                     placeholder="Search courses..."
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   />
                 </div>
                 <select
@@ -128,7 +128,7 @@ export default function CoursesPage() {
                     setLoading(true);
                     void fetchCourses();
                   }}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800"
+                  className="px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900"
                 >
                   <option value="newest">Newest</option>
                   <option value="price_low">Price: Low to High</option>
@@ -148,17 +148,17 @@ export default function CoursesPage() {
 
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <div className="inline-block h-10 w-10 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
-                <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm">
+                <div className="inline-block h-10 w-10 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
+                <p className="mt-4 text-gray-600 dark:text-ink-300 text-sm">
                   Loading courses...
                 </p>
               </div>
             ) : filteredCourses.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-gray-500 dark:text-gray-400 text-base mb-2">
+                <p className="text-gray-500 dark:text-ink-300 text-base mb-2">
                   No courses found.
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                <p className="text-gray-500 dark:text-ink-300 text-sm">
                   Try clearing the search or check back later for new courses.
                 </p>
               </div>
@@ -174,9 +174,9 @@ export default function CoursesPage() {
                     <Link
                       key={course.id}
                       href={`/courses/${course.id}`}
-                      className="group bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                      className="group bg-white dark:bg-ink-900 rounded-xl shadow-md dark:shadow-black/40 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                     >
-                      <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-blue-400 dark:from-mint-800 to-indigo-600 dark:to-mint-950 overflow-hidden">
                         {imageSrc ? (
                           <img
                             src={imageSrc}
@@ -206,18 +206,18 @@ export default function CoursesPage() {
                             </svg>
                           </div>
                         )}
-                        <div className="absolute top-3 right-3 bg-white dark:bg-gray-900/90 px-3 py-1 rounded-full text-xs font-medium text-gray-900 dark:text-gray-100">
+                        <div className="absolute top-3 right-3 bg-white dark:bg-ink-950/90 px-3 py-1 rounded-full text-xs font-medium text-gray-900 dark:text-ink-50">
                           {course.videos.length} Videos
                         </div>
                       </div>
                       <div className="p-5">
-                        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-1 group-hover:text-blue-600 dark:group-hover:text-mint-400 transition-colors">
                           {course.title}
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
+                        <p className="text-gray-600 dark:text-ink-300 text-sm mb-3 line-clamp-2 min-h-[2.5rem]">
                           {course.description || 'No description available'}
                         </p>
-                        <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-ink-800">
                           <PricingDisplay
                             mrp={course.mrp}
                             actualPrice={course.price}
@@ -229,7 +229,7 @@ export default function CoursesPage() {
                             isLoggedIn={isLoggedIn}
                             size="md"
                           />
-                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                          <span className="text-xs font-medium text-gray-500 dark:text-ink-300">
                             Lifetime access
                           </span>
                         </div>

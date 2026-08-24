@@ -5,6 +5,20 @@ import { lightTheme, darkTheme, type Theme } from '@/lib/theme';
 
 type ThemeMode = 'light' | 'dark';
 
+/**
+ * Storage key. Deliberately NOT the old 'theme'.
+ *
+ * The previous provider wrote localStorage on every mount, not only when the
+ * visitor used the toggle, so every returning visitor already has theme='light'
+ * persisted despite never having chosen it. Reading that value back would pin
+ * them to light forever and make the new default a no-op. A new key lets
+ * everyone re-enter on the default while a real, explicit choice still sticks.
+ *
+ * Must stay in sync with the blocking script in app/layout.tsx.
+ */
+const STORAGE_KEY = 'theme-v2';
+const DEFAULT_MODE: ThemeMode = 'dark';
+
 interface ThemeContextType {
   theme: Theme;
   mode: ThemeMode;
@@ -14,39 +28,49 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function readStoredMode(): ThemeMode | null {
+  try {
+    const value = localStorage.getItem(STORAGE_KEY);
+    return value === 'light' || value === 'dark' ? value : null;
+  } catch {
+    // Private mode, or site data blocked. Treat as "no choice recorded".
+    return null;
+  }
+}
+
+function applyMode(mode: ThemeMode) {
+  document.documentElement.classList.toggle('dark', mode === 'dark');
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState<ThemeMode>('light');
-  const [mounted, setMounted] = useState(false);
+  // Seeded with the same default the blocking <head> script uses, so the first
+  // client render agrees with the class that script already put on <html>.
+  const [mode, setMode] = useState<ThemeMode>(DEFAULT_MODE);
 
   useEffect(() => {
-    // Check localStorage first, default to 'light' if not set
-    const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
-    
-    // Default to 'light' theme (ignore system preference)
-    const initialMode = savedTheme || 'light';
-    setMode(initialMode);
-    setMounted(true);
-    
-    // Apply theme class to html element
-    document.documentElement.classList.toggle('dark', initialMode === 'dark');
+    // Adopt an explicitly stored choice. The blocking script has already set
+    // the class for the first paint; this syncs React's copy of the state and
+    // re-asserts the class as a safety net if that script was ever blocked.
+    const resolved = readStoredMode() ?? DEFAULT_MODE;
+    setMode(resolved);
+    applyMode(resolved);
   }, []);
 
-  useEffect(() => {
-    if (mounted) {
-      // Update localStorage
-      localStorage.setItem('theme', mode);
-      // Update html class
-      document.documentElement.classList.toggle('dark', mode === 'dark');
+  // Persist ONLY a deliberate choice. Never write on mount -- that is what made
+  // "no stored value" indistinguishable from "the user picked light".
+  const commit = (next: ThemeMode) => {
+    setMode(next);
+    applyMode(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Storage unavailable: the choice still applies for this page view.
     }
-  }, [mode, mounted]);
-
-  const toggleTheme = () => {
-    setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  const setTheme = (newMode: ThemeMode) => {
-    setMode(newMode);
-  };
+  const toggleTheme = () => commit(mode === 'light' ? 'dark' : 'light');
+
+  const setTheme = (newMode: ThemeMode) => commit(newMode);
 
   const theme = mode === 'dark' ? darkTheme : lightTheme;
 

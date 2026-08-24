@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { useTheme } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import {
   LineChart,
@@ -49,8 +50,37 @@ interface AnalyticsData {
   }>;
 }
 
+// Chart colours. Recharts takes these as inline SVG props, which a `dark:`
+// class can never override, so the palette is selected from the theme mode.
+// The `light` values are byte-identical to what shipped before this existed.
+// The `dark` series ramp is validated for the ink-900 chart surface: OKLCH
+// lightness in-band, chroma >= 0.1, adjacent-pair CVD separation ΔE 23.7
+// (deuteranopia) / 10.7 (tritanopia), and >= 3:1 contrast against the surface.
+const CHART_COLORS = {
+  light: {
+    grid: '#e5e7eb',
+    axis: '#6b7280',
+    tick: '#6b7280',
+    tooltipBg: '#ffffff',
+    tooltipBorder: '#e5e7eb',
+    tooltipText: '#111827',
+    series: ['#3b82f6', '#10b981', '#8b5cf6'],
+  },
+  dark: {
+    grid: '#26332D',        // ink-700 -- recessive
+    axis: '#26332D',        // ink-700
+    tick: '#8B9C95',        // ink-300 -- 6.2:1 on ink-900
+    tooltipBg: '#1A2621',   // ink-800 -- lifted above the ink-900 card
+    tooltipBorder: '#35443E', // ink-600
+    tooltipText: '#E8EDEB', // ink-50
+    series: ['#009463', '#8B5CF6', '#D97706'], // mint-700 / violet / amber
+  },
+} as const;
+
 export default function AdminAnalyticsPage() {
   const router = useRouter();
+  const { mode } = useTheme();
+  const chart = CHART_COLORS[mode];
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -99,7 +129,7 @@ export default function AdminAnalyticsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading analytics...</div>
@@ -110,10 +140,10 @@ export default function AdminAnalyticsPage() {
 
   if (error || !analytics) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4">
             {error || 'Failed to load analytics'}
           </div>
         </div>
@@ -122,19 +152,19 @@ export default function AdminAnalyticsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Analytics Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Platform performance and revenue insights</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Analytics Dashboard</h1>
+            <p className="text-gray-600 dark:text-ink-300 mt-1">Platform performance and revenue insights</p>
           </div>
           <div className="flex items-center space-x-3">
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 text-sm"
+              className="px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 text-sm"
             >
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
@@ -143,7 +173,7 @@ export default function AdminAnalyticsPage() {
             </select>
             <Link
               href="/admin/earnings"
-              className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+              className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-md hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
             >
               View Earnings
             </Link>
@@ -152,75 +182,75 @@ export default function AdminAnalyticsPage() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Revenue</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Total Revenue</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-ink-50">
               ₹{analytics.summary.totalRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {new Date(analytics.period.start).toLocaleDateString()} - {new Date(analytics.period.end).toLocaleDateString()}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Sales</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-50">{analytics.summary.totalSales}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Total Sales</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-ink-50">{analytics.summary.totalSales}</p>
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               Avg: ₹{analytics.summary.averageOrderValue.toFixed(2)}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Direct Revenue</p>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Direct Revenue</p>
             <p className="text-3xl font-bold text-green-600 dark:text-green-400">
               ₹{analytics.summary.directRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {((analytics.summary.directRevenue / analytics.summary.totalRevenue) * 100).toFixed(1)}% of total
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Affiliate Revenue</p>
-            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Affiliate Revenue</p>
+            <p className="text-3xl font-bold text-blue-600 dark:text-mint-400">
               ₹{analytics.summary.affiliateRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {((analytics.summary.affiliateRevenue / analytics.summary.totalRevenue) * 100).toFixed(1)}% of total
             </p>
           </div>
         </div>
 
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Revenue Over Time</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 mb-8 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Revenue Over Time</h2>
           {analytics.charts.revenue.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={analytics.charts.revenue}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
-                  stroke="#6b7280"
-                  className="dark:stroke-gray-400"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  stroke={chart.axis}
+                  className="dark:stroke-ink-300"
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <YAxis
-                  stroke="#6b7280"
-                  className="dark:stroke-gray-400"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  stroke={chart.axis}
+                  className="dark:stroke-ink-300"
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e5e7eb',
+                    backgroundColor: chart.tooltipBg,
+                    border: `1px solid ${chart.tooltipBorder}`,
                     borderRadius: '8px',
-                    color: '#111827',
+                    color: chart.tooltipText,
                   }}
                 />
                 <Legend />
                 <Line
                   type="monotone"
                   dataKey="total"
-                  stroke="#3b82f6"
+                  stroke={chart.series[0]}
                   strokeWidth={2}
                   name="Total Revenue"
                   dot={{ r: 4 }}
@@ -228,7 +258,7 @@ export default function AdminAnalyticsPage() {
                 <Line
                   type="monotone"
                   dataKey="direct"
-                  stroke="#10b981"
+                  stroke={chart.series[1]}
                   strokeWidth={2}
                   name="Direct Revenue"
                   dot={{ r: 4 }}
@@ -236,7 +266,7 @@ export default function AdminAnalyticsPage() {
                 <Line
                   type="monotone"
                   dataKey="affiliate"
-                  stroke="#8b5cf6"
+                  stroke={chart.series[2]}
                   strokeWidth={2}
                   name="Affiliate Revenue"
                   dot={{ r: 4 }}
@@ -244,45 +274,45 @@ export default function AdminAnalyticsPage() {
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-ink-300">
               <p>No revenue data available for this period</p>
             </div>
           )}
         </div>
 
         {/* User Growth Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">User Growth</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 mb-8 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">User Growth</h2>
           {analytics.charts.userGrowth.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={analytics.charts.userGrowth}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
-                  stroke="#6b7280"
-                  className="dark:stroke-gray-400"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  stroke={chart.axis}
+                  className="dark:stroke-ink-300"
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <YAxis
-                  stroke="#6b7280"
-                  className="dark:stroke-gray-400"
-                  tick={{ fill: '#6b7280' }}
-                  style={{ fill: '#6b7280' }}
+                  stroke={chart.axis}
+                  className="dark:stroke-ink-300"
+                  tick={{ fill: chart.tick }}
+                  style={{ fill: chart.tick }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e5e7eb',
+                    backgroundColor: chart.tooltipBg,
+                    border: `1px solid ${chart.tooltipBorder}`,
                     borderRadius: '8px',
-                    color: '#111827',
+                    color: chart.tooltipText,
                   }}
                 />
-                <Bar dataKey="count" fill="#3b82f6" name="New Users" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="count" fill={chart.series[0]} name="New Users" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-ink-300">
               <p>No user growth data available for this period</p>
             </div>
           )}
@@ -291,29 +321,29 @@ export default function AdminAnalyticsPage() {
         {/* Top Courses and Top Affiliates */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Top Courses */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Top Selling Courses</h2>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Top Selling Courses</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Course
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Sales
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Revenue
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {analytics.topCourses.map((course) => (
-                    <tr key={course.courseId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">{course.courseTitle}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{course.sales}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-50">
+                    <tr key={course.courseId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">{course.courseTitle}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">{course.sales}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-ink-50">
                         ₹{course.revenue.toFixed(2)}
                       </td>
                     </tr>
@@ -324,32 +354,32 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Top Affiliates */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Top Performing Affiliates</h2>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Top Performing Affiliates</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Affiliate
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Sales
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Revenue
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Commission
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {analytics.topAffiliates.map((affiliate) => (
-                    <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">{affiliate.affiliateName}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{affiliate.sales}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                    <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">{affiliate.affiliateName}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">{affiliate.sales}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">
                         ₹{affiliate.revenue.toFixed(2)}
                       </td>
                       <td className="px-4 py-3 text-sm font-semibold text-green-600 dark:text-green-400">

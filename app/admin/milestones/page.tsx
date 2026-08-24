@@ -207,7 +207,7 @@ export default function AdminMilestonesPage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+        <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">Loading milestones...</div>
           </div>
@@ -219,10 +219,10 @@ export default function AdminMilestonesPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-6 flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Milestones & Offers</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Milestones & Offers</h1>
             <button
               onClick={() => {
                 setShowForm(true);
@@ -236,27 +236,27 @@ export default function AdminMilestonesPage() {
                   endDate: '',
                 });
               }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
             >
               Add Milestone
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400">
+            <div className="mb-4 p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg text-red-700 dark:text-red-400">
               {error}
             </div>
           )}
 
           {showForm && (
-            <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+            <div className="mb-6 bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
                 {editingMilestone ? 'Edit Milestone' : 'Create Milestone'}
               </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Target Count (subscriptions)
                   </label>
                   <input
@@ -265,12 +265,12 @@ export default function AdminMilestonesPage() {
                     min="1"
                     value={formData.targetCount}
                     onChange={(e) => setFormData({ ...formData, targetCount: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                     placeholder="e.g., 100"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Start Date
                   </label>
                   <input
@@ -278,11 +278,11 @@ export default function AdminMilestonesPage() {
                     required
                     value={formData.startDate}
                     onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     End Date
                   </label>
                   <input
@@ -290,18 +290,18 @@ export default function AdminMilestonesPage() {
                     required
                     value={formData.endDate}
                     onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                   />
                 </div>
               </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Reward Type
                   </label>
                   <select
                     value={formData.rewardType}
                     onChange={(e) => handleRewardTypeChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                   >
                     <option value="">Select reward type...</option>
                     <option value="international">International Trip</option>
@@ -311,28 +311,28 @@ export default function AdminMilestonesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Custom Reward (Optional)
                   </label>
                   <input
                     type="text"
                     value={formData.reward}
                     onChange={(e) => setFormData({ ...formData, reward: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                     placeholder="Leave empty to use selected type, or enter custom reward text"
                   />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                     If left empty, will use the selected reward type above. Enter custom text to override.
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Description (optional)
                   </label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                     rows={3}
                     placeholder="Additional details about this reward..."
                   />
@@ -340,7 +340,7 @@ export default function AdminMilestonesPage() {
                 <div className="flex gap-3">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
                   >
                     {editingMilestone ? 'Update' : 'Create'}
                   </button>
@@ -358,7 +358,7 @@ export default function AdminMilestonesPage() {
                         endDate: '',
                       });
                     }}
-                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    className="px-4 py-2 bg-gray-200 dark:bg-ink-800 text-gray-700 dark:text-ink-200 rounded-lg hover:bg-gray-300 dark:hover:bg-ink-700 transition-colors"
                   >
                     Cancel
                   </button>
@@ -367,41 +367,41 @@ export default function AdminMilestonesPage() {
             </div>
           )}
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-700">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden transition-colors">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+              <thead className="bg-gray-50 dark:bg-ink-800">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                     Target
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                     Reward
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                 {milestones.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                    <td colSpan={4} className="px-6 py-4 text-center text-gray-500 dark:text-ink-300">
                       No milestones found. Create your first milestone!
                     </td>
                   </tr>
                 ) : (
                   milestones.map((milestone) => (
-                    <tr key={milestone.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-50">
+                    <tr key={milestone.id} className="hover:bg-gray-50 dark:hover:bg-ink-800/50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-ink-50">
                         {milestone.targetCount} subscriptions
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-50">
+                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-ink-50">
                         <div className="font-medium">{milestone.reward}</div>
                         {milestone.description && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          <div className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                             {milestone.description}
                           </div>
                         )}
@@ -410,8 +410,8 @@ export default function AdminMilestonesPage() {
                         <span
                           className={`px-2 py-1 text-xs font-medium rounded-full ${
                             milestone.isActive
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-400'
+                              : 'bg-gray-100 text-gray-800 dark:bg-ink-800 dark:text-ink-300'
                           }`}
                         >
                           {milestone.isActive ? 'Active' : 'Inactive'}
@@ -421,7 +421,7 @@ export default function AdminMilestonesPage() {
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => handleToggleActive(milestone)}
-                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-blue-900/40 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-mint-900/40 text-xs font-medium text-blue-700 dark:text-mint-300 bg-blue-50 dark:bg-mint-900/20 hover:bg-blue-100 dark:hover:bg-mint-900/40 transition-colors"
                             title={milestone.isActive ? 'Deactivate' : 'Activate'}
                           >
                             {milestone.isActive ? (
@@ -442,7 +442,7 @@ export default function AdminMilestonesPage() {
                           </button>
                           <button
                             onClick={() => handleEdit(milestone)}
-                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-indigo-100 dark:border-indigo-900/40 text-xs font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/20 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-colors"
+                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-indigo-100 dark:border-mint-900/40 text-xs font-medium text-indigo-700 dark:text-mint-300 bg-indigo-50 dark:bg-mint-900/20 hover:bg-indigo-100 dark:hover:bg-mint-900/40 transition-colors"
                             title="Edit milestone"
                           >
                             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -452,7 +452,7 @@ export default function AdminMilestonesPage() {
                           </button>
                           <button
                             onClick={() => handleDelete(milestone.id)}
-                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/40 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                            className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/50 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-950/60 transition-colors"
                             title="Delete milestone"
                           >
                             <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

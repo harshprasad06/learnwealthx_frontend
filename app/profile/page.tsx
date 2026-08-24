@@ -93,7 +93,7 @@ export default function ProfilePage() {
         <main className="app-main">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="state-loading">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
               <p className="mt-3 text-sm">Loading profile...</p>
             </div>
           </div>
@@ -123,10 +123,10 @@ export default function ProfilePage() {
       <Navbar />
       <main className="app-main">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-4">
             My Profile
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-sm text-gray-600 dark:text-ink-300 mb-6">
             View and update your account details. For Google accounts, password changes are managed
             via Google.
           </p>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
           <div className="app-card app-card-padding space-y-6">
             {error && <div className="state-error">{error}</div>}
             {success && (
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 px-4 py-3 rounded text-sm">
+              <div className="bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-900/60 text-green-700 dark:text-green-300 px-4 py-3 rounded text-sm">
                 {success}
               </div>
             )}
@@ -142,51 +142,51 @@ export default function ProfilePage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Name
                   </label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                     placeholder="Your name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={user.email}
                     disabled
-                    className="mt-1 block w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/40 cursor-not-allowed"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-200 dark:border-ink-800 rounded-md text-sm text-gray-500 dark:text-ink-300 bg-gray-50 dark:bg-ink-950/40 cursor-not-allowed"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                   Account Type
                 </label>
                 <input
                   type="text"
                   value={user.provider === 'google' ? 'Google Sign-in' : 'Email & Password'}
                   disabled
-                  className="mt-1 block w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/40 cursor-not-allowed"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-200 dark:border-ink-800 rounded-md text-sm text-gray-500 dark:text-ink-300 bg-gray-50 dark:bg-ink-950/40 cursor-not-allowed"
                 />
               </div>
 
               {/* Password change (email/password accounts only) */}
               {user.provider !== 'google' && (
-                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-2 space-y-4">
-                  <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                <div className="border-t border-gray-200 dark:border-ink-800 pt-4 mt-2 space-y-4">
+                  <h2 className="text-sm font-semibold text-gray-900 dark:text-ink-50">
                     Change Password
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                         Current Password
                       </label>
                       <input
@@ -195,12 +195,12 @@ export default function ProfilePage() {
                         onChange={(e) =>
                           setForm((prev) => ({ ...prev, currentPassword: e.target.value }))
                         }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900"
                         placeholder="Enter current password"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
                         New Password
                       </label>
                       <input
@@ -209,12 +209,12 @@ export default function ProfilePage() {
                         onChange={(e) =>
                           setForm((prev) => ({ ...prev, newPassword: e.target.value }))
                         }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900"
                         placeholder="At least 6 characters"
                       />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-ink-300">
                     If you forget your password, use the &quot;Forgot password?&quot; link on the
                     login page.
                   </p>

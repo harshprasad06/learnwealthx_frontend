@@ -168,19 +168,19 @@ export default function EarningAffiliatesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">
                 Earning Affiliates
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-gray-600 dark:text-ink-300 mt-1">
                 All affiliates who have earned commissions from sales
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
+              <p className="text-sm text-gray-500 dark:text-ink-400 mt-1">
                 Commission Rate: {(data.commissionRate * 100).toFixed(0)}% | Platform Share: {(data.platformShareRate * 100).toFixed(0)}%
               </p>
             </div>
             <Link
               href="/admin/earnings"
-              className="inline-flex items-center justify-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-medium transition-colors"
+              className="inline-flex items-center justify-center px-4 py-2 bg-gray-200 dark:bg-ink-800 text-gray-700 dark:text-ink-200 rounded-md hover:bg-gray-300 dark:hover:bg-ink-700 text-sm font-medium transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -200,10 +200,10 @@ export default function EarningAffiliatesPage() {
                   setSearch(e.target.value);
                   setPage(1); // Reset to first page on search
                 }}
-                className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:border-green-400 transition-colors"
+                className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:border-green-400 transition-colors"
               />
               <svg
-                className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-gray-500"
+                className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-ink-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -216,18 +216,18 @@ export default function EarningAffiliatesPage() {
           {/* Stats Summary */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="app-card app-card-padding">
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Affiliates</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-50">{data.total}</p>
+              <p className="text-sm font-medium text-gray-500 dark:text-ink-300 mb-1">Total Affiliates</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-ink-50">{data.total}</p>
             </div>
             <div className="app-card app-card-padding">
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Sales</p>
+              <p className="text-sm font-medium text-gray-500 dark:text-ink-300 mb-1">Total Sales</p>
               <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                 {data.affiliates.reduce((sum, aff) => sum + aff.saleCount, 0)}
               </p>
             </div>
             <div className="app-card app-card-padding">
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Commission</p>
-              <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              <p className="text-sm font-medium text-gray-500 dark:text-ink-300 mb-1">Total Commission</p>
+              <p className="text-2xl font-bold text-purple-600 dark:text-mint-400">
                 ₹{data.affiliates.reduce((sum, aff) => sum + aff.totalCommission, 0).toFixed(2)}
               </p>
             </div>
@@ -244,65 +244,65 @@ export default function EarningAffiliatesPage() {
           ) : (
             <div className="app-card overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                  <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Affiliate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Total Revenue
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Commission Earned
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Sales
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Wallet
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {data.affiliates.map((affiliate) => {
                       const isExpanded = expandedAffiliate === affiliate.affiliateId;
 
                       return (
                         <>
-                          <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">
                                 <Avatar imageUrl={affiliate.picture} name={affiliate.name} email={affiliate.email} />
                                 <div className="ml-4">
-                                  <div className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                                  <div className="text-sm font-medium text-gray-900 dark:text-ink-50">
                                     {affiliate.name || 'No name'}
                                   </div>
-                                  <div className="text-sm text-gray-500 dark:text-gray-400">{affiliate.email}</div>
-                                  <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                                  <div className="text-sm text-gray-500 dark:text-ink-300">{affiliate.email}</div>
+                                  <div className="text-xs text-gray-400 dark:text-ink-400 mt-1">
                                     Code: {affiliate.referralCode}
                                   </div>
                                 </div>
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                              <div className="text-sm font-semibold text-gray-900 dark:text-ink-50">
                                 ₹{affiliate.totalRevenue.toFixed(2)}
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                              <div className="text-sm font-semibold text-purple-600 dark:text-mint-400">
                                 ₹{affiliate.totalCommission.toFixed(2)}
                               </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                              <div className="text-xs text-gray-500 dark:text-ink-300">
                                 {(data.commissionRate * 100).toFixed(0)}%
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900 dark:text-gray-50">
+                              <div className="text-sm text-gray-900 dark:text-ink-50">
                                 {affiliate.saleCount} sale{affiliate.saleCount !== 1 ? 's' : ''}
                               </div>
                             </td>
@@ -310,7 +310,7 @@ export default function EarningAffiliatesPage() {
                               <div className="text-sm font-semibold text-green-600 dark:text-green-400">
                                 ₹{affiliate.walletBalance.toFixed(2)}
                               </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                              <div className="text-xs text-gray-500 dark:text-ink-300">
                                 Earned: ₹{affiliate.walletTotalEarned.toFixed(2)}
                               </div>
                             </td>
@@ -325,39 +325,39 @@ export default function EarningAffiliatesPage() {
                           </tr>
                           {isExpanded && (
                             <tr>
-                              <td colSpan={6} className="px-6 py-4 bg-gray-50 dark:bg-gray-700/50">
+                              <td colSpan={6} className="px-6 py-4 bg-gray-50 dark:bg-ink-800/50">
                                 <div className="space-y-3">
-                                  <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-50 mb-3">
+                                  <h4 className="text-sm font-semibold text-gray-900 dark:text-ink-50 mb-3">
                                     Sales History ({affiliate.purchases.length} sale{affiliate.purchases.length !== 1 ? 's' : ''})
                                   </h4>
                                   <div className="space-y-2">
                                     {affiliate.purchases.map((purchase, idx) => (
                                       <div
                                         key={`${purchase.purchaseId}-${idx}`}
-                                        className="p-4 bg-white dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-600"
+                                        className="p-4 bg-white dark:bg-ink-900 rounded-md border border-gray-200 dark:border-ink-700"
                                       >
                                         <div className="flex items-start justify-between mb-2">
                                           <div className="flex-1">
-                                            <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                                            <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
                                               {purchase.courseTitle}
                                             </p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                                               Sold to: {purchase.buyerName || purchase.buyerEmail} ({purchase.buyerEmail})
                                             </p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                                               Date: {new Date(purchase.saleDate).toLocaleString()}
                                             </p>
                                           </div>
                                           <div className="text-right ml-4">
-                                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                                            <p className="text-sm font-semibold text-gray-900 dark:text-ink-50">
                                               ₹{purchase.amount.toFixed(2)}
                                             </p>
                                           </div>
                                         </div>
-                                        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+                                        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-ink-700">
                                           <div>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">Commission</p>
-                                            <p className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                                            <p className="text-xs text-gray-500 dark:text-ink-300">Commission</p>
+                                            <p className="text-sm font-semibold text-purple-600 dark:text-mint-400">
                                               ₹{purchase.commission.toFixed(2)} ({(data.commissionRate * 100).toFixed(0)}%)
                                             </p>
                                           </div>
@@ -378,22 +378,22 @@ export default function EarningAffiliatesPage() {
 
               {/* Pagination */}
               {data.totalPages > 1 && (
-                <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex items-center justify-between border-t border-gray-200 dark:border-gray-600">
-                  <div className="text-sm text-gray-700 dark:text-gray-300">
+                <div className="bg-gray-50 dark:bg-ink-800 px-6 py-4 flex items-center justify-between border-t border-gray-200 dark:border-ink-700">
+                  <div className="text-sm text-gray-700 dark:text-ink-200">
                     Showing page {page} of {data.totalPages} (Total: {data.total} affiliates)
                   </div>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
-                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm font-medium text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-900 hover:bg-gray-50 dark:hover:bg-ink-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(data.totalPages, p + 1))}
                       disabled={page === data.totalPages}
-                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm font-medium text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-900 hover:bg-gray-50 dark:hover:bg-ink-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       Next
                     </button>

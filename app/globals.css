@@ -22,22 +22,34 @@
 }
 
 .dark {
-  /* Dark theme colors */
-  --background: #111827;
-  --foreground: #f9fafb;
-  --bg-secondary: #1f2937;
-  --bg-tertiary: #374151;
-  --bg-card: #1f2937;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-tertiary: #9ca3af;
-  --text-muted: #6b7280;
-  --border-primary: #374151;
-  --border-secondary: #4b5563;
-  --input-bg: #1f2937;
-  --input-text: #f9fafb;
-  --input-placeholder: #6b7280;
-  --input-border: #4b5563;
+  /* `.dark` always lands on <html>, so these two cover the pre-hydration frame:
+     the canvas is already dark before <body> paints, and native UI (scrollbars,
+     date/select popups, spinners) renders dark instead of light-on-dark. */
+  color-scheme: dark;
+  background-color: #0A0F0D;  /* ink-950 */
+
+  /* Dark theme colors — near-black "ink" neutrals with a mint accent */
+  --background: #0A0F0D;      /* ink-950 */
+  --foreground: #E8EDEB;      /* ink-50  */
+  --bg-secondary: #111A16;    /* ink-900 */
+  --bg-tertiary: #1A2621;     /* ink-800 */
+  --bg-card: #111A16;         /* ink-900 */
+  --text-primary: #E8EDEB;    /* ink-50  */
+  --text-secondary: #9CACA6;  /* ink-200 */
+  --text-tertiary: #8B9C95;   /* ink-300 */
+  --text-muted: #778A83;      /* ink-400 */
+  --border-primary: #1A2621;  /* ink-800 */
+  --border-secondary: #26332D;/* ink-700 */
+  --input-bg: #111A16;        /* ink-900 */
+  --input-text: #E8EDEB;      /* ink-50  */
+  --input-placeholder: #778A83;/* ink-400 */
+  --input-border: #26332D;    /* ink-700 */
+  /* Brand accent */
+  --accent: #00D68F;          /* mint-500 */
+  --accent-hover: #16E0A5;    /* mint-400 */
+  --accent-contrast: #0A0F0D; /* text that sits on top of the accent */
+  --glow: rgba(0, 214, 143, 0.10);
+  --glow-soft: rgba(0, 214, 143, 0.05);
 }
 
 html {
@@ -79,7 +91,7 @@ img[alt*="logo"] {
 @layer components {
   /* Shared layout shells */
   .app-page {
-    @apply min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors;
+    @apply min-h-screen flex flex-col bg-gray-50 dark:bg-ink-950 transition-colors;
   }
 
   .app-main {
@@ -88,7 +100,7 @@ img[alt*="logo"] {
 
   /* Cards */
   .app-card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 transition-colors;
+    @apply bg-white dark:bg-ink-900 rounded-xl shadow-md dark:shadow-black/40 dark:border dark:border-ink-800 transition-colors;
   }
 
   .app-card-padding {
@@ -97,38 +109,63 @@ img[alt*="logo"] {
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 dark:bg-mint-500 dark:text-ink-950 dark:hover:bg-mint-400 dark:shadow-mint-500/20 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-gray-100 text-gray-800 text-sm font-medium hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 disabled:opacity-60 disabled:cursor-not-allowed transition-colors;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-gray-100 text-gray-800 text-sm font-medium hover:bg-gray-200 dark:bg-ink-800 dark:text-ink-50 dark:hover:bg-ink-700 dark:border dark:border-ink-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
+    @apply inline-flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 dark:hover:text-ink-50 transition-colors;
   }
 
   /* Section headings */
   .section-title {
-    @apply text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-50;
+    @apply text-2xl sm:text-3xl font-bold text-gray-900 dark:text-ink-50;
   }
 
   .section-subtitle {
-    @apply mt-1 text-sm text-gray-600 dark:text-gray-400;
+    @apply mt-1 text-sm text-gray-600 dark:text-ink-300;
   }
 
   /* Standard states */
   .state-loading {
-    @apply flex flex-col items-center justify-center py-12 text-gray-600 dark:text-gray-400;
+    @apply flex flex-col items-center justify-center py-12 text-gray-600 dark:text-ink-300;
   }
 
   .state-empty {
-    @apply text-center py-12 text-gray-500 dark:text-gray-400;
+    @apply text-center py-12 text-gray-500 dark:text-ink-400;
   }
 
   .state-error {
-    @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded;
+    @apply bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 px-4 py-3 rounded;
   }
+}
+
+/* ── Ambient mint glow (dark mode only) ─────────────────────────────────────
+   Layered radial gradients painted on top of the page surface colour. Scoped
+   under `.dark` so light mode is completely unaffected. */
+.dark .app-page {
+  background-image:
+    radial-gradient(48rem 32rem at 50% -6rem, var(--glow), transparent 70%),
+    radial-gradient(32rem 24rem at 100% 0, var(--glow-soft), transparent 70%),
+    radial-gradient(28rem 22rem at 0 8rem, var(--glow-soft), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+/* Slightly brighter bloom behind the short, vertically-centred auth cards,
+   where the glow is the dominant background treatment in the reference design.
+   Matched structurally rather than by utility class: only the auth pages render
+   .app-page with a single child (every other page also renders a <Navbar />),
+   so this hits login/signup and nothing else. Naming a utility here would be
+   wrong twice over -- Tailwind duplicates such a rule once per @layer
+   components class that @applies that utility, and it would also catch the
+   tall `<main>` content pages. */
+.dark .app-page > div:only-child {
+  background-image:
+    radial-gradient(34rem 26rem at 50% 45%, var(--glow), transparent 68%);
+  background-repeat: no-repeat;
 }
 
 /* Hero wave animation */
@@ -179,22 +216,22 @@ img[alt*="logo"] {
   input[type="tel"],
   textarea,
   select {
-    @apply bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-50 border-gray-300 dark:border-gray-600;
+    @apply bg-gray-50 dark:bg-ink-900 text-gray-900 dark:text-ink-50 border-gray-300 dark:border-ink-700;
   }
   
   input::placeholder,
   textarea::placeholder {
-    @apply text-gray-400 dark:text-gray-500;
+    @apply text-gray-400 dark:text-ink-400;
   }
   
   /* Select dropdown options */
   select option {
-    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50;
+    @apply bg-white dark:bg-ink-900 text-gray-900 dark:text-ink-50;
   }
   
   /* Ensure headings have explicit colors with theme support */
   h1, h2, h3, h4, h5, h6 {
-    @apply text-gray-900 dark:text-gray-50;
+    @apply text-gray-900 dark:text-ink-50;
   }
 }
 
@@ -212,6 +249,11 @@ img[alt*="logo"] {
 .prose code { background: #f3f4f6; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.875em; }
 .prose pre { background: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
 .prose img { width: 100%; border-radius: 8px; margin: 1rem 0; }
-.dark .prose p { color: #d1d5db; }
-.dark .prose h1, .dark .prose h2, .dark .prose h3 { color: #f9fafb; }
-.dark .prose code { background: #374151; color: #f9fafb; }
+.dark .prose p { color: #9CACA6; }
+.dark .prose h1, .dark .prose h2, .dark .prose h3 { color: #E8EDEB; }
+.dark .prose code { background: #1A2621; color: #B8FFE8; }
+.dark .prose li { color: #9CACA6; }
+.dark .prose a { color: #16E0A5; }
+.dark .prose strong { color: #E8EDEB; }
+.dark .prose blockquote { border-left-color: #26332D; color: #8B9C95; }
+.dark .prose pre { background: #0A0F0D; color: #E8EDEB; border: 1px solid #1A2621; }

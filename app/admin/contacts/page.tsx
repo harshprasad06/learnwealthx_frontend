@@ -165,15 +165,15 @@ export default function AdminContactsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'new':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+        return 'bg-blue-100 text-blue-800 dark:bg-mint-900/30 dark:text-mint-400';
       case 'read':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950/50 dark:text-yellow-400';
       case 'replied':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+        return 'bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-400';
       case 'archived':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400';
+        return 'bg-gray-100 text-gray-800 dark:bg-ink-800 dark:text-ink-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400';
+        return 'bg-gray-100 text-gray-800 dark:bg-ink-800 dark:text-ink-300';
     }
   };
 
@@ -192,7 +192,7 @@ export default function AdminContactsPage() {
     const initial = displayName.charAt(0).toUpperCase();
 
     return (
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
         {initial}
       </div>
     );
@@ -202,7 +202,7 @@ export default function AdminContactsPage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+        <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">Loading contacts...</div>
           </div>
@@ -214,39 +214,39 @@ export default function AdminContactsPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Contact Submissions</h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">Manage and respond to contact form submissions</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Contact Submissions</h1>
+            <p className="mt-2 text-gray-600 dark:text-ink-300">Manage and respond to contact form submissions</p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-              <div className="text-sm text-gray-600 dark:text-gray-400">Total</div>
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-50">{stats.total}</div>
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+              <div className="text-sm text-gray-600 dark:text-ink-300">Total</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-ink-50">{stats.total}</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-              <div className="text-sm text-gray-600 dark:text-gray-400">New</div>
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.new}</div>
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+              <div className="text-sm text-gray-600 dark:text-ink-300">New</div>
+              <div className="text-2xl font-bold text-blue-600 dark:text-mint-400">{stats.new}</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-              <div className="text-sm text-gray-600 dark:text-gray-400">Read</div>
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+              <div className="text-sm text-gray-600 dark:text-ink-300">Read</div>
               <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{stats.read}</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-              <div className="text-sm text-gray-600 dark:text-gray-400">Replied</div>
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+              <div className="text-sm text-gray-600 dark:text-ink-300">Replied</div>
               <div className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.replied}</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-              <div className="text-sm text-gray-600 dark:text-gray-400">Archived</div>
-              <div className="text-2xl font-bold text-gray-600 dark:text-gray-400">{stats.archived}</div>
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+              <div className="text-sm text-gray-600 dark:text-ink-300">Archived</div>
+              <div className="text-2xl font-bold text-gray-600 dark:text-ink-300">{stats.archived}</div>
             </div>
           </div>
 
           {/* Filters */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 mb-6 transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 mb-6 transition-colors">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <input
@@ -257,7 +257,7 @@ export default function AdminContactsPage() {
                     setFilters({ ...filters, search: e.target.value });
                     setPage(1);
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                 />
               </div>
               <div>
@@ -267,7 +267,7 @@ export default function AdminContactsPage() {
                     setFilters({ ...filters, status: e.target.value });
                     setPage(1);
                   }}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                  className="px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                 >
                   <option value="all">All Status</option>
                   <option value="new">New</option>
@@ -280,57 +280,57 @@ export default function AdminContactsPage() {
           </div>
 
           {error && (
-            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400">
+            <div className="mb-4 p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg text-red-700 dark:text-red-400">
               {error}
             </div>
           )}
 
           {/* Contacts Table */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden transition-colors">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                       Contact
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                       Subject
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                       Date
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-ink-200 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {contacts.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                      <td colSpan={5} className="px-6 py-4 text-center text-gray-500 dark:text-ink-300">
                         No contacts found.
                       </td>
                     </tr>
                   ) : (
                     contacts.map((contact) => (
-                      <tr key={contact.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <tr key={contact.id} className="hover:bg-gray-50 dark:hover:bg-ink-800/50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             {renderAvatar(contact)}
                             <div className="ml-3">
-                              <div className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                              <div className="text-sm font-medium text-gray-900 dark:text-ink-50">
                                 {contact.name}
                               </div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">{contact.email}</div>
+                              <div className="text-sm text-gray-500 dark:text-ink-300">{contact.email}</div>
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-sm text-gray-900 dark:text-gray-50">{contact.subject}</div>
+                          <div className="text-sm text-gray-900 dark:text-ink-50">{contact.subject}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
@@ -339,7 +339,7 @@ export default function AdminContactsPage() {
                             {contact.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-ink-300">
                           {new Date(contact.createdAt).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -348,7 +348,7 @@ export default function AdminContactsPage() {
                               setSelectedContact(contact);
                               setShowModal(true);
                             }}
-                            className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 mr-3"
+                            className="text-blue-600 dark:text-mint-400 hover:text-blue-900 dark:hover:text-mint-300 mr-3"
                           >
                             View
                           </button>
@@ -356,7 +356,7 @@ export default function AdminContactsPage() {
                             value={contact.status}
                             onChange={(e) => handleStatusChange(contact.id, e.target.value)}
                             disabled={processing}
-                            className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 mr-3"
+                            className="text-sm border border-gray-300 dark:border-ink-700 rounded px-2 py-1 bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50 mr-3"
                           >
                             <option value="new">New</option>
                             <option value="read">Read</option>
@@ -380,22 +380,22 @@ export default function AdminContactsPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
+              <div className="px-6 py-4 border-t border-gray-200 dark:border-ink-800 flex items-center justify-between">
+                <div className="text-sm text-gray-700 dark:text-ink-200">
                   Showing {((page - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(page * ITEMS_PER_PAGE, total)} of {total} contacts
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setPage(page - 1)}
                     disabled={page === 1}
-                    className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border border-gray-300 dark:border-ink-700 rounded text-sm text-gray-700 dark:text-ink-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setPage(page + 1)}
                     disabled={page === totalPages}
-                    className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border border-gray-300 dark:border-ink-700 rounded text-sm text-gray-700 dark:text-ink-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Next
                   </button>
@@ -409,16 +409,16 @@ export default function AdminContactsPage() {
       {/* Contact Detail Modal */}
       {showModal && selectedContact && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transition-colors">
             <div className="p-6">
               <div className="flex justify-between items-start mb-4">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50">Contact Details</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-ink-50">Contact Details</h2>
                 <button
                   onClick={() => {
                     setShowModal(false);
                     setSelectedContact(null);
                   }}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  className="text-gray-400 dark:text-ink-300 hover:text-gray-600 dark:hover:text-ink-200"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -428,39 +428,39 @@ export default function AdminContactsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                  <div className="mt-1 text-gray-900 dark:text-gray-50">{selectedContact.name}</div>
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Name</label>
+                  <div className="mt-1 text-gray-900 dark:text-ink-50">{selectedContact.name}</div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                  <div className="mt-1 text-gray-900 dark:text-gray-50">
-                    <a href={`mailto:${selectedContact.email}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Email</label>
+                  <div className="mt-1 text-gray-900 dark:text-ink-50">
+                    <a href={`mailto:${selectedContact.email}`} className="text-blue-600 dark:text-mint-400 hover:underline">
                       {selectedContact.email}
                     </a>
                   </div>
                 </div>
                 {selectedContact.phone && (
                   <div>
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
-                    <div className="mt-1 text-gray-900 dark:text-gray-50">
-                      <a href={`tel:${selectedContact.phone}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                    <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Phone</label>
+                    <div className="mt-1 text-gray-900 dark:text-ink-50">
+                      <a href={`tel:${selectedContact.phone}`} className="text-blue-600 dark:text-mint-400 hover:underline">
                         {selectedContact.phone}
                       </a>
                     </div>
                   </div>
                 )}
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
-                  <div className="mt-1 text-gray-900 dark:text-gray-50">{selectedContact.subject}</div>
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Subject</label>
+                  <div className="mt-1 text-gray-900 dark:text-ink-50">{selectedContact.subject}</div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                  <div className="mt-1 p-3 bg-gray-50 dark:bg-gray-700 rounded text-gray-900 dark:text-gray-50 whitespace-pre-wrap">
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Message</label>
+                  <div className="mt-1 p-3 bg-gray-50 dark:bg-ink-800 rounded text-gray-900 dark:text-ink-50 whitespace-pre-wrap">
                     {selectedContact.message}
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Status</label>
                   <div className="mt-1">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(selectedContact.status)}`}>
                       {selectedContact.status}
@@ -468,15 +468,15 @@ export default function AdminContactsPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Submitted</label>
-                  <div className="mt-1 text-gray-900 dark:text-gray-50">
+                  <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Submitted</label>
+                  <div className="mt-1 text-gray-900 dark:text-ink-50">
                     {new Date(selectedContact.createdAt).toLocaleString()}
                   </div>
                 </div>
                 {selectedContact.repliedAt && (
                   <div>
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Replied At</label>
-                    <div className="mt-1 text-gray-900 dark:text-gray-50">
+                    <label className="text-sm font-medium text-gray-700 dark:text-ink-200">Replied At</label>
+                    <div className="mt-1 text-gray-900 dark:text-ink-50">
                       {new Date(selectedContact.repliedAt).toLocaleString()}
                     </div>
                   </div>
@@ -488,7 +488,7 @@ export default function AdminContactsPage() {
                   value={selectedContact.status}
                   onChange={(e) => handleStatusChange(selectedContact.id, e.target.value)}
                   disabled={processing}
-                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-lg bg-white dark:bg-ink-800 text-gray-900 dark:text-ink-50"
                 >
                   <option value="new">New</option>
                   <option value="read">Read</option>
@@ -498,7 +498,7 @@ export default function AdminContactsPage() {
                 <button
                   onClick={() => handleDelete(selectedContact.id)}
                   disabled={processing}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Delete
                 </button>

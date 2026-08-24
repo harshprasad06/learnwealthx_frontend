@@ -29,3 +29,6 @@ pnpm-debug.log*
 
 # vercel
 .vercel
+# local backups & build artifacts
+*.bak
+tsconfig.tsbuildinfo
