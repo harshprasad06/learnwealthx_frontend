@@ -22,6 +22,12 @@
 }
 
 .dark {
+  /* `.dark` always lands on <html>, so these two cover the pre-hydration frame:
+     the canvas is already dark before <body> paints, and native UI (scrollbars,
+     date/select popups, spinners) renders dark instead of light-on-dark. */
+  color-scheme: dark;
+  background-color: #0A0F0D;  /* ink-950 */
+
   /* Dark theme colors — near-black "ink" neutrals with a mint accent */
   --background: #0A0F0D;      /* ink-950 */
   --foreground: #E8EDEB;      /* ink-50  */
