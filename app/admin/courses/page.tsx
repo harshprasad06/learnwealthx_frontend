@@ -412,8 +412,8 @@ export default function AdminCoursesPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs rounded-full ${
                         course.isPublished
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-gray-100 text-gray-800'
+                          ? 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-300'
+                          : 'bg-gray-100 dark:bg-ink-800 text-gray-800 dark:text-ink-100'
                       }`}>
                         {course.isPublished ? 'Published' : 'Draft'}
                       </span>

@@ -386,7 +386,7 @@ function InnerCheckoutModal({
                 onClick={() => setAuthMode('signup')}
                 className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'signup'
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                    ? 'bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 border-blue-600 dark:border-mint-500 shadow-md'
                     : 'bg-white dark:bg-ink-800 text-gray-700 dark:text-ink-200 border-gray-300 dark:border-ink-700 hover:bg-gray-50 dark:hover:bg-ink-700'
                 }`}
               >
@@ -397,7 +397,7 @@ function InnerCheckoutModal({
                 onClick={() => setAuthMode('login')}
                 className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'login'
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                    ? 'bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 border-blue-600 dark:border-mint-500 shadow-md'
                     : 'bg-white dark:bg-ink-800 text-gray-700 dark:text-ink-200 border-gray-300 dark:border-ink-700 hover:bg-gray-50 dark:hover:bg-ink-700'
                 }`}
               >
@@ -514,7 +514,7 @@ function InnerCheckoutModal({
             >
               {loading ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white dark:border-ink-950 border-t-transparent rounded-full animate-spin" />
                   Processing...
                 </>
               ) : authMode === 'signup' ? (

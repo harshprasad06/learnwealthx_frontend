@@ -24,7 +24,7 @@ export default async function BlogIndexPage() {
         <p className="text-gray-500 dark:text-ink-400 mb-10">Tips, guides and insights on online learning and wealth building.</p>
 
         {posts.length === 0 && (
-          <p className="text-gray-400">No posts yet. Check back soon.</p>
+          <p className="text-gray-400 dark:text-ink-300">No posts yet. Check back soon.</p>
         )}
 
         <div className="grid gap-8">
@@ -35,7 +35,7 @@ export default async function BlogIndexPage() {
                   <BlogImage src={post.image} alt={post.title} className="w-full h-48 object-cover" />
                 )}
                 <div className="p-5">
-                  <p className="text-xs text-gray-400 mb-1">{post.date}</p>
+                  <p className="text-xs text-gray-400 dark:text-ink-300 mb-1">{post.date}</p>
                   <h2 className="text-xl font-semibold group-hover:text-blue-600 dark:group-hover:text-mint-400 transition-colors mb-2">{post.title}</h2>
                   <p className="text-gray-500 dark:text-ink-400 text-sm line-clamp-2">{post.description}</p>
                   <span className="inline-block mt-3 text-blue-600 dark:text-mint-400 text-sm font-medium">Read more →</span>

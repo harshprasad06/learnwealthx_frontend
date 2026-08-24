@@ -141,7 +141,7 @@ export default function AdminAffiliatesPage() {
       <div className="relative w-10 h-10 rounded-full overflow-hidden">
         {/* Fallback - Always visible initially, hidden when image loads successfully */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
+          className={`absolute inset-0 bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
             showImage ? 'opacity-0' : 'opacity-100'
           }`}
         >
@@ -167,13 +167,13 @@ export default function AdminAffiliatesPage() {
   const getKycStatusColor = (status: string) => {
     switch (status) {
       case 'approved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-300';
       case 'rejected':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-300';
       case 'under_review':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-950/40 text-yellow-800 dark:text-yellow-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-ink-800 text-gray-800 dark:text-ink-100';
     }
   };
 

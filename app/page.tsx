@@ -108,7 +108,7 @@ export default function Home() {
         {/* Decorative animated wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg
-            className="w-full h-12 text-white"
+            className="w-full h-12 text-white dark:text-ink-950"
             fill="currentColor"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"

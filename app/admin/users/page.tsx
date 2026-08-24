@@ -212,7 +212,7 @@ export default function AdminUsersPage() {
       <div className="relative w-10 h-10 rounded-full overflow-hidden">
         {/* Fallback - Always visible initially, hidden when image loads successfully */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
+          className={`absolute inset-0 bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
             showImage ? 'opacity-0' : 'opacity-100'
           }`}
         >
@@ -238,13 +238,13 @@ export default function AdminUsersPage() {
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
       case 'ADMIN':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-300';
       case 'AFFILIATE':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 dark:bg-mint-900/30 text-blue-800 dark:text-mint-300';
       case 'BUYER':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-ink-800 text-gray-800 dark:text-ink-100';
     }
   };
 

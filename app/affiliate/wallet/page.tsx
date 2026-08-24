@@ -88,15 +88,15 @@ export default function WalletPage() {
   const getTransactionTypeColor = (type: string) => {
     switch (type) {
       case 'credit':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40';
       case 'debit':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40';
       case 'payout_request':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-blue-600 dark:text-mint-400 bg-blue-50 dark:bg-mint-900/20';
       case 'payout_processed':
-        return 'text-purple-600 bg-purple-50';
+        return 'text-purple-600 dark:text-mint-400 bg-purple-50 dark:bg-mint-900/20';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-gray-600 dark:text-ink-300 bg-gray-50 dark:bg-ink-900';
     }
   };
 

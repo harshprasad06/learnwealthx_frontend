@@ -43,13 +43,13 @@ export default async function BlogPostPage({ params }: Props) {
       <main className="max-w-3xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-8">
-          <p className="text-sm text-gray-400 mb-2">{frontmatter.date}</p>
+          <p className="text-sm text-gray-400 dark:text-ink-300 mb-2">{frontmatter.date}</p>
           <h1 className="text-3xl font-bold leading-tight mb-4">{frontmatter.title}</h1>
           {frontmatter.description && (
             <p className="text-lg text-gray-500 dark:text-ink-400">{frontmatter.description}</p>
           )}
           {frontmatter.author && (
-            <p className="text-sm text-gray-400 mt-3">By {frontmatter.author}</p>
+            <p className="text-sm text-gray-400 dark:text-ink-300 mt-3">By {frontmatter.author}</p>
           )}
         </div>
 

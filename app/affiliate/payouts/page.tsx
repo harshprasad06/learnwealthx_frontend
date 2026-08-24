@@ -151,15 +151,15 @@ export default function PayoutsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-950/40 text-green-800 dark:text-green-300';
       case 'processing':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 dark:bg-mint-900/30 text-blue-800 dark:text-mint-300';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-950/40 text-yellow-800 dark:text-yellow-300';
       case 'failed':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-ink-800 text-gray-800 dark:text-ink-100';
     }
   };
 
@@ -234,7 +234,7 @@ export default function PayoutsPage() {
           <div className="bg-yellow-50 dark:bg-yellow-950/40 border-l-4 border-yellow-500 rounded-lg shadow-sm p-5">
             <div className="flex items-start">
               <svg
-                className="w-6 h-6 text-yellow-600 mr-3 mt-0.5"
+                className="w-6 h-6 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -303,7 +303,7 @@ export default function PayoutsPage() {
                     value={requestForm.amount}
                     onChange={(e) => setRequestForm({ ...requestForm, amount: e.target.value })}
                     placeholder={`Enter amount (max: ₹${wallet?.balance.toFixed(2) || '0.00'})`}
-                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   />
                   <p className="text-xs text-gray-500 dark:text-ink-400 mt-1">
                     Available: ₹{wallet?.balance.toFixed(2) || '0.00'}
@@ -342,7 +342,7 @@ export default function PayoutsPage() {
                         setRequestForm({ ...requestForm, paymentDetails: e.target.value })
                       }
                       placeholder="yourname@upi"
-                      className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                     />
                   </div>
                 )}

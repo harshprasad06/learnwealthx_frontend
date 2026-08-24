@@ -283,7 +283,7 @@ export default function AffiliateDashboardPage() {
       <div className="relative w-8 h-8 rounded-full overflow-hidden">
         {/* Fallback - Always visible initially, hidden when image loads successfully */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
+          className={`absolute inset-0 bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm transition-opacity duration-200 ${
             showImage ? 'opacity-0' : 'opacity-100'
           }`}
         >
@@ -533,7 +533,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="As per bank records"
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                         />
                       </div>
                       <div>
@@ -545,7 +545,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter account number"
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                         />
                       </div>
                       <div>
@@ -557,7 +557,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="e.g., HDFC0001234"
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm uppercase text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm uppercase text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                         />
                       </div>
                       <div>
@@ -569,7 +569,7 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter bank name"
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition text-sm text-gray-900 dark:text-ink-50 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                         />
                       </div>
                     </div>
@@ -578,7 +578,7 @@ export default function AffiliateDashboardPage() {
                   {/* Documents Section */}
                   <div>
                     <div className="flex items-center mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                      <div className="flex-shrink-0 w-10 h-10 bg-purple-100 dark:bg-mint-900/30 rounded-full flex items-center justify-center mr-3">
                         <svg className="w-5 h-5 text-purple-600 dark:text-mint-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -604,7 +604,7 @@ export default function AffiliateDashboardPage() {
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-ink-200 mb-2">
-                          Document Back <span className="text-gray-400">(Optional)</span>
+                          Document Back <span className="text-gray-400 dark:text-ink-300">(Optional)</span>
                         </label>
                         <div className="relative">
                           <input
@@ -618,7 +618,7 @@ export default function AffiliateDashboardPage() {
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-ink-200 mb-2">
-                          Address Proof <span className="text-gray-400">(Optional)</span>
+                          Address Proof <span className="text-gray-400 dark:text-ink-300">(Optional)</span>
                         </label>
                         <div className="relative">
                           <input
@@ -694,7 +694,7 @@ export default function AffiliateDashboardPage() {
           </div>
           <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
             <p className="text-sm text-gray-500 dark:text-ink-300">Lifetime Earnings</p>
-            <p className="text-2xl font-bold text-green-600 mt-1">
+            <p className="text-2xl font-bold text-green-600 dark:text-green-400 mt-1">
               ₹{affiliate.totalEarnings.toFixed(2)}
             </p>
           </div>

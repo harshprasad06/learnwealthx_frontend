@@ -238,7 +238,7 @@ export default function WatchCoursePage() {
           <svg
             key={star}
             className={`${cls} ${
-              star <= full ? 'text-yellow-400' : 'text-gray-600'
+              star <= full ? 'text-yellow-400' : 'text-gray-600 dark:text-ink-300'
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
