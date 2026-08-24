@@ -71,7 +71,7 @@ export default function Home() {
       <Navbar />
       <main className="app-main">
         {/* Hero Banner Section */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
+        <section className="relative bg-gradient-to-br from-blue-600 dark:from-mint-900 via-blue-700 dark:via-mint-950 to-indigo-800 dark:to-ink-950 text-white">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="text-center">
@@ -79,14 +79,14 @@ export default function Home() {
               Learn Skills That
               <span className="block text-yellow-300 mt-2">Change Your Life</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-blue-100 dark:text-mint-100 mb-8 max-w-3xl mx-auto">
               Master in-demand skills with our comprehensive courses. 
               Start learning today and unlock your potential.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/courses"
-                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 dark:text-ink-50 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
               >
                 Browse All Courses
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ export default function Home() {
               {!user && (
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-mint-500 text-blue-700 dark:text-ink-950 font-semibold rounded-lg shadow-lg hover:bg-gray-100 dark:hover:bg-mint-400 transition-all transform hover:scale-105"
                 >
                   Get Started Free
                 </Link>
@@ -298,7 +298,7 @@ export default function Home() {
                     href={`/courses/${course.id}`}
                     className="group bg-white dark:bg-ink-900 rounded-xl shadow-md dark:shadow-black/40 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                   >
-                    <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-blue-400 dark:from-mint-800 to-indigo-600 dark:to-mint-950 overflow-hidden">
                       {imageSrc ? (
                         <img
                           src={imageSrc}
@@ -430,7 +430,7 @@ export default function Home() {
                   to real projects within a week.”
                 </p>
                 <div className="mt-auto flex items-center space-x-3 pt-2">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white text-sm font-semibold">
                     S
                   </div>
                   <div>
@@ -460,7 +460,7 @@ export default function Home() {
                   payouts from referrals.”
                 </p>
                 <div className="mt-auto flex items-center space-x-3 pt-2">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-sm font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 dark:from-mint-900 to-pink-500 dark:to-mint-800 flex items-center justify-center text-white text-sm font-semibold">
                     R
                   </div>
                   <div>
@@ -474,19 +474,19 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <section className="py-16 bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-700 dark:to-mint-950 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             Ready to Start Learning?
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-blue-100 dark:text-mint-100 mb-8">
             Join thousands of students already learning with us. Start your journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {!user && (
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 dark:text-ink-50 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
               >
                 Create Free Account
               </Link>

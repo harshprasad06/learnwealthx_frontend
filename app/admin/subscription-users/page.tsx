@@ -12,7 +12,7 @@ const Avatar = ({ imageUrl, name, email }: { imageUrl: string | null; name: stri
 
   if (!imageUrl || imageError) {
     return (
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 dark:from-mint-900 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
         {initial}
       </div>
     );
@@ -174,7 +174,7 @@ export default function SubscriptionUsersPage() {
                   setSearch(e.target.value);
                   setPage(1); // Reset to first page on search
                 }}
-                className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
+                className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
               />
               <svg
                 className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-ink-400"

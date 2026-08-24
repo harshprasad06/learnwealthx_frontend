@@ -222,7 +222,7 @@ export default function AdminCoursesPage() {
               setThumbnailFile(null);
               setThumbnailPreview('');
             }}
-            className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="w-full sm:w-auto bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400"
           >
             Add Course
           </button>
@@ -282,7 +282,7 @@ export default function AdminCoursesPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                   Thumbnail
                 </label>
                 
@@ -292,9 +292,9 @@ export default function AdminCoursesPage() {
                     type="file"
                     accept="image/*"
                     onChange={handleThumbnailChange}
-                    className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    className="mt-1 block w-full text-sm text-gray-500 dark:text-ink-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-mint-900/20 file:text-blue-700 dark:file:text-mint-400 hover:file:bg-blue-100 dark:hover:file:bg-mint-900/30"
                   />
-                  <p className="mt-1 text-xs text-gray-500">
+                  <p className="mt-1 text-xs text-gray-500 dark:text-ink-400">
                     Upload an image (JPG, PNG, GIF, WEBP - Max 5MB)
                   </p>
                 </div>
@@ -353,7 +353,7 @@ export default function AdminCoursesPage() {
                   onChange={(e) => setFormData({ ...formData, isPublished: e.target.checked })}
                   className="mr-2"
                 />
-                <label htmlFor="isPublished" className="text-sm font-medium text-gray-700">
+                <label htmlFor="isPublished" className="text-sm font-medium text-gray-700 dark:text-ink-200">
                   Published
                 </label>
               </div>
@@ -361,7 +361,7 @@ export default function AdminCoursesPage() {
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {uploading ? 'Uploading...' : editingCourse ? 'Update' : 'Create'}
                 </button>
@@ -371,7 +371,7 @@ export default function AdminCoursesPage() {
                     setShowForm(false);
                     setEditingCourse(null);
                   }}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
+                  className="bg-gray-300 dark:bg-ink-700 text-gray-700 dark:text-ink-200 px-4 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-ink-700"
                 >
                   Cancel
                 </button>

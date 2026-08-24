@@ -211,7 +211,7 @@ export default function PayoutsPage() {
 
         {/* Wallet Summary */}
         {wallet && (
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-600 dark:to-mint-950 rounded-xl shadow-lg p-6 text-white">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <p className="text-sm font-medium opacity-90 mb-1">Available Balance</p>
@@ -231,7 +231,7 @@ export default function PayoutsPage() {
 
         {/* KYC Warning */}
         {kycStatus !== 'approved' && (
-          <div className="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg shadow-sm p-5">
+          <div className="bg-yellow-50 dark:bg-yellow-950/40 border-l-4 border-yellow-500 rounded-lg shadow-sm p-5">
             <div className="flex items-start">
               <svg
                 className="w-6 h-6 text-yellow-600 mr-3 mt-0.5"
@@ -247,13 +247,13 @@ export default function PayoutsPage() {
                 />
               </svg>
               <div>
-                <h3 className="text-yellow-800 font-semibold mb-1">KYC Verification Required</h3>
-                <p className="text-yellow-700 text-sm mb-2">
+                <h3 className="text-yellow-800 dark:text-yellow-300 font-semibold mb-1">KYC Verification Required</h3>
+                <p className="text-yellow-700 dark:text-yellow-300 text-sm mb-2">
                   You must complete KYC verification before requesting payouts.
                 </p>
                 <Link
                   href="/affiliate/dashboard"
-                  className="text-yellow-800 font-medium hover:underline text-sm"
+                  className="text-yellow-800 dark:text-yellow-300 font-medium hover:underline text-sm"
                 >
                   Complete KYC →
                 </Link>
@@ -266,11 +266,11 @@ export default function PayoutsPage() {
         {canRequestPayout && (
           <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Request Payout</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-ink-50">Request Payout</h2>
               {!showRequestForm && (
                 <button
                   onClick={() => setShowRequestForm(true)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-md hover:bg-blue-700 dark:hover:bg-mint-400"
                 >
                   New Request
                 </button>
@@ -280,18 +280,18 @@ export default function PayoutsPage() {
             {showRequestForm && (
               <form onSubmit={handleRequestPayout} className="space-y-4">
                 {error && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
+                  <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 px-4 py-3 rounded text-sm">
                     {error}
                   </div>
                 )}
                 {message && (
-                  <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm">
+                  <div className="bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-900/60 text-green-700 dark:text-green-300 px-4 py-3 rounded text-sm">
                     {message}
                   </div>
                 )}
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                     Amount (Minimum: ₹{MIN_PAYOUT})
                   </label>
                   <input
@@ -303,15 +303,15 @@ export default function PayoutsPage() {
                     value={requestForm.amount}
                     onChange={(e) => setRequestForm({ ...requestForm, amount: e.target.value })}
                     placeholder={`Enter amount (max: ₹${wallet?.balance.toFixed(2) || '0.00'})`}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 dark:text-ink-400 mt-1">
                     Available: ₹{wallet?.balance.toFixed(2) || '0.00'}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                     Payment Method
                   </label>
                   <select
@@ -322,7 +322,7 @@ export default function PayoutsPage() {
                         paymentMethod: e.target.value as 'bank_transfer' | 'upi' | 'paypal',
                       })
                     }
-                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800"
                   >
                     <option value="bank_transfer">Bank Transfer</option>
                     <option value="upi">UPI</option>
@@ -332,7 +332,7 @@ export default function PayoutsPage() {
 
                 {requestForm.paymentMethod === 'upi' && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                       UPI ID (Optional)
                     </label>
                     <input
@@ -342,7 +342,7 @@ export default function PayoutsPage() {
                         setRequestForm({ ...requestForm, paymentDetails: e.target.value })
                       }
                       placeholder="yourname@upi"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder:text-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
                     />
                   </div>
                 )}
@@ -466,7 +466,7 @@ export default function PayoutsPage() {
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                     >
                       Next
                     </button>

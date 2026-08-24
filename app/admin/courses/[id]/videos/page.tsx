@@ -323,16 +323,16 @@ export default function ManageVideosPage() {
                     type="file"
                     accept="video/*"
                     onChange={handleVideoFileChange}
-                    className="mt-1 block w-full text-sm text-gray-500 dark:text-ink-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    className="mt-1 block w-full text-sm text-gray-500 dark:text-ink-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-mint-900/20 file:text-blue-700 dark:file:text-mint-400 hover:file:bg-blue-100 dark:hover:file:bg-mint-900/30"
                   />
                   <p className="mt-1 text-xs text-gray-500 dark:text-ink-300">
                     Supported formats: MP4, WebM, MOV, AVI, MKV (Max 2GB)
                   </p>
                   {submitting && uploadMode === 'upload' && videoFile && (
                     <div className="mt-2">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <div className="w-full bg-gray-200 dark:bg-ink-800 rounded-full h-2.5">
                         <div
-                          className="bg-blue-600 h-2.5 rounded-full transition-all"
+                          className="bg-blue-600 dark:bg-mint-500 h-2.5 rounded-full transition-all"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
                       </div>
@@ -385,7 +385,7 @@ export default function ManageVideosPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting
                     ? uploadMode === 'upload' && videoFile
@@ -431,7 +431,7 @@ export default function ManageVideosPage() {
               setUploadMode('upload');
               setShowForm(true);
             }}
-            className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="w-full sm:w-auto bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400"
           >
             Add Video
           </button>
@@ -531,7 +531,7 @@ export default function ManageVideosPage() {
       {submitting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white dark:bg-ink-950 rounded-xl shadow-lg px-6 py-4 flex flex-col items-center space-y-3">
-            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-blue-500 dark:border-mint-400 border-t-transparent rounded-full animate-spin" />
             <p className="text-sm font-medium text-gray-800 dark:text-ink-50">
               {uploadMode === 'upload' && videoFile
                 ? 'Uploading video to Bunny.net...'

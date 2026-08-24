@@ -82,7 +82,7 @@ function GoogleSignInButton() {
   return (
     <>
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
@@ -90,7 +90,7 @@ function GoogleSignInButton() {
         type="button"
         onClick={() => login()}
         disabled={loading}
-        className="w-full flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+        className="w-full flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 dark:border-ink-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-ink-50 bg-white dark:bg-ink-900 hover:bg-gray-50 dark:hover:bg-ink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-mint-500 disabled:opacity-50"
       >
         {loading ? (
           'Signing in...'

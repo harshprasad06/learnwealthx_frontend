@@ -164,7 +164,7 @@ function ResetPasswordContent() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
-                  New Password <span className="text-gray-500">(min 6 characters)</span>
+                  New Password <span className="text-gray-500 dark:text-ink-400">(min 6 characters)</span>
                 </label>
                 <input
                   type="password"

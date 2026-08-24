@@ -74,7 +74,7 @@ export default function SignupPage() {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your name (optional)"
               />
             </div>
@@ -88,7 +88,7 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your email"
               />
             </div>
@@ -103,7 +103,7 @@ export default function SignupPage() {
                 minLength={6}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your password (min 6 characters)"
               />
             </div>

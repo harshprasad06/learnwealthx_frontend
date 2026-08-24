@@ -142,18 +142,18 @@ export default function AboutPage() {
                 <main className="app-main">
 
                     {/* ── Hero ─────────────────────────────────────────────────── */}
-                    <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-24">
+                    <section className="relative bg-gradient-to-br from-blue-600 dark:from-mint-900 via-blue-700 dark:via-mint-950 to-indigo-800 dark:to-ink-950 text-white py-24">
                         <div className="absolute inset-0 bg-black opacity-10" />
                         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
                             {/* Breadcrumb — visible navigation signal */}
                             <nav aria-label="Breadcrumb" className="mb-8">
-                                <ol className="flex items-center justify-center gap-2 text-blue-200 text-sm">
+                                <ol className="flex items-center justify-center gap-2 text-blue-200 dark:text-mint-200 text-sm">
                                     <li>
                                         <Link href="/" className="hover:text-white transition-colors">
                                             LearnWealthX
                                         </Link>
                                     </li>
-                                    <li className="text-blue-400" aria-hidden="true">/</li>
+                                    <li className="text-blue-400 dark:text-mint-300" aria-hidden="true">/</li>
                                     <li className="text-white font-medium">About</li>
                                 </ol>
                             </nav>
@@ -162,7 +162,7 @@ export default function AboutPage() {
                                 About{" "}
                                 <span className="text-yellow-300">LearnWealthX</span>
                             </h1>
-                            <p className="text-xl sm:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-xl sm:text-2xl text-blue-100 dark:text-mint-100 max-w-3xl mx-auto leading-relaxed">
                                 LearnWealthX is India&apos;s trusted online learning platform — built to make
                                 expert-quality education affordable and accessible for every learner.
                             </p>
@@ -337,18 +337,18 @@ export default function AboutPage() {
                     </section>
 
                     {/* ── CTA ──────────────────────────────────────────────────── */}
-                    <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+                    <section className="py-16 bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-700 dark:to-mint-950 text-white">
                         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
                             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
                                 Ready to Learn with LearnWealthX?
                             </h2>
-                            <p className="text-xl text-blue-100 mb-8">
+                            <p className="text-xl text-blue-100 dark:text-mint-100 mb-8">
                                 Browse our full catalog of expert-led courses and start your LearnWealthX journey.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link
                                     href="/courses"
-                                    className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+                                    className="inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-gray-900 dark:text-ink-50 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
                                 >
                                     Browse LearnWealthX Courses →
                                 </Link>

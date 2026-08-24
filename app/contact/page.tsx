@@ -180,7 +180,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="inline-flex items-center px-5 py-2.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm"
+                        className="inline-flex items-center px-5 py-2.5 rounded-md bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 text-sm font-medium hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm"
                       >
                         {submitting ? 'Sending...' : 'Send Message'}
                       </button>

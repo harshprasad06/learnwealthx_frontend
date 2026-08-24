@@ -236,7 +236,7 @@ export default function AdminMilestonesPage() {
                   endDate: '',
                 });
               }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
             >
               Add Milestone
             </button>
@@ -340,7 +340,7 @@ export default function AdminMilestonesPage() {
                 <div className="flex gap-3">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
                   >
                     {editingMilestone ? 'Update' : 'Create'}
                   </button>

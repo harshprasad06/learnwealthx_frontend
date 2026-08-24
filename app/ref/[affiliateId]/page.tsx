@@ -198,7 +198,7 @@ export default function RefLandingPage() {
         {/* Hero / Affiliate intro */}
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-lg shadow-md overflow-hidden">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-lg shadow-md overflow-hidden">
               {affiliate?.user.picture && !avatarError ? (
                 <img
                   src={affiliate.user.picture}
@@ -226,7 +226,7 @@ export default function RefLandingPage() {
             </div>
           </div>
           {courses.length > 0 && (
-            <div className="px-5 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+            <div className="px-5 py-4 rounded-2xl bg-gradient-to-r from-blue-600 dark:from-mint-800 to-indigo-600 dark:to-mint-950 text-white shadow-lg">
               <p className="text-xs uppercase tracking-wide opacity-80 mb-1">
                 Bundle total ({courses.length} courses)
               </p>

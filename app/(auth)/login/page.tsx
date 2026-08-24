@@ -68,7 +68,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your email"
               />
             </div>
@@ -82,7 +82,7 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your password"
               />
               <div className="mt-2 text-right">

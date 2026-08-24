@@ -238,7 +238,7 @@ export default function AdminPayoutsPage() {
               </button>
               <Link
                 href="/admin/affiliates"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-md hover:bg-blue-700 dark:hover:bg-mint-400"
               >
                 View Affiliates
               </Link>
@@ -257,7 +257,7 @@ export default function AdminPayoutsPage() {
         {/* Filters */}
         <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 mb-6 transition-colors">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
               Filter by Status
             </label>
             <select
@@ -266,7 +266,7 @@ export default function AdminPayoutsPage() {
                 setFilters({ ...filters, status: e.target.value });
                 setPage(1);
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md max-w-xs text-gray-900 bg-white"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md max-w-xs text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900"
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
@@ -278,7 +278,7 @@ export default function AdminPayoutsPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4">
             {error}
           </div>
         )}
@@ -289,46 +289,46 @@ export default function AdminPayoutsPage() {
           <>
             <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden transition-colors">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                  <thead className="bg-gray-50 dark:bg-ink-900">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Affiliate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Amount
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Payment Method
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Requested
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {payouts.map((payout) => (
-                      <tr key={payout.id} className="hover:bg-gray-50">
+                      <tr key={payout.id} className="hover:bg-gray-50 dark:hover:bg-ink-900">
                         <td className="px-6 py-4">
                           <div>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
                               {payout.affiliate.user.name || 'No name'}
                             </p>
-                            <p className="text-xs text-gray-500">{payout.affiliate.user.email}</p>
+                            <p className="text-xs text-gray-500 dark:text-ink-400">{payout.affiliate.user.email}</p>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-semibold text-gray-900">
+                          <span className="font-semibold text-gray-900 dark:text-ink-50">
                             ₹{payout.amount.toFixed(2)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900">
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-ink-50">
                           {getPaymentMethodLabel(payout.paymentMethod)}
                         </td>
                         <td className="px-6 py-4">
@@ -340,7 +340,7 @@ export default function AdminPayoutsPage() {
                             {payout.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-ink-400">
                           {new Date(payout.createdAt).toLocaleDateString()}
                           <br />
                           <span className="text-xs text-gray-400">
@@ -354,7 +354,7 @@ export default function AdminPayoutsPage() {
                                 setSelectedPayout(payout);
                                 setShowModal(true);
                               }}
-                              className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+                              className="px-3 py-1 text-xs bg-blue-100 dark:bg-mint-900/30 text-blue-700 dark:text-mint-400 rounded hover:bg-blue-200 dark:hover:bg-mint-900/50"
                             >
                               View
                             </button>
@@ -362,7 +362,7 @@ export default function AdminPayoutsPage() {
                               <button
                                 onClick={() => openProcessModal(payout)}
                                 disabled={processing}
-                                className="px-3 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200 disabled:opacity-50"
+                                className="px-3 py-1 text-xs bg-green-100 dark:bg-green-950/40 text-green-700 dark:text-green-300 rounded hover:bg-green-200 dark:hover:bg-green-950/60 disabled:opacity-50"
                               >
                                 Process
                               </button>
@@ -372,7 +372,7 @@ export default function AdminPayoutsPage() {
                                 const details = payout.paymentDetails ? JSON.parse(payout.paymentDetails) : {};
                                 if (details.autoGenerated) {
                                   return (
-                                    <span className="px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded font-medium">
+                                    <span className="px-2 py-1 text-xs bg-purple-100 text-purple-700 dark:text-mint-300 rounded font-medium">
                                       Auto
                                     </span>
                                   );
@@ -392,21 +392,21 @@ export default function AdminPayoutsPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-ink-200">
                   Showing page {page} of {totalPages} (Total: {total} payouts)
                 </p>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                    className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                   >
                     Next
                   </button>
@@ -422,14 +422,14 @@ export default function AdminPayoutsPage() {
             <div className="bg-white dark:bg-ink-900 rounded-lg shadow-xl dark:shadow-black/40 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto transition-colors">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">Payout Details</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-ink-50">Payout Details</h2>
                   <button
                     onClick={() => {
                       setShowModal(false);
                       setSelectedPayout(null);
                       setFailureReason('');
                     }}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-ink-300"
                   >
                     ✕
                   </button>
@@ -441,13 +441,13 @@ export default function AdminPayoutsPage() {
                     <h3 className="text-lg font-semibold mb-3">Affiliate Information</h3>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-gray-500">Name</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Name</p>
                         <p className="font-medium">
                           {selectedPayout.affiliate.user.name || 'No name'}
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Email</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Email</p>
                         <p className="font-medium">{selectedPayout.affiliate.user.email}</p>
                       </div>
                     </div>
@@ -458,17 +458,17 @@ export default function AdminPayoutsPage() {
                     <h3 className="text-lg font-semibold mb-3">Payout Details</h3>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-gray-500">Amount</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Amount</p>
                         <p className="font-medium text-lg">₹{selectedPayout.amount.toFixed(2)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Payment Method</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Payment Method</p>
                         <p className="font-medium">
                           {getPaymentMethodLabel(selectedPayout.paymentMethod)}
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Status</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Status</p>
                         <span
                           className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
                             selectedPayout.status
@@ -478,7 +478,7 @@ export default function AdminPayoutsPage() {
                         </span>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Requested At</p>
+                        <p className="text-sm text-gray-500 dark:text-ink-400">Requested At</p>
                         <p className="font-medium">
                           {new Date(selectedPayout.createdAt).toLocaleString()}
                         </p>
@@ -492,23 +492,23 @@ export default function AdminPayoutsPage() {
                       <h3 className="text-lg font-semibold mb-3">Bank Account Details</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500">Account Holder</p>
+                          <p className="text-sm text-gray-500 dark:text-ink-400">Account Holder</p>
                           <p className="font-medium">
                             {selectedPayout.affiliate.kyc.accountHolderName || 'N/A'}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Account Number</p>
+                          <p className="text-sm text-gray-500 dark:text-ink-400">Account Number</p>
                           <p className="font-medium">
                             {selectedPayout.affiliate.kyc.bankAccountNumber || 'N/A'}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">IFSC Code</p>
+                          <p className="text-sm text-gray-500 dark:text-ink-400">IFSC Code</p>
                           <p className="font-medium">{selectedPayout.affiliate.kyc.bankIFSC || 'N/A'}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500">Bank Name</p>
+                          <p className="text-sm text-gray-500 dark:text-ink-400">Bank Name</p>
                           <p className="font-medium">{selectedPayout.affiliate.kyc.bankName || 'N/A'}</p>
                         </div>
                       </div>
@@ -519,8 +519,8 @@ export default function AdminPayoutsPage() {
                   {selectedPayout.paymentDetails && (
                     <div className="border-b pb-4">
                       <h3 className="text-lg font-semibold mb-3">Additional Details</h3>
-                      <div className="bg-gray-50 p-3 rounded">
-                        <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+                      <div className="bg-gray-50 dark:bg-ink-900 p-3 rounded">
+                        <pre className="text-sm text-gray-700 dark:text-ink-200 whitespace-pre-wrap">
                           {JSON.stringify(parsePaymentDetails(selectedPayout.paymentDetails), null, 2)}
                         </pre>
                       </div>
@@ -531,7 +531,7 @@ export default function AdminPayoutsPage() {
                   {selectedPayout.failureReason && (
                     <div className="border-b pb-4">
                       <h3 className="text-lg font-semibold mb-3 text-red-600">Failure Reason</h3>
-                      <p className="text-red-700">{selectedPayout.failureReason}</p>
+                      <p className="text-red-700 dark:text-red-300">{selectedPayout.failureReason}</p>
                     </div>
                   )}
 
@@ -541,7 +541,7 @@ export default function AdminPayoutsPage() {
                       <h3 className="text-lg font-semibold mb-3">Process Payout</h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                             Status
                           </label>
                           <select
@@ -549,7 +549,7 @@ export default function AdminPayoutsPage() {
                             onChange={(e) =>
                               setProcessStatus(e.target.value as 'completed' | 'failed')
                             }
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 bg-white"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900"
                           >
                             <option value="completed">Mark as Completed</option>
                             <option value="failed">Mark as Failed</option>
@@ -558,7 +558,7 @@ export default function AdminPayoutsPage() {
 
                         {processStatus === 'failed' && (
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                               Failure Reason <span className="text-red-500">*</span>
                             </label>
                             <textarea
@@ -567,7 +567,7 @@ export default function AdminPayoutsPage() {
                               placeholder="Provide a reason for failure..."
                               rows={3}
                               required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder:text-gray-400"
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 placeholder:text-gray-400"
                             />
                           </div>
                         )}
@@ -579,7 +579,7 @@ export default function AdminPayoutsPage() {
                               setSelectedPayout(null);
                               setFailureReason('');
                             }}
-                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+                            className="px-4 py-2 bg-gray-200 dark:bg-ink-800 text-gray-700 dark:text-ink-200 rounded-md hover:bg-gray-300 dark:hover:bg-ink-700"
                           >
                             Cancel
                           </button>

@@ -414,7 +414,7 @@ function InnerCheckoutModal({
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
                 placeholder="your@email.com"
               />
             </div>
@@ -428,7 +428,7 @@ function InnerCheckoutModal({
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
                 placeholder="Minimum 6 characters"
               />
             </div>
@@ -438,7 +438,7 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 dark:text-mint-400 focus:ring-blue-500 dark:focus:ring-mint-500 dark:bg-ink-800"
               />
               <span className="text-sm text-gray-600 dark:text-ink-300">
                 I agree to the{' '}
@@ -452,7 +452,7 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToRefundPolicy}
                 onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 dark:text-mint-400 focus:ring-blue-500 dark:focus:ring-mint-500 dark:bg-ink-800"
               />
               <span className="text-sm text-gray-600 dark:text-ink-300">
                 I have read and agree to the{' '}
@@ -533,7 +533,7 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 dark:text-mint-400 focus:ring-blue-500 dark:focus:ring-mint-500 dark:bg-ink-800"
               />
               <span className="text-sm text-gray-600 dark:text-ink-300">
                 I agree to the{' '}
@@ -547,7 +547,7 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToRefundPolicy}
                 onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 dark:text-mint-400 focus:ring-blue-500 dark:focus:ring-mint-500 dark:bg-ink-800"
               />
               <span className="text-sm text-gray-600 dark:text-ink-300">
                 I have read and agree to the{' '}

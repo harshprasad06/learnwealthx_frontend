@@ -192,7 +192,7 @@ export default function AdminContactsPage() {
     const initial = displayName.charAt(0).toUpperCase();
 
     return (
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
         {initial}
       </div>
     );

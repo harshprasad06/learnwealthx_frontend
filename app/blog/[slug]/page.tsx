@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="text-sm text-gray-400 mb-2">{frontmatter.date}</p>
           <h1 className="text-3xl font-bold leading-tight mb-4">{frontmatter.title}</h1>
           {frontmatter.description && (
-            <p className="text-lg text-gray-500">{frontmatter.description}</p>
+            <p className="text-lg text-gray-500 dark:text-ink-400">{frontmatter.description}</p>
           )}
           {frontmatter.author && (
             <p className="text-sm text-gray-400 mt-3">By {frontmatter.author}</p>
@@ -58,17 +58,17 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* MDX content */}
-        <article className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 dark:prose-p:text-ink-200 prose-a:text-blue-600 prose-img:rounded-xl prose-img:w-full prose-strong:text-gray-900 dark:prose-strong:text-white">
+        <article className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 dark:prose-p:text-ink-200 prose-a:text-blue-600 dark:prose-a:text-mint-400 prose-img:rounded-xl prose-img:w-full prose-strong:text-gray-900 dark:prose-strong:text-white">
           <MDXRemote source={content} />
         </article>
 
         {/* CTA */}
-        <div className="mt-12 p-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl text-center text-white">
+        <div className="mt-12 p-8 bg-gradient-to-r from-blue-600 dark:from-mint-800 to-blue-700 dark:to-mint-950 rounded-2xl text-center text-white">
           <h3 className="text-2xl font-bold mb-3">Ready to start your learning journey?</h3>
-          <p className="text-blue-100 mb-6 text-lg">Explore expert-led courses on LearnWealthX and unlock your potential today.</p>
+          <p className="text-blue-100 dark:text-mint-100 mb-6 text-lg">Explore expert-led courses on LearnWealthX and unlock your potential today.</p>
           <a
             href="https://www.learnwealthx.in/courses"
-            className="inline-block bg-white text-blue-700 px-8 py-3 rounded-xl font-bold text-lg hover:bg-blue-50 transition-colors shadow-md"
+            className="inline-block bg-white dark:bg-mint-500 text-blue-700 dark:text-ink-950 px-8 py-3 rounded-xl font-bold text-lg hover:bg-blue-50 dark:hover:bg-mint-400 transition-colors shadow-md"
           >
             Browse Courses →
           </a>

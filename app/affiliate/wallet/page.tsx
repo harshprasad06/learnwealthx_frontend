@@ -192,12 +192,12 @@ export default function WalletPage() {
             <p className="text-3xl font-bold">₹{wallet.balance.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Ready for payout</p>
           </div>
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-500 dark:from-mint-800 to-blue-600 dark:to-mint-950 rounded-xl shadow-lg p-6 text-white">
             <p className="text-sm font-medium opacity-90 mb-1">Lifetime Earnings</p>
             <p className="text-3xl font-bold">₹{wallet.totalEarned.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Total commissions earned</p>
           </div>
-          <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+          <div className="bg-gradient-to-br from-purple-500 dark:from-mint-900 to-purple-600 dark:to-mint-800 rounded-xl shadow-lg p-6 text-white">
             <p className="text-sm font-medium opacity-90 mb-1">Total Paid Out</p>
             <p className="text-3xl font-bold">₹{wallet.totalPaid.toFixed(2)}</p>
             <p className="text-xs opacity-75 mt-2">Amount withdrawn</p>
@@ -414,21 +414,21 @@ export default function WalletPage() {
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-6 flex items-center justify-between">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-ink-200">
                     Showing page {page} of {totalPages} (Total: {total} transactions)
                   </p>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages}
-                      className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50"
                     >
                       Next
                     </button>

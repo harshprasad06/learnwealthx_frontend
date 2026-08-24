@@ -86,7 +86,7 @@ export default function Navbar() {
 
     if (shouldShowFallback) {
       return (
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 dark:from-mint-800 to-indigo-600 dark:to-mint-950 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
           {initial}
         </div>
       );
@@ -298,7 +298,7 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden"
+              className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:focus:ring-mint-500 md:hidden"
               aria-label="Toggle navigation menu"
               onClick={() => setMenuOpen((prev) => !prev)}
             >
@@ -426,7 +426,7 @@ export default function Navbar() {
                   <Link
                     href="/signup"
                     onClick={() => setMenuOpen(false)}
-                    className="mt-1 block px-3 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md text-center"
+                    className="mt-1 block px-3 py-2 text-sm font-medium text-white dark:text-ink-950 bg-blue-600 dark:bg-mint-500 hover:bg-blue-700 dark:hover:bg-mint-400 rounded-md text-center"
                   >
                     Sign Up
                   </Link>

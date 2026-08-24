@@ -176,7 +176,7 @@ export default function CoursesPage() {
                       href={`/courses/${course.id}`}
                       className="group bg-white dark:bg-ink-900 rounded-xl shadow-md dark:shadow-black/40 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                     >
-                      <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-blue-400 dark:from-mint-800 to-indigo-600 dark:to-mint-950 overflow-hidden">
                         {imageSrc ? (
                           <img
                             src={imageSrc}

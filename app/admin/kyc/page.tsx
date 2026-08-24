@@ -240,7 +240,7 @@ export default function AdminKYCPage() {
           </div>
           <Link
             href="/admin/affiliates"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-md hover:bg-blue-700 dark:hover:bg-mint-400"
           >
             View Affiliates
           </Link>
