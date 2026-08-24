@@ -150,9 +150,13 @@ img[alt*="logo"] {
 
 /* Slightly brighter bloom behind the short, vertically-centred auth cards,
    where the glow is the dominant background treatment in the reference design.
-   Deliberately narrow: only a centring flex shell directly inside .app-page
-   (login / signup), never the tall `<main class="flex-1">` content pages. */
-.dark .app-page > .flex-1.items-center {
+   Matched structurally rather than by utility class: only the auth pages render
+   .app-page with a single child (every other page also renders a <Navbar />),
+   so this hits login/signup and nothing else. Naming a utility here would be
+   wrong twice over -- Tailwind duplicates such a rule once per @layer
+   components class that @applies that utility, and it would also catch the
+   tall `<main>` content pages. */
+.dark .app-page > div:only-child {
   background-image:
     radial-gradient(34rem 26rem at 50% 45%, var(--glow), transparent 68%);
   background-repeat: no-repeat;
