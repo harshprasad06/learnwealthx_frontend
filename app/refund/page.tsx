@@ -5,31 +5,31 @@ import Footer from '@/components/Footer';
 
 export default function RefundPolicyPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <main className="flex-1">
         <section className="py-10 sm:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50 mb-4">
               Refund Policy
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">
+            <p className="text-gray-600 dark:text-ink-300 mb-2">
               Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
-            <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+            <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-900/60 rounded-lg">
               <p className="text-yellow-800 dark:text-yellow-200 font-semibold">
                 ⚠️ Important: All sales are final. We do not offer refunds for course purchases.
               </p>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-ink-300 mb-8">
               At LearnWealthX, we are committed to providing high-quality educational content. This Refund Policy 
               outlines our policy regarding course purchases. Please read this policy carefully before making a purchase.
             </p>
 
-            <div className="space-y-6 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+            <div className="space-y-6 text-gray-700 dark:text-ink-200 text-sm sm:text-base">
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   1. No Refund Policy
                 </h2>
                 <p className="mb-2">
@@ -49,7 +49,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   2. Course Access
                 </h2>
                 <p>
@@ -60,7 +60,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   3. Before You Purchase
                 </h2>
                 <p className="mb-2">We encourage you to:</p>
@@ -78,7 +78,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   4. Technical Support
                 </h2>
                 <p>
@@ -89,7 +89,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   5. Duplicate Purchases
                 </h2>
                 <p>
@@ -100,7 +100,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   6. Course Updates
                 </h2>
                 <p>
@@ -111,7 +111,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   7. Affiliate Commissions
                 </h2>
                 <p>
@@ -122,7 +122,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   8. Exceptions
                 </h2>
                 <p>
@@ -133,7 +133,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   9. Contact Us
                 </h2>
                 <p>
@@ -141,7 +141,7 @@ export default function RefundPolicyPage() {
                   contact us through our{' '}
                   <a
                     href="/contact"
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="text-blue-600 dark:text-mint-400 hover:underline"
                   >
                     Contact page
                   </a>
@@ -151,7 +151,7 @@ export default function RefundPolicyPage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   10. Changes to This Policy
                 </h2>
                 <p>

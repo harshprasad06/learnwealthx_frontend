@@ -46,14 +46,14 @@ export default function PricingDisplay({
     return (
       <div className="flex flex-col items-start leading-tight">
         <div className="flex items-baseline gap-1.5">
-          <span className={`${mrpSizeClass} text-gray-500 dark:text-gray-400`}>
+          <span className={`${mrpSizeClass} text-gray-500 dark:text-ink-300`}>
             M.R.P.:
           </span>
-          <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-blue-400`}>
+          <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-mint-400`}>
             ₹{formatCurrency(safeMrp)}
           </span>
         </div>
-        <span className={`${mrpSizeClass} text-gray-500 dark:text-gray-400 mt-0.5`}>
+        <span className={`${mrpSizeClass} text-gray-500 dark:text-ink-300 mt-0.5`}>
           Use referral link for discount
         </span>
       </div>
@@ -63,7 +63,7 @@ export default function PricingDisplay({
   if (!hasDiscount) {
     return (
       <div className="flex flex-col items-start leading-tight">
-        <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-blue-400`}>
+        <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-mint-400`}>
           ₹{formatCurrency(safeActual)}
         </span>
       </div>
@@ -73,14 +73,14 @@ export default function PricingDisplay({
   return (
     <div className="flex flex-col items-start leading-tight">
       <div className="flex items-baseline gap-1.5">
-        <span className="inline-flex items-center rounded-full bg-red-50 dark:bg-red-900/30 px-2 py-0.5 text-[11px] font-semibold text-red-600 dark:text-red-300">
+        <span className="inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/50 px-2 py-0.5 text-[11px] font-semibold text-red-600 dark:text-red-300">
           -{discountPercentage}%
         </span>
-        <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-blue-400 tracking-tight`}>
+        <span className={`${priceSizeClass} font-semibold text-blue-600 dark:text-mint-400 tracking-tight`}>
           ₹{formatCurrency(safeActual)}
         </span>
       </div>
-      <div className={`${mrpSizeClass} text-gray-500 dark:text-gray-400 mt-0.5`}>
+      <div className={`${mrpSizeClass} text-gray-500 dark:text-ink-300 mt-0.5`}>
         <span className="mr-1">M.R.P.:</span>
         <span className="line-through">₹{formatCurrency(safeMrp)}</span>
       </div>

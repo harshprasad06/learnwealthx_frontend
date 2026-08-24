@@ -178,13 +178,13 @@ export default function AdminAffiliatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Affiliates Management</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Manage all affiliate users and their status</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Affiliates Management</h1>
+            <p className="text-gray-600 dark:text-ink-300 mt-1">Manage all affiliate users and their status</p>
           </div>
           <Link
             href="/admin/users"
@@ -195,10 +195,10 @@ export default function AdminAffiliatesPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 mb-6 transition-colors">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 mb-6 transition-colors">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                 KYC Status
               </label>
               <select
@@ -207,7 +207,7 @@ export default function AdminAffiliatesPage() {
                   setFilters({ ...filters, kycStatus: e.target.value });
                   setPage(1);
                 }}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 transition-colors"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -217,7 +217,7 @@ export default function AdminAffiliatesPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                 Active Status
               </label>
               <select
@@ -226,7 +226,7 @@ export default function AdminAffiliatesPage() {
                   setFilters({ ...filters, isActive: e.target.value });
                   setPage(1);
                 }}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 transition-colors"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 transition-colors"
               >
                 <option value="all">All</option>
                 <option value="true">Active</option>
@@ -234,7 +234,7 @@ export default function AdminAffiliatesPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                 Search (Email/Name/Code)
               </label>
               <input
@@ -245,53 +245,53 @@ export default function AdminAffiliatesPage() {
                   setPage(1);
                 }}
                 placeholder="Search affiliates..."
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
               />
             </div>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4 transition-colors">
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4 transition-colors">
             {error}
           </div>
         )}
 
         {loading ? (
-          <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading affiliates...</div>
+          <div className="text-center py-12 text-gray-600 dark:text-ink-300">Loading affiliates...</div>
         ) : (
           <>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden transition-colors">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                  <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Affiliate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Referral Code
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Stats
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Wallet
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         KYC Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {affiliates.map((affiliate) => (
-                      <tr key={affiliate.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={affiliate.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                         <td className="px-6 py-4">
                           <div className="flex items-center space-x-3">
                             {renderAvatar(
@@ -301,12 +301,12 @@ export default function AdminAffiliatesPage() {
                               `affiliate-${affiliate.id}`
                             )}
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                              <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
                                 {affiliate.user.name || 'No name'}
                               </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{affiliate.user.email}</p>
+                              <p className="text-xs text-gray-500 dark:text-ink-300">{affiliate.user.email}</p>
                               {affiliate.user.provider && (
-                                <p className="text-xs text-gray-400 dark:text-gray-500">
+                                <p className="text-xs text-gray-400 dark:text-ink-400">
                                   via {affiliate.user.provider === 'google' ? 'Google' : affiliate.user.provider}
                                 </p>
                               )}
@@ -314,19 +314,19 @@ export default function AdminAffiliatesPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-50">
+                          <code className="text-sm bg-gray-100 dark:bg-ink-800 px-2 py-1 rounded text-gray-900 dark:text-ink-50">
                             {affiliate.referralCode}
                           </code>
                         </td>
                         <td className="px-6 py-4 text-sm">
                           <div>
-                            <p className="text-gray-900 dark:text-gray-50">
+                            <p className="text-gray-900 dark:text-ink-50">
                               <span className="font-semibold">{affiliate.totalClicks}</span> clicks
                             </p>
-                            <p className="text-gray-600 dark:text-gray-400">
+                            <p className="text-gray-600 dark:text-ink-300">
                               <span className="font-semibold">{affiliate.totalSignups}</span> signups
                             </p>
-                            <p className="text-gray-600 dark:text-gray-400">
+                            <p className="text-gray-600 dark:text-ink-300">
                               <span className="font-semibold">{affiliate._count.referrals}</span> referrals
                             </p>
                             <p className="text-green-600 dark:text-green-400 font-semibold">
@@ -342,18 +342,18 @@ export default function AdminAffiliatesPage() {
                         <td className="px-6 py-4 text-sm">
                           {affiliate.wallet ? (
                             <div>
-                              <p className="text-gray-900 dark:text-gray-50">
+                              <p className="text-gray-900 dark:text-ink-50">
                                 Balance: <span className="font-semibold">₹{affiliate.wallet.balance.toFixed(2)}</span>
                               </p>
-                              <p className="text-gray-600 dark:text-gray-400">
+                              <p className="text-gray-600 dark:text-ink-300">
                                 Total: ₹{affiliate.wallet.totalEarned.toFixed(2)}
                               </p>
-                              <p className="text-gray-600 dark:text-gray-400">
+                              <p className="text-gray-600 dark:text-ink-300">
                                 Paid: ₹{affiliate.wallet.totalPaid.toFixed(2)}
                               </p>
                             </div>
                           ) : (
-                            <span className="text-gray-400 dark:text-gray-500">No wallet</span>
+                            <span className="text-gray-400 dark:text-ink-400">No wallet</span>
                           )}
                         </td>
                         <td className="px-6 py-4">
@@ -365,7 +365,7 @@ export default function AdminAffiliatesPage() {
                             {affiliate.kycStatus}
                           </span>
                           {affiliate.kyc && (
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                               {affiliate.kyc.reviewedAt
                                 ? `Reviewed: ${new Date(affiliate.kyc.reviewedAt).toLocaleDateString()}`
                                 : `Submitted: ${new Date(affiliate.kyc.submittedAt).toLocaleDateString()}`}
@@ -376,8 +376,8 @@ export default function AdminAffiliatesPage() {
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
                               affiliate.isActive
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                                : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
+                                ? 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300'
+                                : 'bg-gray-100 dark:bg-ink-800 text-gray-800 dark:text-ink-200'
                             }`}
                           >
                             {affiliate.isActive ? 'Active' : 'Inactive'}
@@ -388,8 +388,8 @@ export default function AdminAffiliatesPage() {
                             onClick={() => handleToggleActive(affiliate.id, affiliate.isActive)}
                             className={`px-3 py-1 text-xs rounded-md transition-colors ${
                               affiliate.isActive
-                                ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
-                                : 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50'
+                                ? 'bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-950/60'
+                                : 'bg-green-100 dark:bg-green-950/50 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-950/60'
                             }`}
                           >
                             {affiliate.isActive ? 'Deactivate' : 'Activate'}
@@ -405,21 +405,21 @@ export default function AdminAffiliatesPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <p className="text-sm text-gray-700 dark:text-ink-200">
                   Showing page {page} of {totalPages} (Total: {total} affiliates)
                 </p>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50 bg-white dark:bg-ink-900 text-gray-700 dark:text-ink-200 hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50 bg-white dark:bg-ink-900 text-gray-700 dark:text-ink-200 hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors"
                   >
                     Next
                   </button>

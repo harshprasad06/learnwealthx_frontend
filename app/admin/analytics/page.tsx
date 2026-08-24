@@ -99,7 +99,7 @@ export default function AdminAnalyticsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading analytics...</div>
@@ -110,10 +110,10 @@ export default function AdminAnalyticsPage() {
 
   if (error || !analytics) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-400 px-4 py-3 rounded mb-4">
             {error || 'Failed to load analytics'}
           </div>
         </div>
@@ -122,19 +122,19 @@ export default function AdminAnalyticsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Analytics Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Platform performance and revenue insights</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Analytics Dashboard</h1>
+            <p className="text-gray-600 dark:text-ink-300 mt-1">Platform performance and revenue insights</p>
           </div>
           <div className="flex items-center space-x-3">
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 text-sm"
+              className="px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-900 text-sm"
             >
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
@@ -143,7 +143,7 @@ export default function AdminAnalyticsPage() {
             </select>
             <Link
               href="/admin/earnings"
-              className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+              className="px-4 py-2 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-md hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
             >
               View Earnings
             </Link>
@@ -152,59 +152,59 @@ export default function AdminAnalyticsPage() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Revenue</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Total Revenue</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-ink-50">
               ₹{analytics.summary.totalRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {new Date(analytics.period.start).toLocaleDateString()} - {new Date(analytics.period.end).toLocaleDateString()}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Sales</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-50">{analytics.summary.totalSales}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Total Sales</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-ink-50">{analytics.summary.totalSales}</p>
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               Avg: ₹{analytics.summary.averageOrderValue.toFixed(2)}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Direct Revenue</p>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Direct Revenue</p>
             <p className="text-3xl font-bold text-green-600 dark:text-green-400">
               ₹{analytics.summary.directRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {((analytics.summary.directRevenue / analytics.summary.totalRevenue) * 100).toFixed(1)}% of total
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Affiliate Revenue</p>
-            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300 mb-1">Affiliate Revenue</p>
+            <p className="text-3xl font-bold text-blue-600 dark:text-mint-400">
               ₹{analytics.summary.affiliateRevenue.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
               {((analytics.summary.affiliateRevenue / analytics.summary.totalRevenue) * 100).toFixed(1)}% of total
             </p>
           </div>
         </div>
 
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Revenue Over Time</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 mb-8 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Revenue Over Time</h2>
           {analytics.charts.revenue.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={analytics.charts.revenue}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
                   stroke="#6b7280"
-                  className="dark:stroke-gray-400"
+                  className="dark:stroke-ink-300"
                   tick={{ fill: '#6b7280' }}
                   style={{ fill: '#6b7280' }}
                 />
                 <YAxis
                   stroke="#6b7280"
-                  className="dark:stroke-gray-400"
+                  className="dark:stroke-ink-300"
                   tick={{ fill: '#6b7280' }}
                   style={{ fill: '#6b7280' }}
                 />
@@ -244,29 +244,29 @@ export default function AdminAnalyticsPage() {
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-ink-300">
               <p>No revenue data available for this period</p>
             </div>
           )}
         </div>
 
         {/* User Growth Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">User Growth</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 mb-8 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">User Growth</h2>
           {analytics.charts.userGrowth.length > 0 ? (
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={analytics.charts.userGrowth}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-ink-800" />
                 <XAxis
                   dataKey="date"
                   stroke="#6b7280"
-                  className="dark:stroke-gray-400"
+                  className="dark:stroke-ink-300"
                   tick={{ fill: '#6b7280' }}
                   style={{ fill: '#6b7280' }}
                 />
                 <YAxis
                   stroke="#6b7280"
-                  className="dark:stroke-gray-400"
+                  className="dark:stroke-ink-300"
                   tick={{ fill: '#6b7280' }}
                   style={{ fill: '#6b7280' }}
                 />
@@ -282,7 +282,7 @@ export default function AdminAnalyticsPage() {
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-ink-300">
               <p>No user growth data available for this period</p>
             </div>
           )}
@@ -291,29 +291,29 @@ export default function AdminAnalyticsPage() {
         {/* Top Courses and Top Affiliates */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Top Courses */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Top Selling Courses</h2>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Top Selling Courses</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Course
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Sales
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Revenue
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {analytics.topCourses.map((course) => (
-                    <tr key={course.courseId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">{course.courseTitle}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{course.sales}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-gray-50">
+                    <tr key={course.courseId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">{course.courseTitle}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">{course.sales}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-gray-900 dark:text-ink-50">
                         ₹{course.revenue.toFixed(2)}
                       </td>
                     </tr>
@@ -324,32 +324,32 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Top Affiliates */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Top Performing Affiliates</h2>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Top Performing Affiliates</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Affiliate
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Sales
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Revenue
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Commission
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {analytics.topAffiliates.map((affiliate) => (
-                    <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">{affiliate.affiliateName}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{affiliate.sales}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                    <tr key={affiliate.affiliateId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">{affiliate.affiliateName}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">{affiliate.sales}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-ink-300">
                         ₹{affiliate.revenue.toFixed(2)}
                       </td>
                       <td className="px-4 py-3 text-sm font-semibold text-green-600 dark:text-green-400">

@@ -207,11 +207,11 @@ export default function AdminCoursesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 text-center sm:text-left">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 text-center sm:text-left">
             Manage Courses
           </h1>
           <button
@@ -229,34 +229,34 @@ export default function AdminCoursesPage() {
         </div>
 
         {showForm && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 mb-8 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 p-6 mb-8 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
               {editingCourse ? 'Edit Course' : 'New Course'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">Title *</label>
                 <input
                   type="text"
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                   placeholder="Enter course title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">Description</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                   rows={3}
                   placeholder="Enter course description"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">M.R.P. (₹) *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">M.R.P. (₹) *</label>
                 <input
                   type="number"
                   required
@@ -264,12 +264,12 @@ export default function AdminCoursesPage() {
                   min="0"
                   value={formData.mrp}
                   onChange={(e) => setFormData({ ...formData, mrp: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                   placeholder="e.g., 899.00"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Sale Price (₹) *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-ink-200">Sale Price (₹) *</label>
                 <input
                   type="number"
                   required
@@ -277,7 +277,7 @@ export default function AdminCoursesPage() {
                   min="0"
                   value={formData.price}
                   onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                   placeholder="e.g., 589.00"
                 />
               </div>
@@ -302,7 +302,7 @@ export default function AdminCoursesPage() {
                 {/* Preview */}
                 {(thumbnailPreview || formData.thumbnail) && (
                   <div className="mt-4">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Preview:</p>
+                    <p className="text-sm text-gray-600 dark:text-ink-300 mb-2">Preview:</p>
                     <img
                       src={
                         thumbnailPreview
@@ -312,7 +312,7 @@ export default function AdminCoursesPage() {
                           : `${API_URL}${formData.thumbnail}`
                       }
                       alt="Thumbnail preview"
-                      className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                      className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-ink-700"
                       onError={(e) => {
                         // Fallback if image fails to load
                         const target = e.target as HTMLImageElement;
@@ -324,7 +324,7 @@ export default function AdminCoursesPage() {
 
                 {/* Or use URL (fallback) */}
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-2">
                     Or enter thumbnail URL:
                   </label>
                   <input
@@ -341,7 +341,7 @@ export default function AdminCoursesPage() {
                       }
                     }}
                     placeholder="https://example.com/image.jpg"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                   />
                 </div>
               </div>
@@ -381,33 +381,33 @@ export default function AdminCoursesPage() {
         )}
 
         {loading ? (
-          <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading courses...</div>
+          <div className="text-center py-12 text-gray-600 dark:text-ink-300">Loading courses...</div>
         ) : courses.length === 0 ? (
-          <div className="text-center py-12 text-gray-500 dark:text-gray-400">No courses yet</div>
+          <div className="text-center py-12 text-gray-500 dark:text-ink-300">No courses yet</div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 overflow-hidden transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 overflow-hidden transition-colors">
             <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-700">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+              <thead className="bg-gray-50 dark:bg-ink-800">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Price</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Videos</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">Title</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">Videos</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                 {courses.map((course) => (
                   <tr key={course.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900 dark:text-gray-50">{course.title}</div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-ink-50">{course.title}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-gray-50">₹{course.price.toFixed(2)}</div>
+                      <div className="text-sm text-gray-900 dark:text-ink-50">₹{course.price.toFixed(2)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 dark:text-gray-50">{course.videos.length}</div>
+                      <div className="text-sm text-gray-900 dark:text-ink-50">{course.videos.length}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs rounded-full ${
@@ -422,7 +422,7 @@ export default function AdminCoursesPage() {
                       <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => handleEdit(course)}
-                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-blue-900/40 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-blue-100 dark:border-mint-900/40 text-xs font-medium text-blue-700 dark:text-mint-300 bg-blue-50 dark:bg-mint-900/20 hover:bg-blue-100 dark:hover:bg-mint-900/40 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -436,7 +436,7 @@ export default function AdminCoursesPage() {
                         </button>
                         <button
                           onClick={() => handleAddVideo(course.id)}
-                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-green-100 dark:border-green-900/40 text-xs font-medium text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-green-100 dark:border-green-900/50 text-xs font-medium text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-950/40 hover:bg-green-100 dark:hover:bg-green-950/60 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -450,7 +450,7 @@ export default function AdminCoursesPage() {
                         </button>
                         <button
                           onClick={() => handleDelete(course.id)}
-                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/40 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 rounded-md border border-red-100 dark:border-red-900/50 text-xs font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-950/60 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path

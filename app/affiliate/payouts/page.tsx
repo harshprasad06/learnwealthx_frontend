@@ -183,7 +183,7 @@ export default function PayoutsPage() {
         <main className="app-main">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="state-loading">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400" />
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400" />
               <p className="mt-3 text-sm">Loading payouts...</p>
             </div>
           </div>
@@ -201,8 +201,8 @@ export default function PayoutsPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">Payouts</h1>
-            <p className="text-gray-600 dark:text-gray-400">Request payouts and track your withdrawal history</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-2">Payouts</h1>
+            <p className="text-gray-600 dark:text-ink-300">Request payouts and track your withdrawal history</p>
           </div>
           <Link href="/affiliate/wallet" className="btn-secondary">
             View Wallet
@@ -264,7 +264,7 @@ export default function PayoutsPage() {
 
         {/* Request Payout Section */}
         {canRequestPayout && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-gray-900">Request Payout</h2>
               {!showRequestForm && (
@@ -322,7 +322,7 @@ export default function PayoutsPage() {
                         paymentMethod: e.target.value as 'bank_transfer' | 'upi' | 'paypal',
                       })
                     }
-                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800"
                   >
                     <option value="bank_transfer">Bank Transfer</option>
                     <option value="upi">UPI</option>
@@ -373,11 +373,11 @@ export default function PayoutsPage() {
         )}
 
         {/* Payout History */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Payout History</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Payout History</h2>
 
           {payouts.length === 0 ? (
-            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            <div className="text-center py-8 text-gray-500 dark:text-ink-300">
               <p>No payout requests yet.</p>
               <p className="text-sm mt-2">
                 {canRequestPayout
@@ -388,35 +388,35 @@ export default function PayoutsPage() {
           ) : (
             <>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                  <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Amount
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Method
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Status
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Requested
                       </th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Processed
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {payouts.map((payout) => (
-                      <tr key={payout.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={payout.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                         <td className="px-4 py-3">
-                          <span className="font-semibold text-gray-900 dark:text-gray-50">
+                          <span className="font-semibold text-gray-900 dark:text-ink-50">
                             ₹{payout.amount.toFixed(2)}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                           {getPaymentMethodLabel(payout.paymentMethod)}
                         </td>
                         <td className="px-4 py-3">
@@ -431,14 +431,14 @@ export default function PayoutsPage() {
                             <p className="text-xs text-red-600 dark:text-red-400 mt-1">{payout.failureReason}</p>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-ink-300">
                           {new Date(payout.createdAt).toLocaleDateString()}
                           <br />
-                          <span className="text-xs text-gray-400 dark:text-gray-500">
+                          <span className="text-xs text-gray-400 dark:text-ink-400">
                             {new Date(payout.createdAt).toLocaleTimeString()}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-ink-300">
                           {payout.processedAt
                             ? new Date(payout.processedAt).toLocaleDateString()
                             : '—'}
@@ -452,14 +452,14 @@ export default function PayoutsPage() {
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-6 flex items-center justify-between">
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                  <p className="text-sm text-gray-700 dark:text-ink-200">
                     Showing page {page} of {totalPages}
                   </p>
                   <div className="flex space-x-2">
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
-                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      className="px-4 py-2 border border-gray-300 dark:border-ink-700 rounded-md disabled:opacity-50 bg-white dark:bg-ink-900 text-gray-700 dark:text-ink-200 hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors"
                     >
                       Previous
                     </button>

@@ -219,14 +219,14 @@ export default function AdminPayoutsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Payout Management</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">Review and process affiliate payout requests</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50">Payout Management</h1>
+              <p className="text-gray-600 dark:text-ink-300 mt-1">Review and process affiliate payout requests</p>
             </div>
             <div className="flex space-x-3">
               <button
@@ -245,17 +245,17 @@ export default function AdminPayoutsPage() {
             </div>
           </div>
           {nextPayoutDate && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 text-sm text-blue-800 dark:text-blue-200">
+            <div className="bg-blue-50 dark:bg-mint-900/20 border border-blue-200 dark:border-mint-800 rounded-lg p-3 text-sm text-blue-800 dark:text-mint-200">
               <strong>Next automatic payout generation:</strong> {nextPayoutDate}
             </div>
           )}
-          <div className="mt-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-sm text-amber-800 dark:text-amber-200">
+          <div className="mt-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 rounded-lg p-3 text-sm text-amber-800 dark:text-amber-200">
             <strong>Manual payouts:</strong> 1) Generate weekly payouts → 2) Pay each affiliate via UPI/bank (use their KYC bank details) → 3) Click Process → Mark as completed.
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 mb-6 transition-colors">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 mb-6 transition-colors">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Filter by Status
@@ -287,7 +287,7 @@ export default function AdminPayoutsPage() {
           <div className="text-center py-12">Loading payouts...</div>
         ) : (
           <>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 overflow-hidden transition-colors">
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden transition-colors">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -419,7 +419,7 @@ export default function AdminPayoutsPage() {
         {/* View/Process Modal */}
         {showModal && selectedPayout && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto transition-colors">
+            <div className="bg-white dark:bg-ink-900 rounded-lg shadow-xl dark:shadow-black/40 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto transition-colors">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-gray-900">Payout Details</h2>

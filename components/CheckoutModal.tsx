@@ -317,10 +317,10 @@ function InnerCheckoutModal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/70 backdrop-blur-sm transition-colors"
       onClick={closeOnBackground}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 relative border border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="bg-white dark:bg-ink-900 rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 relative border border-gray-200 dark:border-ink-800 transition-colors">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="absolute top-4 right-4 text-gray-400 dark:text-ink-400 hover:text-gray-600 dark:hover:text-ink-200 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-ink-800"
           aria-label="Close"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,41 +329,41 @@ function InnerCheckoutModal({
         </button>
 
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">Checkout</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-ink-50 mb-2">Checkout</h2>
+          <p className="text-sm text-gray-600 dark:text-ink-300">
             Complete your purchase to get lifetime access
           </p>
         </div>
 
-        <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 px-5 py-4 border border-blue-100 dark:border-blue-800/50">
+        <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-mint-900/25 dark:to-mint-950/40 px-5 py-4 border border-blue-100 dark:border-mint-800/50">
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1">
-              <p className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-1">{title}</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Lifetime access included</p>
+              <p className="text-base font-semibold text-gray-900 dark:text-ink-50 mb-1">{title}</p>
+              <p className="text-xs text-gray-600 dark:text-ink-300">Lifetime access included</p>
             </div>
             <div className="ml-4 text-right">
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <p className="text-2xl font-bold text-blue-600 dark:text-mint-400">
                 ₹{priceBreakdown ? priceBreakdown.totalAmount.toFixed(2) : totalPrice.toFixed(2)}
               </p>
             </div>
           </div>
           {priceBreakdown && (
-            <div className="pt-3 border-t border-blue-200 dark:border-blue-800/50 space-y-1.5">
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+            <div className="pt-3 border-t border-blue-200 dark:border-mint-800/50 space-y-1.5">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                 <span>Course Price:</span>
                 <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
               </div>
               {priceBreakdown.gstAmount > 0 && (
-                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                   <span>GST (18%):</span>
                   <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                 <span>Payment Gateway Fee:</span>
                 <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-blue-200 dark:border-blue-800/50">
+              <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-ink-50 pt-1 border-t border-blue-200 dark:border-mint-800/50">
                 <span>Total:</span>
                 <span>₹{priceBreakdown.totalAmount.toFixed(2)}</span>
               </div>
@@ -373,8 +373,8 @@ function InnerCheckoutModal({
 
         {step === 'checking' && (
           <div className="py-8 text-center">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-blue-400 mb-3" />
-            <p className="text-sm text-gray-600 dark:text-gray-400">Checking your account...</p>
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-b-transparent border-blue-600 dark:border-mint-400 mb-3" />
+            <p className="text-sm text-gray-600 dark:text-ink-300">Checking your account...</p>
           </div>
         )}
 
@@ -387,7 +387,7 @@ function InnerCheckoutModal({
                 className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'signup'
                     ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                    : 'bg-white dark:bg-ink-800 text-gray-700 dark:text-ink-200 border-gray-300 dark:border-ink-700 hover:bg-gray-50 dark:hover:bg-ink-700'
                 }`}
               >
                 New here
@@ -398,7 +398,7 @@ function InnerCheckoutModal({
                 className={`flex-1 py-2.5 text-sm font-medium rounded-lg border transition-all ${
                   authMode === 'login'
                     ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                    : 'bg-white dark:bg-ink-800 text-gray-700 dark:text-ink-200 border-gray-300 dark:border-ink-700 hover:bg-gray-50 dark:hover:bg-ink-700'
                 }`}
               >
                 I have an account
@@ -406,7 +406,7 @@ function InnerCheckoutModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1.5">
                 Email
               </label>
               <input
@@ -414,12 +414,12 @@ function InnerCheckoutModal({
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-ink-200 mb-1.5">
                 Password
               </label>
               <input
@@ -428,7 +428,7 @@ function InnerCheckoutModal({
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                className="mt-1 block w-full px-4 py-2.5 border border-gray-300 dark:border-ink-700 rounded-lg text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-mint-400 transition-colors"
                 placeholder="Minimum 6 characters"
               />
             </div>
@@ -438,11 +438,11 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
               />
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-ink-300">
                 I agree to the{' '}
-                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-mint-400 underline hover:no-underline">
                   Terms & Conditions
                 </Link>
               </span>
@@ -452,38 +452,38 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToRefundPolicy}
                 onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
               />
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-ink-300">
                 I have read and agree to the{' '}
-                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-mint-400 underline hover:no-underline">
                   Refund Policy
                 </Link>
               </span>
             </label>
 
             {authError && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                 {authError}
               </div>
             )}
             {GOOGLE_CLIENT_ID && (
               <>
                 {googleError && (
-                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm mb-3">
+                  <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm mb-3">
                     {googleError}
                   </div>
                 )}
                 <div className="flex items-center my-4">
-                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
-                  <span className="px-3 text-xs text-gray-500 dark:text-gray-400 font-medium">or</span>
-                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-ink-800" />
+                  <span className="px-3 text-xs text-gray-500 dark:text-ink-300 font-medium">or</span>
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-ink-800" />
                 </div>
                 <button
                   type="button"
                   onClick={() => googleLogin()}
                   disabled={loading || !agreedToTerms || !agreedToRefundPolicy}
-                  className="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
+                  className="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-gray-300 dark:border-ink-700 rounded-lg text-sm font-medium text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-800 hover:bg-gray-50 dark:hover:bg-ink-700 disabled:opacity-50 transition-colors"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path
@@ -510,7 +510,7 @@ function InnerCheckoutModal({
             <button
               type="submit"
               disabled={loading || !agreedToTerms || !agreedToRefundPolicy}
-              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -533,11 +533,11 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
               />
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-ink-300">
                 I agree to the{' '}
-                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-mint-400 underline hover:no-underline">
                   Terms & Conditions
                 </Link>
               </span>
@@ -547,11 +547,11 @@ function InnerCheckoutModal({
                 type="checkbox"
                 checked={agreedToRefundPolicy}
                 onChange={(e) => setAgreedToRefundPolicy(e.target.checked)}
-                className="mt-1 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-700"
+                className="mt-1 rounded border-gray-300 dark:border-ink-700 text-blue-600 focus:ring-blue-500 dark:bg-ink-800"
               />
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600 dark:text-ink-300">
                 I have read and agree to the{' '}
-                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+                <Link href="/refund" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-mint-400 underline hover:no-underline">
                   Refund Policy
                 </Link>
               </span>
@@ -564,7 +564,7 @@ function InnerCheckoutModal({
                 await startPayment();
               }}
               disabled={!agreedToTerms || !agreedToRefundPolicy}
-              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
+              className="w-full py-3 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 rounded-lg text-sm font-semibold hover:bg-blue-700 dark:hover:bg-mint-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
             >
               Proceed to payment
             </button>
@@ -573,11 +573,11 @@ function InnerCheckoutModal({
 
         {step === 'paying' && (
           <div className="py-8 text-center">
-            <div className="inline-block h-10 w-10 animate-spin rounded-full border-3 border-b-transparent border-blue-600 dark:border-blue-400 mb-4" />
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="inline-block h-10 w-10 animate-spin rounded-full border-3 border-b-transparent border-blue-600 dark:border-mint-400 mb-4" />
+            <p className="text-sm font-medium text-gray-700 dark:text-ink-200 mb-1">
               Processing your payment
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-gray-500 dark:text-ink-300">
               Please wait while we complete your purchase...
             </p>
           </div>
@@ -585,35 +585,35 @@ function InnerCheckoutModal({
 
         {step === 'success' && (
           <div className="py-8 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-950/50 flex items-center justify-center">
               <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
               Payment Successful!
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <p className="text-sm text-gray-600 dark:text-ink-300 mb-4">
               You now have lifetime access to this course.
             </p>
             {priceBreakdown && (
-              <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg text-left space-y-1.5">
-                <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Payment Receipt:</p>
-                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+              <div className="mb-6 p-4 bg-gray-50 dark:bg-ink-800/50 rounded-lg text-left space-y-1.5">
+                <p className="text-xs font-semibold text-gray-700 dark:text-ink-200 mb-2">Payment Receipt:</p>
+                <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                   <span>Course Price:</span>
                   <span>₹{priceBreakdown.baseAmount.toFixed(2)}</span>
                 </div>
                 {priceBreakdown.gstAmount > 0 && (
-                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                     <span>GST (18%):</span>
                     <span>₹{priceBreakdown.gstAmount.toFixed(2)}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-ink-300">
                   <span>Payment Gateway Fee:</span>
                   <span>₹{priceBreakdown.gatewayFeeAmount.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-gray-50 pt-1 border-t border-gray-200 dark:border-gray-600">
+                <div className="flex justify-between text-sm font-semibold text-gray-900 dark:text-ink-50 pt-1 border-t border-gray-200 dark:border-ink-700">
                   <span>Total Paid:</span>
                   <span>₹{priceBreakdown.totalAmount.toFixed(2)}</span>
                 </div>
@@ -621,7 +621,7 @@ function InnerCheckoutModal({
             )}
             <button
               onClick={onClose}
-              className="w-full py-3 bg-blue-600 dark:bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 shadow-md hover:shadow-lg transition-all"
+              className="w-full py-3 bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 text-sm font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-mint-400 shadow-md hover:shadow-lg transition-all"
             >
               Continue Learning
             </button>
@@ -630,7 +630,7 @@ function InnerCheckoutModal({
 
         {step === 'error' && (
           <div className="py-6">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-950/50 flex items-center justify-center">
               <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -641,13 +641,13 @@ function InnerCheckoutModal({
             <div className="flex gap-3">
               <button
                 onClick={() => setStep('auth')}
-                className="flex-1 py-2.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                className="flex-1 py-2.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-ink-700 text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-800 hover:bg-gray-50 dark:hover:bg-ink-700 transition-colors"
               >
                 Try again
               </button>
               <button
                 onClick={onClose}
-                className="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                className="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-ink-800 text-gray-800 dark:text-ink-100 hover:bg-gray-300 dark:hover:bg-ink-700 transition-colors"
               >
                 Close
               </button>

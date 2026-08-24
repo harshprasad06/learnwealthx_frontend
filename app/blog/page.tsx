@@ -30,7 +30,7 @@ export default async function BlogIndexPage() {
         <div className="grid gap-8">
           {posts.map(post => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-              <article className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+              <article className="border border-gray-200 dark:border-ink-800 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                 {post.image && (
                   <BlogImage src={post.image} alt={post.title} className="w-full h-48 object-cover" />
                 )}

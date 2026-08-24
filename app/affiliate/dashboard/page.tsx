@@ -308,7 +308,7 @@ export default function AffiliateDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">Loading affiliate dashboard...</div>
@@ -319,7 +319,7 @@ export default function AffiliateDashboardPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
@@ -332,7 +332,7 @@ export default function AffiliateDashboardPage() {
 
   if (!affiliate) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
         <Navbar />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
@@ -351,7 +351,7 @@ export default function AffiliateDashboardPage() {
   // If KYC is not approved, show KYC onboarding instead of full affiliate tools
   if (kycStatus !== 'approved') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 transition-colors">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-ink-950 dark:to-mint-950/40 transition-colors">
         <Navbar />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header Section */}
@@ -361,29 +361,29 @@ export default function AffiliateDashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-50 mb-3">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-ink-50 mb-3">
               KYC Verification Required
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-ink-300 max-w-2xl mx-auto">
               Complete your Know Your Customer (KYC) verification to unlock affiliate features and receive secure payouts.
             </p>
           </div>
 
           {/* Status Banner */}
           {kycLoading ? (
-            <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-blue-50 dark:bg-mint-900/30 border-l-4 border-blue-500 dark:border-mint-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-center">
-                <svg className="animate-spin h-5 w-5 text-blue-500 dark:text-blue-300 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-5 w-5 text-blue-500 dark:text-mint-300 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <p className="text-blue-800 dark:text-blue-100 font-medium">
+                <p className="text-blue-800 dark:text-mint-100 font-medium">
                   Checking your KYC status...
                 </p>
               </div>
             </div>
           ) : kycStatus === 'pending' || kycStatus === 'under_review' ? (
-            <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 dark:border-yellow-400 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-yellow-50 dark:bg-yellow-950/50 border-l-4 border-yellow-500 dark:border-yellow-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-start">
                 <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-300 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -399,7 +399,7 @@ export default function AffiliateDashboardPage() {
               </div>
             </div>
           ) : kycStatus === 'rejected' ? (
-            <div className="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-400 rounded-lg shadow-sm p-5 mb-6">
+            <div className="bg-red-50 dark:bg-red-950/50 border-l-4 border-red-500 dark:border-red-400 rounded-lg shadow-sm p-5 mb-6">
               <div className="flex items-start">
                 <svg className="w-6 h-6 text-red-600 dark:text-red-300 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -418,7 +418,7 @@ export default function AffiliateDashboardPage() {
 
           {/* KYC Form */}
           {(kycStatus === 'not_submitted' || kycStatus === 'rejected') && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-colors">
+            <div className="bg-white dark:bg-ink-900 rounded-xl shadow-xl dark:shadow-black/40 border border-gray-200 dark:border-ink-800 overflow-hidden transition-colors">
               {/* Form Header */}
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
                 <h2 className="text-2xl font-bold text-white mb-2">Complete Your Verification</h2>
@@ -429,7 +429,7 @@ export default function AffiliateDashboardPage() {
 
               <div className="p-8">
                 {kycError && (
-                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+                  <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg p-4 mb-6">
                     <div className="flex items-start">
                       <svg className="w-5 h-5 text-red-600 dark:text-red-300 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -439,7 +439,7 @@ export default function AffiliateDashboardPage() {
                   </div>
                 )}
                 {kycMessage && (
-                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
+                  <div className="bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-900/60 rounded-lg p-4 mb-6">
                     <div className="flex items-start">
                       <svg className="w-5 h-5 text-green-600 dark:text-green-300 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -453,24 +453,24 @@ export default function AffiliateDashboardPage() {
                   {/* Identity Section */}
                   <div className="border-b border-gray-200 pb-6">
                     <div className="flex items-center mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mr-3">
-                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-mint-900/40 rounded-full flex items-center justify-center mr-3">
+                        <svg className="w-5 h-5 text-blue-600 dark:text-mint-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50">
                         Identity Information
                       </h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-ink-200 mb-2">
                           Document Type <span className="text-red-500">*</span>
                         </label>
                         <select
                           name="documentType"
                           required
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800"
                         >
                           <option value="">Select document type</option>
                           <option value="aadhar">Aadhar Card</option>
@@ -480,7 +480,7 @@ export default function AffiliateDashboardPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-ink-200 mb-2">
                           Document Number <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -488,20 +488,20 @@ export default function AffiliateDashboardPage() {
                           type="text"
                           required
                           placeholder="Enter document number"
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-ink-200 mb-2">
                           Date of Birth <span className="text-red-500">*</span>
                         </label>
                         <input
                           name="dob"
                           type="date"
                           required
-                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-700"
+                          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-ink-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800"
                         />
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">
                           You must be 18 years or older to become an affiliate
                         </p>
                       </div>
@@ -511,16 +511,16 @@ export default function AffiliateDashboardPage() {
                   {/* Bank Details Section */}
                   <div className="border-b border-gray-200 pb-6">
                     <div className="flex items-center mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mr-3">
+                      <div className="flex-shrink-0 w-10 h-10 bg-green-100 dark:bg-green-950/60 rounded-full flex items-center justify-center mr-3">
                         <svg className="w-5 h-5 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-ink-50">
                         Bank Account Details
                       </h3>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 ml-13">
+                    <p className="text-sm text-gray-600 dark:text-ink-300 mb-4 ml-13">
                       This account will be used for affiliate payouts.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
@@ -668,32 +668,32 @@ export default function AffiliateDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-2">Affiliate Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-2">Affiliate Dashboard</h1>
+          <p className="text-gray-600 dark:text-ink-300">
             Share your referral link and earn commissions on every sale.
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Total Clicks</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-1">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300">Total Clicks</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-ink-50 mt-1">
               {affiliate.totalClicks}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Total Signups</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-1">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300">Total Signups</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-ink-50 mt-1">
               {affiliate.totalSignups}
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-4 transition-colors">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Lifetime Earnings</p>
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-4 transition-colors">
+            <p className="text-sm text-gray-500 dark:text-ink-300">Lifetime Earnings</p>
             <p className="text-2xl font-bold text-green-600 mt-1">
               ₹{affiliate.totalEarnings.toFixed(2)}
             </p>
@@ -746,31 +746,31 @@ export default function AffiliateDashboardPage() {
 
         {/* Milestones & Offers - DISABLED (Platform subscriptions disabled) */}
         {false && milestones && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Milestones & Offers</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Milestones & Offers</h2>
+            <p className="text-sm text-gray-600 dark:text-ink-300 mb-4">
               Track your progress toward unlocking rewards within each milestone&apos;s valid period.
             </p>
 
             {/* Highest Unlocked Milestone */}
             {milestones?.highestUnlocked && (
-              <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+              <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-950/40 dark:to-orange-950/40 rounded-lg border border-yellow-200 dark:border-yellow-900/60">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
                     🏆
                   </div>
                   <div>
                     <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Highest Milestone Unlocked</p>
-                    <p className="text-lg font-bold text-gray-900 dark:text-gray-50">{milestones?.highestUnlocked?.reward}</p>
+                    <p className="text-lg font-bold text-gray-900 dark:text-ink-50">{milestones?.highestUnlocked?.reward}</p>
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
+                <p className="text-xs text-gray-600 dark:text-ink-300">
                   {milestones?.highestUnlocked?.targetCount} subscriptions • Unlocked on{' '}
                   {milestones?.highestUnlocked?.unlockedAt
                     ? new Date(milestones?.highestUnlocked?.unlockedAt!).toLocaleDateString()
                     : 'N/A'}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-ink-400 mt-1">
                   Valid from{' '}
                   {new Date(milestones?.highestUnlocked?.startDate || new Date()).toLocaleDateString()} to{' '}
                   {new Date(milestones?.highestUnlocked?.endDate || new Date()).toLocaleDateString()}
@@ -783,25 +783,25 @@ export default function AffiliateDashboardPage() {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div>
-                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Next Milestone</p>
-                    <p className="text-lg font-bold text-gray-900 dark:text-gray-50">{milestones?.nextMilestone?.reward}</p>
+                    <p className="text-sm font-medium text-gray-700 dark:text-ink-200">Next Milestone</p>
+                    <p className="text-lg font-bold text-gray-900 dark:text-ink-50">{milestones?.nextMilestone?.reward}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-600 dark:text-ink-300">
                       {milestones?.subscriptionCount} / {milestones?.nextMilestone?.targetCount}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-ink-400">
                       {milestones?.nextMilestone?.remaining} remaining
                     </p>
                   </div>
                 </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-2">
+                <div className="w-full bg-gray-200 dark:bg-ink-800 rounded-full h-3 mb-2">
                   <div
                     className="bg-gradient-to-r from-yellow-500 to-orange-500 h-3 rounded-full transition-all duration-300"
                     style={{ width: `${Math.min(milestones?.nextMilestone?.progress || 0, 100)}%` }}
                   ></div>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                <p className="text-xs text-gray-500 dark:text-ink-300 text-center">
                   {(milestones?.nextMilestone?.progress || 0).toFixed(1)}% complete • Valid{' '}
                   {new Date(milestones?.nextMilestone?.startDate || new Date()).toLocaleDateString()} –{' '}
                   {new Date(milestones?.nextMilestone?.endDate || new Date()).toLocaleDateString()}
@@ -809,7 +809,7 @@ export default function AffiliateDashboardPage() {
               </div>
             ) : (
               <div className="text-center py-4">
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                <p className="text-gray-500 dark:text-ink-300 text-sm">
                   {milestones?.highestUnlocked
                     ? '🎉 You\'ve unlocked all available milestones!'
                     : 'No milestones available yet.'}
@@ -820,21 +820,21 @@ export default function AffiliateDashboardPage() {
         )}
 
         {/* Course-specific Links (only for courses you own) */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Your Course Links</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Your Course Links</h2>
+          <p className="text-gray-600 dark:text-ink-300 mb-4">
             These links go directly to each course you have purchased. Share them with your
             audience to promote specific courses.
           </p>
           {courseLinks.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
+            <p className="text-gray-500 dark:text-ink-300 text-sm">
               You haven&apos;t purchased any courses yet. Buy a course to get a unique link for it.
             </p>
           ) : (
             <>
               {/* Course selection and link generation */}
               <div className="mb-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <p className="text-sm text-gray-600 dark:text-ink-300 mb-2">
                   Select one or more courses below and click &quot;Generate Referral Link&quot;.
                 </p>
                 <button
@@ -863,25 +863,25 @@ export default function AffiliateDashboardPage() {
 
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                  <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                         Select
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Course
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Price
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                     {courseLinks.map((c) => {
                       const checked = selectedCourseIds.includes(c.courseId);
                       return (
-                        <tr key={c.courseId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">
+                        <tr key={c.courseId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">
                             <input
                               type="checkbox"
                               checked={checked}
@@ -892,11 +892,11 @@ export default function AffiliateDashboardPage() {
                                     : prev.filter((id) => id !== c.courseId)
                                 );
                               }}
-                              className="h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded"
+                              className="h-4 w-4 text-blue-600 border-gray-300 dark:border-ink-700 rounded"
                             />
                           </td>
-                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">{c.title}</td>
-                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-gray-50">
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">{c.title}</td>
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">
                             ₹{c.price.toFixed(2)}
                           </td>
                         </tr>
@@ -910,76 +910,76 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Referrals */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">Referred Users ({referrals.length})</h2>
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Referred Users ({referrals.length})</h2>
           {referrals.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">No referred users yet.</p>
+            <p className="text-gray-500 dark:text-ink-300 text-sm">No referred users yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       User
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Signup Date
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Purchases
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Total Spent
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {referrals.map((ref) => (
-                    <tr key={ref.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <tr key={ref.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center space-x-3">
                           {renderAvatar(ref.picture, ref.name, ref.email, `ref-${ref.id}`)}
                           <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                            <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
                               {ref.name || 'No name'}
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">{ref.email}</p>
+                            <p className="text-xs text-gray-500 dark:text-ink-300">{ref.email}</p>
                             {ref.provider && (
-                              <p className="text-xs text-gray-400 dark:text-gray-500">
+                              <p className="text-xs text-gray-400 dark:text-ink-400">
                                 via {ref.provider === 'google' ? 'Google' : ref.provider}
                               </p>
                             )}
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-ink-300">
                         {new Date(ref.createdAt).toLocaleDateString()}
                         <br />
-                        <span className="text-xs text-gray-400 dark:text-gray-500">
+                        <span className="text-xs text-gray-400 dark:text-ink-400">
                           {new Date(ref.createdAt).toLocaleTimeString()}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         {ref.hasPurchased ? (
-                          <span className="px-2 py-1 rounded-full text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 font-medium">
+                          <span className="px-2 py-1 rounded-full text-xs bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300 font-medium">
                             Active Customer
                           </span>
                         ) : (
-                          <span className="px-2 py-1 rounded-full text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium">
+                          <span className="px-2 py-1 rounded-full text-xs bg-gray-100 dark:bg-ink-800 text-gray-600 dark:text-ink-200 font-medium">
                             Not Purchased
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                         {ref.purchaseCount > 0 ? (
                           <div>
                             <span className="font-semibold">{ref.purchaseCount}</span> course
                             {ref.purchaseCount > 1 ? 's' : ''}
                             {ref.purchases.length > 0 && (
-                              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                              <div className="mt-1 text-xs text-gray-500 dark:text-ink-300">
                                 {ref.purchases.slice(0, 2).map((p, idx) => (
                                   <div key={p.id}>
                                     • {p.course.title} (₹{p.amount.toFixed(2)})
@@ -992,7 +992,7 @@ export default function AffiliateDashboardPage() {
                             )}
                           </div>
                         ) : (
-                          <span className="text-gray-400 dark:text-gray-500">—</span>
+                          <span className="text-gray-400 dark:text-ink-400">—</span>
                         )}
                       </td>
                       <td className="px-4 py-3 text-sm">
@@ -1001,7 +1001,7 @@ export default function AffiliateDashboardPage() {
                             ₹{ref.totalSpent.toFixed(2)}
                           </span>
                         ) : (
-                          <span className="text-gray-400 dark:text-gray-500">₹0.00</span>
+                          <span className="text-gray-400 dark:text-ink-400">₹0.00</span>
                         )}
                       </td>
                     </tr>
@@ -1013,11 +1013,11 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Purchases */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/50 p-6 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-50">
+        <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
             Referred Purchases ({purchases.length})
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-sm text-gray-600 dark:text-ink-300 mb-4">
             Total Commission: ₹
             {affiliate
               ? (affiliate.totalEarnings || 0).toFixed(2)
@@ -1025,40 +1025,40 @@ export default function AffiliateDashboardPage() {
             ({(commissionRate * 100).toFixed(0)}% of sales)
           </p>
           {purchases.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">No referred purchases yet.</p>
+            <p className="text-gray-500 dark:text-ink-300 text-sm">No referred purchases yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
+                <thead className="bg-gray-50 dark:bg-ink-800">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Customer
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Course
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Amount
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Commission
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Purchase Date
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
                   {purchases.map((p) => {
                     // Commission is calculated only on the base course price (course table price),
                     // excluding GST and payment gateway fees.
                     const commissionBase = p.course.price ?? p.amount;
                     const commission = commissionBase * commissionRate;
                     return (
-                      <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center space-x-3">
                             {renderAvatar(
@@ -1068,11 +1068,11 @@ export default function AffiliateDashboardPage() {
                               `purchase-${p.id}`
                             )}
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+                              <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
                                 {p.user.name || 'No name'}
                               </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{p.user.email}</p>
-                              <p className="text-xs text-gray-400 dark:text-gray-500">
+                              <p className="text-xs text-gray-500 dark:text-ink-300">{p.user.email}</p>
+                              <p className="text-xs text-gray-400 dark:text-ink-400">
                                 Joined:{' '}
                                 {new Date(p.user.signupDate).toLocaleDateString()}
                                 {p.user.provider && (
@@ -1082,10 +1082,10 @@ export default function AffiliateDashboardPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                           {p.course.title}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                           ₹{p.amount.toFixed(2)}
                         </td>
                         <td className="px-4 py-3 text-sm">
@@ -1097,19 +1097,19 @@ export default function AffiliateDashboardPage() {
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
                               p.status === 'success'
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                                ? 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-300'
                                 : p.status === 'pending'
-                                ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
-                                : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                                ? 'bg-yellow-100 dark:bg-yellow-950/50 text-yellow-800 dark:text-yellow-300'
+                                : 'bg-red-100 dark:bg-red-950/50 text-red-800 dark:text-red-300'
                             }`}
                           >
                             {p.status}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-ink-300">
                           {new Date(p.createdAt).toLocaleDateString()}
                           <br />
-                          <span className="text-xs text-gray-400 dark:text-gray-500">
+                          <span className="text-xs text-gray-400 dark:text-ink-400">
                             {new Date(p.createdAt).toLocaleTimeString()}
                           </span>
                         </td>

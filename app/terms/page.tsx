@@ -5,25 +5,25 @@ import Footer from '@/components/Footer';
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <main className="flex-1">
         <section className="py-10 sm:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50 mb-4">
               Terms of Service
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-ink-300 mb-8">
               Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-ink-300 mb-8">
               Welcome to LearnWealthX. By accessing or using our platform, you agree to be bound by these Terms of Service. 
               Please read them carefully before using our services.
             </p>
 
-            <div className="space-y-6 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+            <div className="space-y-6 text-gray-700 dark:text-ink-200 text-sm sm:text-base">
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   1. Acceptance of Terms
                 </h2>
                 <p>
@@ -34,7 +34,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   2. Account Registration
                 </h2>
                 <p className="mb-2">To access certain features, you must create an account. You agree to:</p>
@@ -48,7 +48,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   3. Course Access and Usage
                 </h2>
                 <p className="mb-2">When you purchase a course on LearnWealthX:</p>
@@ -62,7 +62,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   4. Payment Terms
                 </h2>
                 <p className="mb-2">Payment and pricing:</p>
@@ -77,7 +77,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   5. Affiliate Program
                 </h2>
                 <p className="mb-2">If you participate in our affiliate program:</p>
@@ -92,7 +92,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   6. Intellectual Property
                 </h2>
                 <p className="mb-2">
@@ -109,7 +109,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   7. User Conduct
                 </h2>
                 <p className="mb-2">You agree not to:</p>
@@ -125,7 +125,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   8. Reviews and Feedback
                 </h2>
                 <p>
@@ -136,7 +136,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   9. Platform Availability
                 </h2>
                 <p>
@@ -147,7 +147,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   10. Account Termination
                 </h2>
                 <p className="mb-2">
@@ -166,7 +166,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   11. Limitation of Liability
                 </h2>
                 <p>
@@ -178,7 +178,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   12. Indemnification
                 </h2>
                 <p>
@@ -189,7 +189,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   13. Changes to Terms
                 </h2>
                 <p>
@@ -200,7 +200,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   14. Governing Law
                 </h2>
                 <p>
@@ -210,14 +210,14 @@ export default function TermsOfServicePage() {
               </section>
 
               <section>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-ink-50 mb-2">
                   15. Contact Information
                 </h2>
                 <p>
                   If you have any questions about these Terms of Service, please contact us through our{' '}
                   <a
                     href="/contact"
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="text-blue-600 dark:text-mint-400 hover:underline"
                   >
                     Contact page
                   </a>

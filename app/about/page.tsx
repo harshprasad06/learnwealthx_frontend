@@ -170,31 +170,31 @@ export default function AboutPage() {
                     </section>
 
                     {/* ── Mission ──────────────────────────────────────────────── */}
-                    <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+                    <section className="py-16 bg-white dark:bg-ink-950 transition-colors">
                         <div className="max-w-5xl mx-auto px-4 sm:px-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                                 <div>
-                                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-3">
+                                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-mint-400 mb-3">
                                         Our Mission
                                     </p>
-                                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+                                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50 mb-6">
                                         Why LearnWealthX Exists
                                     </h2>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                                        <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong> was
+                                    <p className="text-gray-600 dark:text-ink-300 mb-4 leading-relaxed">
+                                        <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong> was
                                         founded on a simple belief: the best education should not be reserved for the
                                         privileged few. Every learner in India deserves access to world-class
                                         skill-building content — at a price they can afford.
                                     </p>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                                    <p className="text-gray-600 dark:text-ink-300 mb-4 leading-relaxed">
                                         We partnered with seasoned industry experts to build a catalog of practical,
-                                        hands-on courses. At <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong>,
+                                        hands-on courses. At <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong>,
                                         we don&apos;t teach theory — we teach skills that employers and clients actually
                                         pay for.
                                     </p>
-                                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                                    <p className="text-gray-600 dark:text-ink-300 leading-relaxed">
                                         Today, over 10,000 learners have chosen{" "}
-                                        <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong> as
+                                        <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong> as
                                         their learning home — and we&apos;re just getting started.
                                     </p>
                                 </div>
@@ -204,13 +204,13 @@ export default function AboutPage() {
                                             key={stat.label}
                                             className="app-card app-card-padding flex flex-col items-center text-center"
                                         >
-                                            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                                            <p className="text-3xl font-bold text-blue-600 dark:text-mint-400">
                                                 {stat.value}
                                             </p>
-                                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-50 mt-1">
+                                            <p className="text-sm font-semibold text-gray-900 dark:text-ink-50 mt-1">
                                                 {stat.label}
                                             </p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stat.sub}</p>
+                                            <p className="text-xs text-gray-500 dark:text-ink-300 mt-1">{stat.sub}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -219,13 +219,13 @@ export default function AboutPage() {
                     </section>
 
                     {/* ── Values ───────────────────────────────────────────────── */}
-                    <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+                    <section className="py-16 bg-gray-50 dark:bg-ink-900 transition-colors">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6">
                             <div className="text-center mb-12">
-                                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-3">
+                                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-mint-400 mb-3">
                                     What We Stand For
                                 </p>
-                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50">
+                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50">
                                     The LearnWealthX Promise
                                 </h2>
                             </div>
@@ -233,10 +233,10 @@ export default function AboutPage() {
                                 {values.map((v) => (
                                     <div key={v.title} className="app-card app-card-padding">
                                         <div className="text-3xl mb-3">{v.icon}</div>
-                                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-50 mb-2">
+                                        <h3 className="text-lg font-bold text-gray-900 dark:text-ink-50 mb-2">
                                             {v.title}
                                         </h3>
-                                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                        <p className="text-sm text-gray-600 dark:text-ink-300 leading-relaxed">
                                             {v.description}
                                         </p>
                                     </div>
@@ -246,38 +246,38 @@ export default function AboutPage() {
                     </section>
 
                     {/* ── Story ────────────────────────────────────────────────── */}
-                    <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+                    <section className="py-16 bg-white dark:bg-ink-950 transition-colors">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6">
                             <div className="text-center mb-10">
-                                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400 mb-3">
+                                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-600 dark:text-mint-400 mb-3">
                                     Our Story
                                 </p>
-                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-50">
+                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50">
                                     How LearnWealthX Began
                                 </h2>
                             </div>
-                            <div className="prose prose-blue dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 space-y-4 leading-relaxed">
+                            <div className="prose prose-blue dark:prose-invert max-w-none text-gray-600 dark:text-ink-300 space-y-4 leading-relaxed">
                                 <p>
-                                    <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong> started
+                                    <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong> started
                                     with a frustration every self-taught professional knows: quality online courses
                                     were either too expensive, too generic, or taught by people who had never actually
                                     done the work they were teaching.
                                 </p>
                                 <p>
                                     Our founders set out to build something different. The name{" "}
-                                    <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong> reflects
+                                    <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong> reflects
                                     the core idea — that learning is the original wealth multiplier. Every skill you
                                     acquire is an asset that compounds over time.
                                 </p>
                                 <p>
                                     We built the{" "}
-                                    <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong> platform
+                                    <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong> platform
                                     from the ground up with one goal: zero gap between what you learn and what the
                                     market needs. Every course on LearnWealthX is created by experts who are actively
                                     working in their field.
                                 </p>
                                 <p>
-                                    Since launch, <strong className="text-gray-900 dark:text-gray-100">LearnWealthX</strong>{" "}
+                                    Since launch, <strong className="text-gray-900 dark:text-ink-50">LearnWealthX</strong>{" "}
                                     has helped thousands of learners across India develop skills in video editing,
                                     digital marketing, web development, freelancing, and more — at a fraction of the
                                     cost of traditional learning.
@@ -287,10 +287,10 @@ export default function AboutPage() {
                     </section>
 
                     {/* ── FAQ (brand Q&A) ──────────────────────────────────────── */}
-                    <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+                    <section className="py-16 bg-gray-50 dark:bg-ink-900 transition-colors">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6">
                             <div className="text-center mb-10">
-                                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
+                                <h2 className="text-3xl font-bold text-gray-900 dark:text-ink-50">
                                     Frequently Asked Questions About LearnWealthX
                                 </h2>
                             </div>
@@ -321,13 +321,13 @@ export default function AboutPage() {
                                         key={q}
                                         className="app-card app-card-padding group cursor-pointer"
                                     >
-                                        <summary className="font-semibold text-gray-900 dark:text-gray-50 list-none flex items-center justify-between">
+                                        <summary className="font-semibold text-gray-900 dark:text-ink-50 list-none flex items-center justify-between">
                                             {q}
-                                            <span className="ml-4 text-blue-600 dark:text-blue-400 group-open:rotate-180 transition-transform">
+                                            <span className="ml-4 text-blue-600 dark:text-mint-400 group-open:rotate-180 transition-transform">
                                                 ▾
                                             </span>
                                         </summary>
-                                        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                        <p className="mt-3 text-sm text-gray-600 dark:text-ink-300 leading-relaxed">
                                             {a}
                                         </p>
                                     </details>
