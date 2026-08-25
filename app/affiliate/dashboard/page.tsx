@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+// The one money/rate formatter in this app, so a bundle price cannot render as
+// "3797.00" here and "3,797.00" on the earnings screen.
+import { formatRate, formatRupees } from '@/app/earnings/types';
 
 interface AffiliateInfo {
   id: string;
@@ -55,14 +58,38 @@ interface AffiliatePurchase {
   };
 }
 
+/**
+ * One shareable BUNDLE.
+ *
+ * Affiliates promote bundles, never courses: a bundle is the only sellable unit,
+ * so a course-level link has nothing to sell at the end of it.
+ *
+ * Sourced from `bundleLinks` on `GET /api/affiliate/me` when that field is
+ * present, and reconstructed from `GET /api/bundles` when it is not — see
+ * `fetchDashboard`.
+ */
+interface BundleLink {
+  bundleId: string;
+  title: string;
+  price: number;
+  courseCount: number;
+  /**
+   * DECIMAL FRACTION 0..1 (0.4 = 40%), or `null` for "the API did not say, use
+   * the account rate". `null` and `0` are different answers and are kept apart
+   * deliberately: a falsy check would turn an explicit 0% bundle into one
+   * paying the account default.
+   */
+  commissionRate: number | null;
+  /** A ready-made `/ref/{affiliateId}?bundles=…` URL. */
+  link: string;
+}
+
 export default function AffiliateDashboardPage() {
   const [affiliate, setAffiliate] = useState<AffiliateInfo | null>(null);
   const [referrals, setReferrals] = useState<ReferralUser[]>([]);
   const [purchases, setPurchases] = useState<AffiliatePurchase[]>([]);
-  const [courseLinks, setCourseLinks] = useState<
-    { courseId: string; title: string; price: number; link: string; purchasedAt: string }[]
-  >([]);
-  const [selectedCourseIds, setSelectedCourseIds] = useState<string[]>([]);
+  const [bundleLinks, setBundleLinks] = useState<BundleLink[]>([]);
+  const [selectedBundleIds, setSelectedBundleIds] = useState<string[]>([]);
   const [generatedLink, setGeneratedLink] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -140,12 +167,21 @@ export default function AffiliateDashboardPage() {
       setReferrals(data.referrals || []);
       setPurchases(data.purchases || []);
       setCommissionRate(data.commissionRate || 0.3); // Store commission rate from API
-      setCourseLinks(
-        (data.courseLinks || []).map((c: any) => ({
-          ...c,
-          link: '', // will be generated client-side
-        }))
-      );
+      // `bundleLinks` is being added to this endpoint in parallel. When it is
+      // there we use it verbatim, including the `link` the server built. When it
+      // is not — which is what the running backend does today — the same rows
+      // are reconstructed from the public bundle list, so this screen works
+      // either side of that deploy with no code change.
+      const affiliateId: string = data.affiliate?.id ?? '';
+      if (Array.isArray(data.bundleLinks)) {
+        setBundleLinks(
+          data.bundleLinks
+            .map((b: any) => normaliseBundleLink(b, affiliateId))
+            .filter((b: BundleLink) => b.bundleId !== '')
+        );
+      } else {
+        await fetchBundleLinksFromCatalogue(affiliateId);
+      }
       // After affiliate is ensured, fetch KYC status
       await fetchKycStatus();
       
@@ -156,6 +192,71 @@ export default function AffiliateDashboardPage() {
       setError('Failed to load affiliate dashboard');
     } finally {
       setLoading(false);
+    }
+  };
+
+  /** The canonical shape of an affiliate bundle link. */
+  const buildRefLink = (affiliateId: string, bundleIds: string[]) => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    return `${origin}/ref/${affiliateId}?bundles=${bundleIds
+      .map((id) => encodeURIComponent(id))
+      .join(',')}`;
+  };
+
+  const normaliseBundleLink = (raw: any, affiliateId: string): BundleLink => {
+    const bundleId = typeof raw?.bundleId === 'string' ? raw.bundleId : '';
+    const price = Number(raw?.price);
+    const courseCount = Number(raw?.courseCount);
+    // `== null` catches null AND undefined without catching 0, which is a real
+    // rate and must not be rewritten to "inherit the default".
+    const rawRate = raw?.commissionRate;
+    const rate = rawRate == null ? null : Number(rawRate);
+
+    return {
+      bundleId,
+      title: typeof raw?.title === 'string' && raw.title ? raw.title : 'Untitled bundle',
+      price: Number.isFinite(price) ? price : 0,
+      courseCount: Number.isFinite(courseCount) ? courseCount : 0,
+      commissionRate: rate !== null && Number.isFinite(rate) ? rate : null,
+      // The server's own link wins when it sends one — it is the authority on
+      // its own URL shape. Otherwise build the same thing client-side.
+      link:
+        typeof raw?.link === 'string' && raw.link
+          ? raw.link
+          : buildRefLink(affiliateId, [bundleId]),
+    };
+  };
+
+  /**
+   * Fallback for a backend that does not send `bundleLinks` yet.
+   *
+   * `GET /api/bundles` shows a non-admin caller only the purchasable bundles,
+   * which is exactly the set worth promoting.
+   */
+  const fetchBundleLinksFromCatalogue = async (affiliateId: string) => {
+    try {
+      const res = await fetch(`${API_URL}/api/bundles`, { credentials: 'include' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const list: any[] = Array.isArray(data?.bundles) ? data.bundles : [];
+      setBundleLinks(
+        list
+          .filter((b) => typeof b?.id === 'string')
+          .map((b) =>
+            normaliseBundleLink(
+              {
+                bundleId: b.id,
+                title: b.title,
+                price: b.price,
+                courseCount: b.courseCount,
+                commissionRate: b.commissionRate,
+              },
+              affiliateId
+            )
+          )
+      );
+    } catch (err) {
+      console.error('Bundle link fallback error:', err);
     }
   };
 
@@ -236,27 +337,33 @@ export default function AffiliateDashboardPage() {
   };
 
   const handleGenerateLink = () => {
-    if (!affiliate || selectedCourseIds.length === 0) {
-      alert('Please select at least one course to generate a link.');
+    if (!affiliate || selectedBundleIds.length === 0) {
+      alert('Please select at least one bundle to generate a link.');
       return;
     }
-    const origin =
-      typeof window !== 'undefined' ? window.location.origin : '';
-    const link = `${origin}/ref/${affiliate.id}?courses=${selectedCourseIds.join(
-      ','
-    )}`;
-    setGeneratedLink(link);
+    // A single selected bundle reuses that row's own link, so the generated URL
+    // and the row's Copy button can never disagree.
+    if (selectedBundleIds.length === 1) {
+      const only = bundleLinks.find((b) => b.bundleId === selectedBundleIds[0]);
+      if (only) {
+        setGeneratedLink(only.link);
+        return;
+      }
+    }
+    setGeneratedLink(buildRefLink(affiliate.id, selectedBundleIds));
   };
 
-  const handleCopyGeneratedLink = async () => {
-    if (!generatedLink) return;
+  const handleCopyLink = async (link: string) => {
+    if (!link) return;
     try {
-      await navigator.clipboard.writeText(generatedLink);
+      await navigator.clipboard.writeText(link);
       alert('Referral link copied to clipboard!');
     } catch {
       alert('Failed to copy link. Please copy it manually.');
     }
   };
+
+  const handleCopyGeneratedLink = () => handleCopyLink(generatedLink);
 
   const handleImageLoad = (imageId: string) => {
     setLoadedImages((prev) => new Set(prev).add(imageId));
@@ -819,23 +926,28 @@ export default function AffiliateDashboardPage() {
           </div>
         )}
 
-        {/* Course-specific Links (only for courses you own) */}
+        {/* Bundle links.
+            Affiliates share BUNDLES, never courses: a bundle is the only
+            sellable unit, so a course-level link has nothing to sell at the end
+            of it. `courseLinks` is still on the API and is deliberately ignored
+            here. */}
         <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Your Course Links</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">Your Bundle Links</h2>
           <p className="text-gray-600 dark:text-ink-300 mb-4">
-            These links go directly to each course you have purchased. Share them with your
-            audience to promote specific courses.
+            Each link below opens a bundle — the only thing a customer can buy. Share a single
+            bundle with its Copy button, or tick several and build one link for all of them.
           </p>
-          {courseLinks.length === 0 ? (
+          {bundleLinks.length === 0 ? (
             <p className="text-gray-500 dark:text-ink-300 text-sm">
-              You haven&apos;t purchased any courses yet. Buy a course to get a unique link for it.
+              There are no bundles on sale to promote yet. They will appear here as soon as one is
+              published.
             </p>
           ) : (
             <>
-              {/* Course selection and link generation */}
+              {/* Bundle selection and link generation */}
               <div className="mb-4">
                 <p className="text-sm text-gray-600 dark:text-ink-300 mb-2">
-                  Select one or more courses below and click &quot;Generate Referral Link&quot;.
+                  Select one or more bundles below and click &quot;Generate Referral Link&quot;.
                 </p>
                 <button
                   onClick={handleGenerateLink}
@@ -849,6 +961,7 @@ export default function AffiliateDashboardPage() {
                       type="text"
                       readOnly
                       value={generatedLink}
+                      aria-label="Generated referral link"
                       className="flex-1 px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md text-sm text-gray-900 dark:text-ink-50 bg-gray-50 dark:bg-ink-900"
                     />
                     <button
@@ -865,39 +978,74 @@ export default function AffiliateDashboardPage() {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-ink-800">
                   <thead className="bg-gray-50 dark:bg-ink-800">
                     <tr>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-400 uppercase">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Select
                       </th>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
-                        Course
+                        Bundle
+                      </th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
+                        Courses
                       </th>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                         Price
                       </th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
+                        Commission
+                      </th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
+                        Link
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
-                    {courseLinks.map((c) => {
-                      const checked = selectedCourseIds.includes(c.courseId);
+                    {bundleLinks.map((b) => {
+                      const checked = selectedBundleIds.includes(b.bundleId);
+                      // The bundle's own rate when the API sent one, otherwise
+                      // this account's rate. `?? ` not `||`, so an explicit 0%
+                      // bundle is not silently promoted to the account default.
+                      const rate = b.commissionRate ?? commissionRate;
                       return (
-                        <tr key={c.courseId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                        <tr key={b.bundleId} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                           <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">
                             <input
                               type="checkbox"
                               checked={checked}
+                              aria-label={`Select ${b.title}`}
                               onChange={(e) => {
-                                setSelectedCourseIds((prev) =>
+                                setSelectedBundleIds((prev) =>
                                   e.target.checked
-                                    ? [...prev, c.courseId]
-                                    : prev.filter((id) => id !== c.courseId)
+                                    ? [...prev, b.bundleId]
+                                    : prev.filter((id) => id !== b.bundleId)
                                 );
                               }}
                               className="h-4 w-4 text-blue-600 dark:text-mint-400 border-gray-300 dark:border-ink-700 rounded"
                             />
                           </td>
-                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">{c.title}</td>
                           <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50">
-                            ₹{c.price.toFixed(2)}
+                            <Link
+                              href={`/bundles/${b.bundleId}`}
+                              className="hover:text-blue-600 dark:hover:text-mint-400 transition-colors"
+                            >
+                              {b.title}
+                            </Link>
+                          </td>
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50 tabular-nums">
+                            {b.courseCount}
+                          </td>
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50 tabular-nums">
+                            {formatRupees(b.price)}
+                          </td>
+                          <td className="px-4 py-2 text-sm text-gray-900 dark:text-ink-50 tabular-nums">
+                            {formatRate(rate)}
+                          </td>
+                          <td className="px-4 py-2 text-sm">
+                            <button
+                              onClick={() => handleCopyLink(b.link)}
+                              className="px-3 py-1.5 rounded-md border border-blue-100 dark:border-mint-900/40 text-xs font-medium text-blue-700 dark:text-mint-300 bg-blue-50 dark:bg-mint-900/20 hover:bg-blue-100 dark:hover:bg-mint-900/40 transition-colors"
+                            >
+                              Copy
+                            </button>
                           </td>
                         </tr>
                       );
