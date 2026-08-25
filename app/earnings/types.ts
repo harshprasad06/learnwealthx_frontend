@@ -95,6 +95,21 @@ export interface MonthlyPoint {
   commission: number;
 }
 
+/**
+ * NOT USED BY THIS PAGE.
+ *
+ * `/earnings` is a projection calculator only — it deliberately does not show
+ * what the visitor has already earned. This type, `normaliseMeResponse`,
+ * `groupSales`, `formatDate`, `formatMonthLabel` and the interfaces they depend
+ * on (`EarningsWallet`, `EarningsTotals`, `RecentSale`, `MonthlyPoint`,
+ * `SaleRow`) are the client for `GET /api/earnings/me`, which exists and is
+ * tested on the backend.
+ *
+ * They are kept because that endpoint is live: if a "my earnings" view is ever
+ * added to the affiliate dashboard, this is its ready-made client, including the
+ * bundle-group collapsing that stops one 3-course bundle sale from being counted
+ * as three. Delete this block along with the endpoint, not before.
+ */
 export interface MeResponse {
   isAffiliate: boolean;
   referralCode: string | null;
