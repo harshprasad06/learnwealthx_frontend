@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import CheckoutModal from '@/components/CheckoutModal';
+import { resolveAssetUrl } from '@/components/ThumbnailUploader';
+import type { PublicBundle } from '@/app/bundles/types';
+import { courseCountLabel, formatRupees, normaliseBundleList } from '@/app/bundles/types';
 
 interface Course {
   id: string;
@@ -40,6 +44,14 @@ export default function RefLandingPage() {
   const router = useRouter();
 
   const [courses, setCourses] = useState<Course[]>([]);
+  /**
+   * Bundles named by `?bundles=`, which is the shape affiliate links now use.
+   *
+   * Kept separate from `courses` rather than replacing it: links already in the
+   * wild carry `?courses=` and must keep working, and a link may carry both.
+   */
+  const [bundles, setBundles] = useState<PublicBundle[]>([]);
+  const [bundlesLoading, setBundlesLoading] = useState(true);
   const [affiliate, setAffiliate] = useState<AffiliatePublic | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -55,11 +67,18 @@ export default function RefLandingPage() {
   // Track click by affiliateId and set cookie with course IDs
   useEffect(() => {
     if (!affiliateId) return;
+    // `bundles` is what affiliate links now carry, since a bundle is the only
+    // sellable unit. `courses` is still forwarded alongside it so that links
+    // already in the wild keep attributing, and both are sent when a link
+    // carries both. URLSearchParams does the encoding.
+    const query = new URLSearchParams();
+    const bundlesParam = searchParams.get('bundles');
     const coursesParam = searchParams.get('courses');
-    const url = coursesParam
-      ? `${API_URL}/api/affiliate/track-by-id/${affiliateId}?courses=${encodeURIComponent(
-          coursesParam
-        )}`
+    if (bundlesParam) query.set('bundles', bundlesParam);
+    if (coursesParam) query.set('courses', coursesParam);
+    const trackingQuery = query.toString();
+    const url = trackingQuery
+      ? `${API_URL}/api/affiliate/track-by-id/${affiliateId}?${trackingQuery}`
       : `${API_URL}/api/affiliate/track-by-id/${affiliateId}`;
     fetch(url, {
       credentials: 'include',
@@ -83,6 +102,51 @@ export default function RefLandingPage() {
     };
     loadAffiliate();
   }, [affiliateId]);
+
+  // Load the bundles named by `?bundles=`.
+  //
+  // ONE request: `GET /api/bundles` already nests each bundle's member courses,
+  // so the named bundles are a local filter over a single response rather than a
+  // request per id. (The course loader below still loops, which is the shape it
+  // has always had; legacy links carry one or two ids.)
+  useEffect(() => {
+    const bundlesParam = searchParams.get('bundles');
+    if (!bundlesParam) {
+      setBundlesLoading(false);
+      return;
+    }
+    const ids = bundlesParam
+      .split(',')
+      .map((b) => b.trim())
+      .filter(Boolean);
+    if (ids.length === 0) {
+      setBundlesLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/bundles`, { credentials: 'include' });
+        if (!res.ok) return;
+        const body = await res.json().catch(() => null);
+        if (cancelled) return;
+        const wanted = new Set(ids);
+        // Order follows the link, so the affiliate controls what leads.
+        const found = normaliseBundleList(body).filter((b) => wanted.has(b.id));
+        setBundles(ids.map((id) => found.find((b) => b.id === id)).filter((b): b is PublicBundle => !!b));
+      } catch (e) {
+        console.error('Error loading referral bundles', e);
+        if (!cancelled) setError('Failed to load the bundles for this referral link.');
+      } finally {
+        if (!cancelled) setBundlesLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [searchParams]);
 
   // Load selected courses
   useEffect(() => {
@@ -252,8 +316,8 @@ export default function RefLandingPage() {
           )}
         </div>
 
-        {loading && (
-          <div className="text-center py-12 text-foreground/70">Loading courses...</div>
+        {(loading || bundlesLoading) && (
+          <div className="text-center py-12 text-foreground/70">Loading...</div>
         )}
 
         {error && !loading && (
@@ -262,9 +326,107 @@ export default function RefLandingPage() {
           </div>
         )}
 
-        {!loading && !error && courses.length === 0 && (
+        {!loading && !bundlesLoading && !error && courses.length === 0 && bundles.length === 0 && (
           <div className="text-center py-12 text-foreground/60">
-            No valid courses were found for this referral link.
+            <p>This referral link does not point at anything on sale right now.</p>
+            <Link
+              href="/courses"
+              className="mt-3 inline-block underline font-medium text-blue-600 dark:text-mint-400"
+            >
+              Browse all bundles
+            </Link>
+          </div>
+        )}
+
+        {/* Bundles. A bundle is the only sellable unit, so the CTA goes to the
+            bundle page, where `create-bundle-order` is — not to the course-based
+            CheckoutModal below, which is kept only for legacy `?courses=` links.
+            These cards use explicit light + dark colours rather than the
+            `bg-cardBackground` / `dark:border-border` tokens the course cards
+            below use: those two class names are not in tailwind.config.ts and so
+            resolve to nothing. */}
+        {!bundlesLoading && bundles.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {bundles.map((bundle) => {
+              const cover = resolveAssetUrl(bundle.image, API_URL);
+              return (
+                <div
+                  key={bundle.id}
+                  className="bg-white dark:bg-ink-900 rounded-xl shadow-lg dark:shadow-black/40 dark:border dark:border-ink-800 overflow-hidden flex flex-col"
+                >
+                  <div className="relative h-44 bg-gradient-to-br from-blue-400 dark:from-mint-800 to-indigo-600 dark:to-mint-950">
+                    {cover ? (
+                      /* eslint-disable-next-line @next/next/no-img-element --
+                         the API host is not in next.config.js
+                         images.remotePatterns. Matches every other screen. */
+                      <img src={cover} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <svg
+                          className="w-14 h-14 text-white opacity-60"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    <span className="absolute top-3 right-3 rounded-full bg-white/95 dark:bg-ink-950/90 px-3 py-1 text-xs font-medium text-gray-900 dark:text-ink-50">
+                      {courseCountLabel(bundle.courseCount)}
+                    </span>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h2 className="text-lg font-semibold mb-1 text-gray-900 dark:text-ink-50 line-clamp-2">
+                      {bundle.title}
+                    </h2>
+                    <p className="text-sm text-gray-600 dark:text-ink-300 line-clamp-2">
+                      {bundle.description || 'No description available.'}
+                    </p>
+                    {bundle.courses.length > 0 && (
+                      <ul className="mt-3 space-y-0.5 flex-1">
+                        {bundle.courses.slice(0, 3).map((course) => (
+                          <li
+                            key={course.id}
+                            className="flex gap-1.5 text-xs text-gray-700 dark:text-ink-200"
+                          >
+                            <span
+                              className="text-blue-600 dark:text-mint-400 shrink-0"
+                              aria-hidden="true"
+                            >
+                              &bull;
+                            </span>
+                            <span className="line-clamp-1">{course.title}</span>
+                          </li>
+                        ))}
+                        {bundle.courses.length > 3 && (
+                          <li className="text-xs text-gray-500 dark:text-ink-300">
+                            +{bundle.courses.length - 3} more
+                          </li>
+                        )}
+                      </ul>
+                    )}
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-xl font-bold text-blue-600 dark:text-mint-400 tabular-nums">
+                        {formatRupees(bundle.price)}
+                      </span>
+                      <span className="text-xs text-gray-500 dark:text-ink-300">
+                        Lifetime access
+                      </span>
+                    </div>
+                    <Link href={`/bundles/${bundle.id}`} className="btn-primary mt-4 w-full">
+                      View bundle
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
 

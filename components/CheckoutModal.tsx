@@ -86,6 +86,16 @@ function InnerCheckoutModal({
   const [googleError, setGoogleError] = useState('');
   const [priceBreakdown, setPriceBreakdown] = useState<PriceBreakdown | null>(null);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  /**
+   * Bundles that contain what the buyer tried to buy.
+   *
+   * Populated from a 409 on `create-order`: courses are sold in bundles now, and
+   * the rejection names the bundle(s) to send the buyer to. Empty is a valid
+   * answer — an older or partial backend may 409 without the field — in which
+   * case the catalogue link below is the way forward.
+   */
+  const [bundleIds, setBundleIds] = useState<string[]>([]);
+  const [soldInBundles, setSoldInBundles] = useState(false);
   const [agreedToRefundPolicy, setAgreedToRefundPolicy] = useState(false);
 
   const googleLogin = useGoogleLogin({
@@ -215,6 +225,8 @@ function InnerCheckoutModal({
 
   const startPayment = async () => {
     setPayError('');
+    setBundleIds([]);
+    setSoldInBundles(false);
     setLoading(true);
     try {
       // Ensure Razorpay script is loaded before we start payment flow.
@@ -235,6 +247,25 @@ function InnerCheckoutModal({
       const orderData = await orderRes.json();
 
       if (!orderRes.ok) {
+        // 409 = these courses are not sold individually any more. That is not a
+        // payment failure and must not be rendered as one: the body names the
+        // bundle(s) containing them, which is a way forward rather than a dead
+        // end. `bundleIds` is treated as optional — see the state declaration.
+        if (orderRes.status === 409) {
+          setSoldInBundles(true);
+          setBundleIds(
+            (Array.isArray(orderData?.bundleIds) ? orderData.bundleIds : []).filter(
+              (id: unknown): id is string => typeof id === 'string'
+            )
+          );
+          setPayError(
+            orderData?.message ||
+              orderData?.error ||
+              'These courses are sold as part of a bundle.'
+          );
+          setStep('error');
+          return;
+        }
         setPayError(orderData.error || 'Failed to create order');
         setStep('error');
         return;
@@ -638,13 +669,42 @@ function InnerCheckoutModal({
             <p className="text-center text-red-600 dark:text-red-400 text-sm font-medium mb-6">
               {payError || 'Something went wrong during checkout.'}
             </p>
+
+            {/* A 409 has a destination, so offer it instead of a retry that
+                would only 409 again. */}
+            {soldInBundles && (
+              <div className="mb-6 flex flex-col gap-2">
+                {bundleIds.map((id) => (
+                  <Link
+                    key={id}
+                    href={`/bundles/${id}`}
+                    onClick={onClose}
+                    className="w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
+                  >
+                    Go to the bundle
+                  </Link>
+                ))}
+                {bundleIds.length === 0 && (
+                  <Link
+                    href="/courses"
+                    onClick={onClose}
+                    className="w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
+                  >
+                    Browse all bundles
+                  </Link>
+                )}
+              </div>
+            )}
+
             <div className="flex gap-3">
-              <button
-                onClick={() => setStep('auth')}
-                className="flex-1 py-2.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-ink-700 text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-800 hover:bg-gray-50 dark:hover:bg-ink-700 transition-colors"
-              >
-                Try again
-              </button>
+              {!soldInBundles && (
+                <button
+                  onClick={() => setStep('auth')}
+                  className="flex-1 py-2.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-ink-700 text-gray-700 dark:text-ink-200 bg-white dark:bg-ink-800 hover:bg-gray-50 dark:hover:bg-ink-700 transition-colors"
+                >
+                  Try again
+                </button>
+              )}
               <button
                 onClick={onClose}
                 className="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-ink-800 text-gray-800 dark:text-ink-100 hover:bg-gray-300 dark:hover:bg-ink-700 transition-colors"

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Courses",
   description:
-    "Browse all LearnWealthX courses. Master in-demand skills with expert-led online courses. Start learning today.",
+    "Browse every LearnWealthX course bundle. One payment, lifetime access to every course in the bundle. Start learning today.",
 };
 
 export default function CoursesLayout({

@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import Script from 'next/script';
-import CheckoutModal from '@/components/CheckoutModal';
 import PricingDisplay from '@/components/PricingDisplay';
+import type { PublicBundle } from '@/app/bundles/types';
+import { courseCountLabel, formatRupees, normaliseBundleList } from '@/app/bundles/types';
 
 interface Course {
   id: string;
@@ -39,20 +39,18 @@ interface Review {
   user: ReviewUser;
 }
 
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-
 export default function CourseDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const [course, setCourse] = useState<Course | null>(null);
   const [hasAccess, setHasAccess] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [purchasing, setPurchasing] = useState(false);
-  const [showCheckout, setShowCheckout] = useState(false);
+  /**
+   * The bundles that contain this course.
+   *
+   * A course is NOT a sellable unit — bundles are — so this is what replaces the
+   * buy button for a visitor without access.
+   */
+  const [containingBundles, setContainingBundles] = useState<PublicBundle[]>([]);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [averageRating, setAverageRating] = useState<number>(0);
@@ -66,6 +64,7 @@ export default function CourseDetailPage() {
     if (params.id) {
       fetchCourse();
       fetchReviews();
+      fetchContainingBundles();
     }
     fetchUserRole();
   }, [params.id]);
@@ -128,87 +127,30 @@ export default function CourseDetailPage() {
     }
   };
 
-  const handlePurchase = async () => {
-    setPurchasing(true);
+  /**
+   * Find the bundles this course belongs to.
+   *
+   * ONE request. `GET /api/bundles` already nests each bundle's member courses,
+   * so the containing bundles are a local filter over that single response —
+   * there is no per-bundle lookup and so no N+1. A public caller only ever sees
+   * purchasable bundles, which is exactly the set worth linking to.
+   *
+   * Failures are silent on purpose: this is a secondary lookup, and the course
+   * content below must still render if it fails. The no-bundle branch of the
+   * render doubles as the failure state.
+   */
+  const fetchContainingBundles = async () => {
     try {
-      // Create order
-      const orderRes = await fetch(`${API_URL}/api/payments/create-order`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ courseIds: [params.id] }),
-      });
-
-      const orderData = await orderRes.json();
-
-      if (!orderRes.ok) {
-        alert(orderData.error || 'Failed to create order');
-        return;
-      }
-
-      // PAYMENT BYPASS MODE - Direct purchase without Razorpay
-      if (orderData.bypass) {
-        alert('Course purchased successfully! (Payment bypass mode)');
-        router.refresh();
-        fetchCourse();
-        setPurchasing(false);
-        return;
-      }
-
-      // Normal Razorpay flow
-      // Check if Razorpay script is loaded
-      if (typeof window.Razorpay === 'undefined') {
-        alert('Payment gateway is loading. Please try again in a moment.');
-        return;
-      }
-
-      // Initialize Razorpay
-      const options = {
-        key: orderData.key,
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: 'LearnWealthX',
-        description: `Purchase: ${course?.title}`,
-        order_id: orderData.orderId,
-        handler: async function (response: any) {
-          // Verify payment
-          const verifyRes = await fetch(`${API_URL}/api/payments/verify`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({
-              orderId: response.razorpay_order_id,
-              paymentId: response.razorpay_payment_id,
-              signature: response.razorpay_signature,
-            }),
-          });
-
-          const verifyData = await verifyRes.json();
-
-          if (verifyRes.ok && verifyData.success) {
-            alert('Payment successful! Course unlocked.');
-            router.refresh();
-            fetchCourse();
-            fetchReviews();
-          } else {
-            alert('Payment verification failed');
-          }
-        },
-        prefill: {
-          email: '',
-        },
-        theme: {
-          color: '#3399cc',
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
+      const res = await fetch(`${API_URL}/api/bundles`, { credentials: 'include' });
+      if (!res.ok) return;
+      const body = await res.json().catch(() => null);
+      setContainingBundles(
+        normaliseBundleList(body).filter((bundle) =>
+          bundle.courses.some((member) => member.id === params.id)
+        )
+      );
     } catch (error) {
-      console.error('Purchase error:', error);
-      alert('Something went wrong');
-    } finally {
-      setPurchasing(false);
+      console.error('Error fetching bundles for course:', error);
     }
   };
 
@@ -299,7 +241,6 @@ export default function CourseDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white dark:bg-ink-900 rounded-lg shadow-md dark:shadow-black/40 overflow-hidden transition-colors">
@@ -352,22 +293,51 @@ export default function CourseDetailPage() {
                   Price shown excludes payment gateway fees
                 </p>
               </div>
-              <div className="flex items-center gap-3">
-                {!hasAccess && (
-                  <button
-                    onClick={() => setShowCheckout(true)}
-                    className="bg-blue-600 dark:bg-mint-500 text-white dark:text-ink-950 px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-mint-400 transition-colors"
-                  >
-                    Checkout
-                  </button>
-                )}
-                {hasAccess && (
+              <div className="flex flex-col items-start gap-3">
+                {hasAccess ? (
                   <Link
                     href={`/courses/${course.id}/watch`}
                     className="bg-green-600 dark:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   >
                     Watch Course
                   </Link>
+                ) : (
+                  /* No buy button here by design: a course is not sellable on
+                     its own. This points at the parent product instead. */
+                  <div className="sm:max-w-xs">
+                    {containingBundles.length > 0 ? (
+                      <>
+                        <p className="text-sm text-gray-600 dark:text-ink-300">
+                          This course is sold as part of{' '}
+                          {containingBundles.length === 1 ? 'a bundle' : 'these bundles'}:
+                        </p>
+                        <ul className="mt-2 space-y-3">
+                          {containingBundles.map((bundle) => (
+                            <li key={bundle.id}>
+                              <Link href={`/bundles/${bundle.id}`} className="btn-primary">
+                                View {bundle.title} — {formatRupees(bundle.price)}
+                              </Link>
+                              <p className="mt-1 text-xs text-gray-500 dark:text-ink-300">
+                                {courseCountLabel(bundle.courseCount)}, lifetime access
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <p className="text-sm text-gray-600 dark:text-ink-300">
+                        This course is only available inside a bundle, and no bundle containing it
+                        is on sale right now.{' '}
+                        <Link
+                          href="/courses"
+                          className="underline font-medium text-blue-600 dark:text-mint-400"
+                        >
+                          Browse all bundles
+                        </Link>
+                        .
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -502,19 +472,6 @@ export default function CourseDetailPage() {
           </div>
         </div>
       </div>
-      {showCheckout && course && (
-        <CheckoutModal
-          courseIds={[course.id]}
-          title={course.title}
-          totalPrice={course.price}
-          onClose={() => setShowCheckout(false)}
-          onSuccess={() => {
-            setShowCheckout(false);
-            router.refresh();
-            router.push(`/courses/${course.id}/watch`);
-          }}
-        />
-      )}
     </div>
   );
 }

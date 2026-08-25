@@ -157,6 +157,16 @@ export default function Navbar() {
                               <span className="font-medium">Courses</span>
                             </Link>
                             <Link
+                              href="/admin/bundles"
+                              onClick={() => setAdminMenuOpen(false)}
+                              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-ink-200 hover:bg-blue-50 dark:hover:bg-mint-900/20 hover:text-blue-600 dark:hover:text-mint-400 transition-all group"
+                            >
+                              <svg className="w-5 h-5 text-gray-400 dark:text-ink-300 group-hover:text-blue-600 dark:group-hover:text-mint-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                              </svg>
+                              <span className="font-medium">Bundles</span>
+                            </Link>
+                            <Link
                               href="/admin/users"
                               onClick={() => setAdminMenuOpen(false)}
                               className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-ink-200 hover:bg-blue-50 dark:hover:bg-mint-900/20 hover:text-blue-600 dark:hover:text-mint-400 transition-all group"
@@ -249,6 +259,15 @@ export default function Navbar() {
                       Affiliate
                     </Link>
                   )}
+                  {/* Every signed-in user, admin or not: the affiliate programme is
+                      open to all accounts, so this sits outside the role-gated
+                      admin dropdown above. */}
+                  <Link
+                    href="/earnings"
+                    className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    Earnings Calculator
+                  </Link>
                 </>
               )}
             </div>
@@ -337,6 +356,13 @@ export default function Navbar() {
                     Courses
                   </Link>
                   <Link
+                    href="/admin/bundles"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
+                  >
+                    Bundles
+                  </Link>
+                  <Link
                     href="/admin/users"
                     onClick={() => setMenuOpen(false)}
                     className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
@@ -401,6 +427,15 @@ export default function Navbar() {
                   className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
                 >
                   Affiliate
+                </Link>
+              )}
+              {user && (
+                <Link
+                  href="/earnings"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
+                >
+                  Earnings Calculator
                 </Link>
               )}
               {!loading && user && (
