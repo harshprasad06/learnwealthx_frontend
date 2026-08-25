@@ -157,9 +157,20 @@ export function fromPaise(paise: number): number {
   return paise / 100;
 }
 
-/** House convention for precise money: two decimals, always. */
+/**
+ * Precise money: two decimals AND Indian digit grouping — `₹3,797.00`.
+ *
+ * The grouping is not cosmetic. A bare `toFixed(2)` renders 3797 as
+ * "₹3797.00" while the package switcher renders the same number as "₹3,797",
+ * so one page showed one value two ways and invited the reader to wonder
+ * whether they were different amounts.
+ */
 export function formatRupees(rupees: number): string {
-  return `₹${rupees.toFixed(2)}`;
+  const safe = Number.isFinite(rupees) ? rupees : 0;
+  return `₹${safe.toLocaleString('en-IN', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 /**
