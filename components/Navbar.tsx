@@ -266,7 +266,7 @@ export default function Navbar() {
                     href="/earnings"
                     className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
                   >
-                    Earnings
+                    Earnings Calculator
                   </Link>
                 </>
               )}
@@ -435,7 +435,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
                 >
-                  Earnings
+                  Earnings Calculator
                 </Link>
               )}
               {!loading && user && (
