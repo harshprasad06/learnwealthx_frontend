@@ -71,6 +71,24 @@ export default function BundleDetailPage() {
   const [buying, setBuying] = useState(false);
   const [buyError, setBuyError] = useState('');
   const [buyNotice, setBuyNotice] = useState('');
+
+  /**
+   * What the buyer will actually be charged, itemised.
+   *
+   * Fetched, never computed here: the server rounds the gateway fee to whole
+   * paise and hands that exact integer to Razorpay, so a total worked out in the
+   * browser can land a rupee away from the amount on the card statement. This is
+   * the same `breakdown` the checkout uses.
+   *
+   * Null while loading or if the call fails — the page still renders and stays
+   * buyable, it just falls back to showing the bundle price alone.
+   */
+  const [priceBreakdown, setPriceBreakdown] = useState<{
+    baseAmount: number;
+    gstAmount: number;
+    gatewayFeeAmount: number;
+    totalAmount: number;
+  } | null>(null);
   /** Set when the buy action failed with a 401, so we can offer a sign-in link. */
   const [needsSignIn, setNeedsSignIn] = useState(false);
 
@@ -111,9 +129,42 @@ export default function BundleDetailPage() {
     }
   }, [bundleId]);
 
+  /**
+   * The itemised total, from `/price`. Deliberately a SEPARATE request from the
+   * bundle itself: if it fails the page must still render and stay buyable, so
+   * it never sets `error` and never blocks `loading`.
+   */
+  const fetchPrice = useCallback(async () => {
+    if (!bundleId) return;
+    try {
+      const res = await fetch(`${API_URL}/api/bundles/${bundleId}/price`, {
+        credentials: 'include',
+      });
+      if (!res.ok) return;
+      const body = await res.json().catch(() => null);
+      const b = body?.breakdown;
+      if (
+        b &&
+        [b.baseAmount, b.gstAmount, b.gatewayFeeAmount, b.totalAmount].every(
+          (n) => typeof n === 'number' && Number.isFinite(n)
+        )
+      ) {
+        setPriceBreakdown({
+          baseAmount: b.baseAmount,
+          gstAmount: b.gstAmount,
+          gatewayFeeAmount: b.gatewayFeeAmount,
+          totalAmount: b.totalAmount,
+        });
+      }
+    } catch {
+      // Silent by design — see the state declaration.
+    }
+  }, [bundleId]);
+
   useEffect(() => {
     fetchBundle();
-  }, [fetchBundle]);
+    fetchPrice();
+  }, [fetchBundle, fetchPrice]);
 
   /**
    * Buy the bundle.
@@ -510,9 +561,49 @@ export default function BundleDetailPage() {
                       )}
                     </div>
                     <p className="mt-1 text-xs text-gray-500 dark:text-ink-300">
-                      One payment for every course in the bundle. Price shown excludes payment
-                      gateway fees.
+                      One payment for every course in the bundle.
                     </p>
+
+                    {/* What the buyer is actually charged, itemised.
+                        Every figure comes from the server, which rounds the fee
+                        to whole paise and hands that same integer to the gateway
+                        — so this is the number on the card statement, not an
+                        approximation of it. GST appears only when it is charged;
+                        a "GST ₹0.00" line invites a question nobody needs. */}
+                    {priceBreakdown && (
+                      <dl className="mt-3 max-w-xs rounded-md border border-gray-200 dark:border-ink-800 bg-gray-50 dark:bg-ink-900 px-3 py-2 text-xs">
+                        <div className="flex items-baseline justify-between gap-4 py-0.5">
+                          <dt className="text-gray-600 dark:text-ink-300">Bundle price</dt>
+                          <dd className="tabular-nums text-gray-900 dark:text-ink-50">
+                            {formatRupees(priceBreakdown.baseAmount)}
+                          </dd>
+                        </div>
+                        {priceBreakdown.gstAmount > 0 && (
+                          <div className="flex items-baseline justify-between gap-4 py-0.5">
+                            <dt className="text-gray-600 dark:text-ink-300">GST</dt>
+                            <dd className="tabular-nums text-gray-900 dark:text-ink-50">
+                              + {formatRupees(priceBreakdown.gstAmount)}
+                            </dd>
+                          </div>
+                        )}
+                        <div className="flex items-baseline justify-between gap-4 py-0.5">
+                          <dt className="text-gray-600 dark:text-ink-300">
+                            Payment processing fee
+                          </dt>
+                          <dd className="tabular-nums text-gray-900 dark:text-ink-50">
+                            + {formatRupees(priceBreakdown.gatewayFeeAmount)}
+                          </dd>
+                        </div>
+                        <div className="mt-1 flex items-baseline justify-between gap-4 border-t border-gray-200 dark:border-ink-800 pt-1.5">
+                          <dt className="font-semibold text-gray-900 dark:text-ink-50">
+                            Total payable
+                          </dt>
+                          <dd className="tabular-nums font-semibold text-gray-900 dark:text-ink-50">
+                            {formatRupees(priceBreakdown.totalAmount)}
+                          </dd>
+                        </div>
+                      </dl>
+                    )}
                     {ownedCount > 0 && (
                       <p className="mt-2 text-xs text-green-700 dark:text-green-300">
                         You already own {ownedCount} of these {courseCountLabel(bundle.courseCount)}
