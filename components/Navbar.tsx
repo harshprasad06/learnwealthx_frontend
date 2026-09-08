@@ -259,17 +259,18 @@ export default function Navbar() {
                       Affiliate
                     </Link>
                   )}
-                  {/* Every signed-in user, admin or not: the affiliate programme is
-                      open to all accounts, so this sits outside the role-gated
-                      admin dropdown above. */}
-                  <Link
-                    href="/earnings"
-                    className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    Earnings Calculator
-                  </Link>
                 </>
               )}
+              {/* EVERYONE, signed in or not.
+                  The calculator is how a visitor finds out what the programme
+                  pays — gating it behind a login hides the pitch from exactly
+                  the people it is meant to convince. */}
+              <Link
+                href="/earnings"
+                className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Earnings Calculator
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
@@ -429,15 +430,14 @@ export default function Navbar() {
                   Affiliate
                 </Link>
               )}
-              {user && (
-                <Link
-                  href="/earnings"
-                  onClick={() => setMenuOpen(false)}
-                  className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
-                >
-                  Earnings Calculator
-                </Link>
-              )}
+              {/* EVERYONE, signed in or not — see the desktop link above. */}
+              <Link
+                href="/earnings"
+                onClick={() => setMenuOpen(false)}
+                className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
+              >
+                Earnings Calculator
+              </Link>
               {!loading && user && (
                 <button
                   onClick={() => {
