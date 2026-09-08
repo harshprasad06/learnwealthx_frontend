@@ -10,6 +10,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // The reference landing pairs Clash Display with Plus Jakarta Sans.
+        // Clash Display is not on Google Fonts, so `display` falls through to
+        // Plus Jakarta Sans at its heaviest weight — same proportions, same
+        // geometric feel, and no third-party host to add to the CSP.
+        display: ['var(--font-display)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

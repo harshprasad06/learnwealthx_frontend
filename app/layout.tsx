@@ -1,8 +1,28 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import RefTracker from "@/components/RefTracker";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Suspense } from "react";
+
+/**
+ * Plus Jakarta Sans, self-hosted by next/font.
+ *
+ * The reference landing pairs it with Clash Display, which is not on Google
+ * Fonts; `--font-display` therefore resolves to the same family and the display
+ * role is carried by weight and tracking instead of a second file. Self-hosting
+ * avoids a render-blocking request to fonts.googleapis.com and keeps the font
+ * off the critical path entirely.
+ *
+ * `display: 'swap'` so text paints in the fallback immediately rather than
+ * holding the first paint for a font file.
+ */
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.learnwealthx.in/";
 
@@ -77,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
       <head>
         {/*
           Theme bootstrap. MUST stay the very first thing in <head> and MUST be a
