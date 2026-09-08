@@ -334,7 +334,10 @@ img[alt*="logo"] {
   background-image: linear-gradient(to right, #43F0BC, #00D68F);
 }
 
-/* Decorative motion, disabled for anyone who has asked for less of it. */
-@media (prefers-reduced-motion: reduce) {
-  .grid-bg { background-image: none; }
-}
+/* Nothing here animates, so there is deliberately no `prefers-reduced-motion`
+   rule. An earlier version removed `.grid-bg` entirely for those users, which
+   was wrong twice over: a static grid is not motion, and stripping it left the
+   sections it backs looking unfinished rather than calmer. Components that do
+   animate — a pulsing dot, a rotating chevron — carry their own `motion-safe:`
+   or `motion-reduce:` variants at the point of use, which is where the decision
+   belongs. */
