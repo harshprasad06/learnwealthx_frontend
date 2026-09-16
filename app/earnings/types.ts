@@ -184,9 +184,16 @@ export function formatRupeesIndian(rupees: number): string {
   return `₹${Math.round(safe).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 }
 
-/** A decimal fraction rendered as a percentage: 0.4 → "40%". */
+/**
+ * A decimal fraction rendered as a percentage: 0.4 → "40%".
+ *
+ * Non-finite input renders "0%", matching `formatRupees` and
+ * `formatRupeesIndian`. Without the guard this printed whatever arithmetic
+ * produced — `Math.max()` over an empty package list yields `-Infinity`, and
+ * this function rendered that verbatim as "-Infinity%" onto the page.
+ */
 export function formatRate(rate: number): string {
-  const percent = rate * 100;
+  const percent = Number.isFinite(rate) ? rate * 100 : 0;
   // Keeps 2.5% honest without printing "40.00%" for the common case.
   return `${Number.isInteger(percent) ? percent : Number(percent.toFixed(2))}%`;
 }
