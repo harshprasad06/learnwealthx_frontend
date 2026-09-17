@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/join/Hero';
 import Stats from '@/components/join/Stats';
 import HowItWorks from '@/components/join/HowItWorks';
+import WhoItsFor from '@/components/join/WhoItsFor';
 import CommissionTable from '@/components/join/CommissionTable';
 import Benefits from '@/components/join/Benefits';
 import JoinFaq from '@/components/join/JoinFaq';
@@ -55,6 +56,7 @@ export default function JoinPage() {
         <Hero />
         <Stats />
         <HowItWorks />
+        <WhoItsFor />
         <CommissionTable />
         <Benefits />
         <JoinFaq />
