@@ -92,7 +92,25 @@ const FAQS: JoinFaqItem[] = [
     question: 'Is there a cap on what I can earn?',
     answer: (
       <>
-        No cap. Commission is paid on every referred sale at the rate shown for that membership.
+        No cap. Commission is paid on every referred sale at the rate in effect for that
+        membership at the time of the sale.
+      </>
+    ),
+  },
+  {
+    // The written form of the reservation of rights shown under the commission
+    // table. It belongs here too because this is where a reader goes looking
+    // for the catch, and because the answer is genuinely true: per-bundle rates
+    // are editable in the admin panel and the platform default is an
+    // environment variable, so a rate can change after someone reads the table.
+    question: 'Can the commission rates change?',
+    answer: (
+      <>
+        Yes. LearnWealthX may change, suspend or withdraw commission rates, incentives and the
+        affiliate programme itself at any time, at its sole discretion and without prior notice.
+        Published rates apply to sales made while they are in effect and are not guaranteed for
+        the future. Commission already credited to your wallet for a completed sale is not
+        affected by a later change.
       </>
     ),
   },

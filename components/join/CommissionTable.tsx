@@ -284,8 +284,35 @@ export default function CommissionTable() {
                 </p>
               </div>
             )}
+
           </>
         )}
+
+        {/* THE DISCLAIMER — deliberately OUTSIDE every branch above.
+            A reservation of rights must not disappear on the renders where it
+            is least convenient: while the rates are still loading, when the
+            fetch failed, or when the catalogue is empty. Those are exactly the
+            states the success branch does not cover, so it lives out here and
+            renders unconditionally.
+
+            It is also the only block in this section with a border and a tinted
+            ground. The notes under the table explain the numbers; this one
+            qualifies them, and a reader skimming should be able to tell those
+            two jobs apart at a glance.
+
+            The statement is true rather than boilerplate: per-bundle rates are
+            editable in /admin/bundles and the platform default is an
+            environment variable, so a rate genuinely can change between someone
+            reading this table and making a sale. Saying so is what stops the
+            table from reading as a fixed promise. */}
+        <p className="mt-6 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-xs leading-relaxed text-gray-600 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300">
+          <span className="font-semibold text-gray-900 dark:text-ink-100">Please note:</span>{' '}
+          LearnWealthX may change, suspend or withdraw commission rates, incentives and the
+          affiliate programme itself at any time, at its sole discretion and without prior
+          notice. Published rates apply to sales made while they are in effect and are not
+          guaranteed for the future. Commission already credited to your wallet for a completed
+          sale is not affected by a later change.
+        </p>
       </div>
     </section>
   );
