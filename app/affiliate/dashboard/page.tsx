@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 // The one money/rate formatter in this app, so a bundle price cannot render as
 // "3797.00" here and "3,797.00" on the earnings screen.
 import { formatRate, formatRupees } from '@/app/earnings/types';
+import EarningsPeriodPanel from '@/components/affiliate/EarningsPeriodPanel';
 
 interface AffiliateInfo {
   id: string;
@@ -784,6 +785,12 @@ export default function AffiliateDashboardPage() {
             Share your referral link and earn commissions on every sale.
           </p>
         </div>
+
+        {/* Period-scoped earnings. Sits ABOVE the lifetime summary cards
+            because "how am I doing right now" is the question an affiliate
+            opens this page with; the lifetime totals below answer the slower
+            one. */}
+        <EarningsPeriodPanel />
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
