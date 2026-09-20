@@ -16,6 +16,9 @@ interface WalletData {
     description: string | null;
     status: string;
     createdAt: string;
+    /** Gateway payment id, resolved server-side. Null for payouts, manual
+     *  adjustments, and purchases made with payment bypassed. */
+    transactionId?: string | null;
   }>;
 }
 
@@ -27,6 +30,9 @@ interface Transaction {
   referenceId: string | null;
   status: string;
   createdAt: string;
+  /** Gateway payment id, resolved server-side. Null for payouts, manual
+   *  adjustments, and purchases made with payment bypassed. */
+  transactionId?: string | null;
 }
 
 export default function WalletPage() {
@@ -236,6 +242,15 @@ export default function WalletPage() {
                       <p className="text-xs text-gray-600 dark:text-ink-300 break-words mt-0.5">
                         {tx.description || 'Transaction'}
                       </p>
+                      {/* Rendered only when there is one. Payouts and manual
+                          adjustments have no purchase behind them, so a label
+                          with nothing after it would be worse than no label. */}
+                      {tx.transactionId && (
+                        <p className="text-[11px] text-gray-500 dark:text-ink-300 mt-1 break-all">
+                          <span className="text-gray-400 dark:text-ink-400">Txn ID:</span>{' '}
+                          <span className="font-mono">{tx.transactionId}</span>
+                        </p>
+                      )}
                       <p className="text-[11px] text-gray-400 dark:text-ink-400 mt-1">
                         {new Date(tx.createdAt).toLocaleDateString()}{' '}
                         <span className="mx-1">•</span>
@@ -316,6 +331,12 @@ export default function WalletPage() {
                     <p className="text-gray-900 dark:text-ink-50 text-xs mb-1">
                       {tx.description || 'Transaction'}
                     </p>
+                    {tx.transactionId && (
+                      <p className="text-[11px] text-gray-500 dark:text-ink-300 mb-1 break-all">
+                        <span className="text-gray-400 dark:text-ink-400">Txn ID:</span>{' '}
+                        <span className="font-mono">{tx.transactionId}</span>
+                      </p>
+                    )}
                     <div className="flex items-center justify-between mt-1">
                       <div className="text-[11px] text-gray-500 dark:text-ink-300">
                         <div>{new Date(tx.createdAt).toLocaleDateString()}</div>
@@ -375,6 +396,12 @@ export default function WalletPage() {
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
                           {tx.description || 'Transaction'}
+                          {tx.transactionId && (
+                            <span className="block text-[11px] text-gray-500 dark:text-ink-300 mt-0.5 break-all">
+                              <span className="text-gray-400 dark:text-ink-400">Txn ID:</span>{' '}
+                              <span className="font-mono">{tx.transactionId}</span>
+                            </span>
+                          )}
                         </td>
                         <td className="px-4 py-3">
                           <span
