@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import GoogleSignIn from '@/components/GoogleSignIn';
+import PasswordInput from '@/components/PasswordInput';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -96,14 +97,17 @@ export default function SignupPage() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-ink-200">
                 Password * (min 6 characters)
               </label>
-              <input
+              {/* `new-password`: this is account creation, so a password
+                  manager should offer to generate and save one. Telling it
+                  `current-password` here is why managers sometimes never store
+                  the credential a user just signed up with. */}
+              <PasswordInput
                 id="password"
-                type="password"
+                value={formData.password}
+                onChange={(password) => setFormData({ ...formData, password })}
+                autoComplete="new-password"
                 required
                 minLength={6}
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-ink-700 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-mint-500 focus:border-blue-500 dark:focus:border-mint-400 text-gray-900 dark:text-ink-50 bg-white dark:bg-ink-800 placeholder:text-gray-400 dark:placeholder:text-ink-400 transition-colors"
                 placeholder="Enter your password (min 6 characters)"
               />
             </div>
