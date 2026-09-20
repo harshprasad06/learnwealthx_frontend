@@ -81,6 +81,14 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              {/* Moved out of the header nav. The affiliate pitch is not a
+                  primary destination for someone here to learn — it belongs
+                  where the other secondary links already live. */}
+              <li>
+                <Link href="/join" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
+                  Free Affiliate
+                </Link>
+              </li>
             </ul>
           </div>
 

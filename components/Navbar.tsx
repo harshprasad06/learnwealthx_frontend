@@ -266,16 +266,10 @@ export default function Navbar() {
                   pays — gating it behind a login hides the pitch from exactly
                   the people it is meant to convince.
 
-                  /join and /earnings are both here because they answer different
-                  questions: /join is "should I do this at all?", /earnings is
-                  "what would it pay me?". /join comes first, since deciding
-                  precedes calculating. */}
-              <Link
-                href="/join"
-                className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Affiliate Programme
-              </Link>
+                  /join is deliberately NOT here. It lives in the footer's Quick
+                  Links as "Free Affiliate": the affiliate pitch is not a primary
+                  destination for someone who came here to learn, and the header
+                  is reserved for the ones that are. */}
               <Link
                 href="/earnings"
                 className="text-gray-700 dark:text-ink-200 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
@@ -442,13 +436,6 @@ export default function Navbar() {
                 </Link>
               )}
               {/* EVERYONE, signed in or not — see the desktop links above. */}
-              <Link
-                href="/join"
-                onClick={() => setMenuOpen(false)}
-                className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-ink-200 hover:bg-gray-100 dark:hover:bg-ink-900 rounded-md"
-              >
-                Affiliate Programme
-              </Link>
               <Link
                 href="/earnings"
                 onClick={() => setMenuOpen(false)}

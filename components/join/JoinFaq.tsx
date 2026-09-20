@@ -140,20 +140,47 @@ export default function JoinFaq() {
         className="pointer-events-none absolute inset-0 grid-bg radial-fade"
       />
 
-      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-mint-400">
-            Questions
-          </p>
-          <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-gray-900 dark:text-ink-50">
-            Before you <span className="gradient-text">join</span>
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-gray-600 dark:text-ink-300">
-            The rules that actually apply, stated plainly.
-          </p>
-        </div>
+      {/* TWO COLUMNS, as the reference lays it out: the question the section
+          answers on the left, the accordion on the right. The headline stays
+          on screen beside the list instead of scrolling away above it, and the
+          "Talk to us" escape hatch sits with it — so the one question this page
+          does not answer still has somewhere to go.
 
-        <div className="space-y-3">
+          `lg:items-start` pins the left column to the top rather than centring
+          it against a much taller accordion. */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-10 lg:gap-16 lg:items-start">
+          <div>
+            <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-blue-700 dark:bg-mint-500/15 dark:text-mint-300">
+              FAQs
+            </span>
+            <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-ink-50 text-balance">
+              What would you like to <span className="gradient-text">know about</span>?
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-gray-600 dark:text-ink-300">
+              The rules that actually apply, stated plainly.
+            </p>
+            <a
+              href="/contact"
+              className="mt-7 inline-flex items-center gap-2 rounded-xl border border-gray-300 dark:border-ink-700 px-5 py-3 text-sm font-semibold text-gray-900 dark:text-ink-50 hover:bg-gray-100 dark:hover:bg-ink-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-mint-500"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+              >
+                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l2-4.9A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z" />
+              </svg>
+              Talk to us
+            </a>
+          </div>
+
+          <div className="space-y-3">
           {FAQS.map((faq) => (
             <details
               key={faq.question}
@@ -200,6 +227,7 @@ export default function JoinFaq() {
               </div>
             </details>
           ))}
+          </div>
         </div>
       </div>
     </section>
