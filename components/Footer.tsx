@@ -85,6 +85,11 @@ export default function Footer() {
                   primary destination for someone here to learn — it belongs
                   where the other secondary links already live. */}
               <li>
+                <Link href="/founders" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
+                  Founders
+                </Link>
+              </li>
+              <li>
                 <Link href="/join" className="text-gray-600 dark:text-ink-300 hover:text-blue-600 dark:hover:text-mint-400 transition-colors text-sm inline-block">
                   Free Affiliate
                 </Link>
