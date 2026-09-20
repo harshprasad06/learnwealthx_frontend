@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 // "3797.00" here and "3,797.00" on the earnings screen.
 import { formatRate, formatRupees } from '@/app/earnings/types';
 import EarningsPeriodPanel from '@/components/affiliate/EarningsPeriodPanel';
+import DashboardGreeting from '@/components/affiliate/DashboardGreeting';
 
 interface AffiliateInfo {
   id: string;
@@ -779,6 +780,11 @@ export default function AffiliateDashboardPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-ink-950 transition-colors">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        {/* Greeting first, page title second. Someone opening their own
+            dashboard already knows which page they are on; being addressed by
+            name is the part that is worth the top of the screen. */}
+        <DashboardGreeting />
+
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-ink-50 mb-2">Affiliate Dashboard</h1>
           <p className="text-gray-600 dark:text-ink-300">
