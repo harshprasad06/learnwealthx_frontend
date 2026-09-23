@@ -415,11 +415,6 @@ export default function BundleDetailPage() {
                   {course.description}
                 </p>
               )}
-              <p className="mt-2 text-xs text-gray-500 dark:text-ink-300">
-                {/* The member price is context for what the bundle contains, not
-                    an offer: a course cannot be bought on its own. */}
-                Worth {formatRupees(course.price)} on its own
-              </p>
             </div>
           </div>
         </div>
