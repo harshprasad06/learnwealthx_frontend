@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 // The one money/rate formatter in this app, so a bundle price cannot render as
@@ -43,8 +43,18 @@ interface ReferralUser {
 interface AffiliatePurchase {
   id: string;
   amount: number;
+  baseAmount?: number;
   status: string;
   createdAt: string;
+  /** Set when this row is part of a bundle sale. */
+  bundleId?: string | null;
+  /** Shared by every row of ONE bundle sale. */
+  bundlePurchaseGroupId?: string | null;
+  bundleTitle?: string | null;
+  bundlePrice?: number | null;
+  /** Commission AS STORED, frozen at purchase time. Null on pre-migration rows. */
+  commissionAmount?: number | null;
+  commissionRate?: number | null;
   course: {
     id: string;
     title: string;
@@ -86,6 +96,81 @@ interface BundleLink {
   link: string;
 }
 
+/**
+ * ONE SALE PER LINE.
+ *
+ * A bundle sale is written as one Purchase row PER MEMBER COURSE, all sharing a
+ * `bundlePurchaseGroupId`. Rendered raw, a ten-course membership appeared as
+ * ten purchases — the affiliate saw "Referred Purchases (73)" for what was
+ * really a handful of sales, and no line showed what a membership was worth.
+ *
+ * Rows sharing a group id collapse into one, summing amount and commission and
+ * taking the bundle's title. Standalone course rows pass through untouched.
+ * Order of first appearance is preserved, so the API's newest-first ordering
+ * survives.
+ *
+ * COMMISSION IS SUMMED FROM THE STORED VALUE, never recomputed. It is frozen on
+ * each row at purchase time, and a bundle may carry its own rate: multiplying
+ * the price by one platform-wide rate displayed a 59% Legacy sale at the
+ * platform default, so this table and the wallet disagreed about what had been
+ * earned. `commissionAmount` is null only on pre-migration rows, where falling
+ * back to the platform rate reproduces exactly what was shown before.
+ */
+interface ReferredSale {
+  key: string;
+  title: string;
+  isBundle: boolean;
+  courseCount: number;
+  amount: number;
+  commission: number;
+  status: string;
+  createdAt: string;
+  user: AffiliatePurchase['user'];
+}
+
+function collapseReferredSales(
+  purchases: readonly AffiliatePurchase[],
+  fallbackRate: number
+): ReferredSale[] {
+  const sales: ReferredSale[] = [];
+  const indexByGroup = new Map<string, number>();
+
+  for (const p of purchases) {
+    // Stored commission when present; the old arithmetic only as a fallback.
+    const base = p.baseAmount ?? p.course?.price ?? p.amount;
+    const commission =
+      p.commissionAmount !== null && p.commissionAmount !== undefined
+        ? p.commissionAmount
+        : base * fallbackRate;
+
+    const groupId = p.bundlePurchaseGroupId;
+    if (groupId) {
+      const existing = indexByGroup.get(groupId);
+      if (existing !== undefined) {
+        sales[existing].amount += p.amount;
+        sales[existing].commission += commission;
+        sales[existing].courseCount += 1;
+        continue;
+      }
+      indexByGroup.set(groupId, sales.length);
+    }
+
+    sales.push({
+      key: groupId ?? p.id,
+      title: (groupId ? p.bundleTitle : p.course?.title) ?? p.course?.title ?? 'Purchase',
+      isBundle: Boolean(groupId),
+      courseCount: 1,
+      amount: p.amount,
+      commission,
+      status: p.status,
+      createdAt: p.createdAt,
+      user: p.user,
+    });
+  }
+
+  return sales;
+}
+
 export default function AffiliateDashboardPage() {
   const [affiliate, setAffiliate] = useState<AffiliateInfo | null>(null);
   const [referrals, setReferrals] = useState<ReferralUser[]>([]);
@@ -98,6 +183,18 @@ export default function AffiliateDashboardPage() {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [commissionRate, setCommissionRate] = useState<number>(0.3); // Default 30%
+
+  // ONE LINE PER SALE, not per purchase row — see collapseReferredSales.
+  // Memoised on the inputs so the table is not rebuilt on every unrelated
+  // state change (this component holds a lot of state).
+  const referredSales = useMemo(
+    () => collapseReferredSales(purchases, commissionRate),
+    [purchases, commissionRate]
+  );
+  const referredCommissionTotal = useMemo(
+    () => referredSales.reduce((sum, sale) => sum + sale.commission, 0),
+    [referredSales]
+  );
   const [kycStatus, setKycStatus] = useState<'not_submitted' | 'pending' | 'under_review' | 'approved' | 'rejected'>('not_submitted');
   const [kycLoading, setKycLoading] = useState(false);
   const [kycError, setKycError] = useState('');
@@ -1175,17 +1272,22 @@ export default function AffiliateDashboardPage() {
 
         {/* Purchases */}
         <div className="bg-white dark:bg-ink-900 rounded-lg shadow dark:shadow-black/40 p-6 transition-colors">
+          {/* Counts SALES, not purchase rows. A ten-course membership is one
+              sale; counting rows reported it as ten. */}
           <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-ink-50">
-            Referred Purchases ({purchases.length})
+            Referred Purchases ({referredSales.length})
           </h2>
           <p className="text-sm text-gray-600 dark:text-ink-300 mb-4">
-            Total Commission: ₹
-            {affiliate
-              ? (affiliate.totalEarnings || 0).toFixed(2)
-              : '0.00'}{' '}
-            ({(commissionRate * 100).toFixed(0)}% of sales)
+            Total Commission: ₹{referredCommissionTotal.toFixed(2)}
+            {referredSales.length > 0 && (
+              <span className="text-gray-500 dark:text-ink-400">
+                {' '}
+                across {referredSales.length}{' '}
+                {referredSales.length === 1 ? 'sale' : 'sales'}
+              </span>
+            )}
           </p>
-          {purchases.length === 0 ? (
+          {referredSales.length === 0 ? (
             <p className="text-gray-500 dark:text-ink-300 text-sm">No referred purchases yet.</p>
           ) : (
             <div className="overflow-x-auto">
@@ -1196,7 +1298,7 @@ export default function AffiliateDashboardPage() {
                       Customer
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
-                      Course
+                      Membership
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-ink-200 uppercase">
                       Amount
@@ -1213,20 +1315,16 @@ export default function AffiliateDashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-ink-900 divide-y divide-gray-200 dark:divide-ink-800">
-                  {purchases.map((p) => {
-                    // Commission is calculated only on the base course price (course table price),
-                    // excluding GST and payment gateway fees.
-                    const commissionBase = p.course.price ?? p.amount;
-                    const commission = commissionBase * commissionRate;
+                  {referredSales.map((p) => {
                     return (
-                      <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
+                      <tr key={p.key} className="hover:bg-gray-50 dark:hover:bg-ink-800 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center space-x-3">
                             {renderAvatar(
                               p.user.picture,
                               p.user.name,
                               p.user.email,
-                              `purchase-${p.id}`
+                              `purchase-${p.key}`
                             )}
                             <div>
                               <p className="text-sm font-medium text-gray-900 dark:text-ink-50">
@@ -1244,14 +1342,20 @@ export default function AffiliateDashboardPage() {
                           </div>
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
-                          {p.course.title}
+                          {p.title}
+                          {p.isBundle && (
+                            <span className="block text-xs text-gray-500 dark:text-ink-300">
+                              {p.courseCount}{' '}
+                              {p.courseCount === 1 ? 'course' : 'courses'}
+                            </span>
+                          )}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 dark:text-ink-50 tabular-nums">
                           ₹{p.amount.toFixed(2)}
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className="font-semibold text-green-600 dark:text-green-400">
-                            ₹{commission.toFixed(2)}
+                          <span className="font-semibold text-green-600 dark:text-green-400 tabular-nums">
+                            ₹{p.commission.toFixed(2)}
                           </span>
                         </td>
                         <td className="px-4 py-3">
