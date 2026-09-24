@@ -272,3 +272,57 @@ export async function readError(res: Response, fallback: string): Promise<string
   if (headline && detail) return `${headline}: ${detail}`;
   return headline || detail || `${fallback} (HTTP ${res.status})`;
 }
+
+/**
+ * The one bundle that already contains every other bundle in the list.
+ *
+ * The catalogue is a ladder — Prime's courses are a subset of Alpha's, which
+ * are a subset of Legacy's — so when an affiliate shares several tiers at once,
+ * the top one already includes the rest. Naming it lets the page offer a single
+ * purchase instead of a row of cards the visitor has to reason about.
+ *
+ * ── WHY THIS MATTERS MORE THAN TIDINESS ───────────────────────────────────
+ * Buying two nested tiers is not merely wasteful, it is IMPOSSIBLE: bundle
+ * checkout refuses any bundle whose member courses the buyer already owns, so
+ * a visitor who buys Prime and then tries Legacy is rejected with a 400. A
+ * "buy both" control would take the first payment and then hard-fail the
+ * second. Collapsing to the covering tier is the only honest offer.
+ *
+ * ── CONTAINMENT, CHECKED — NOT ASSUMED FROM PRICE ─────────────────────────
+ * A bundle qualifies only if every course of every other shared bundle is in
+ * it. Two unrelated bundles that merely differ in price return null, and the
+ * page falls back to showing them separately, which is correct: they really are
+ * two different purchases.
+ *
+ * Candidates are tested cheapest-first, so if two bundles hold identical course
+ * sets the cheaper one wins — the buyer should not be sent at the dearer of two
+ * identical products.
+ *
+ * Returns null for fewer than two purchasable bundles: there is nothing to
+ * collapse, and a single bundle is already its own best offer.
+ */
+export function findCoveringBundle(
+  bundles: readonly PublicBundle[]
+): PublicBundle | null {
+  const purchasable = bundles.filter((bundle) => bundle.isPurchasable);
+  if (purchasable.length < 2) return null;
+
+  const byPriceAscending = [...purchasable].sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+
+  for (const candidate of byPriceAscending) {
+    const candidateCourseIds = new Set(candidate.courses.map((course) => course.id));
+    // A bundle with no listed courses cannot be shown to contain anything.
+    if (candidateCourseIds.size === 0) continue;
+
+    const coversEveryOther = purchasable.every(
+      (other) =>
+        other.id === candidate.id ||
+        (other.courses.length > 0 &&
+          other.courses.every((course) => candidateCourseIds.has(course.id)))
+    );
+
+    if (coversEveryOther) return candidate;
+  }
+
+  return null;
+}

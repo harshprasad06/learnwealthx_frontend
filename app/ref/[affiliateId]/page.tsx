@@ -1,13 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import CheckoutModal from '@/components/CheckoutModal';
 import { resolveAssetUrl } from '@/components/ThumbnailUploader';
 import type { PublicBundle } from '@/app/bundles/types';
-import { courseCountLabel, formatRupees, normaliseBundleList } from '@/app/bundles/types';
+import {
+  courseCountLabel,
+  findCoveringBundle,
+  formatRupees,
+  normaliseBundleList,
+} from '@/app/bundles/types';
 
 interface Course {
   id: string;
@@ -51,6 +56,11 @@ export default function RefLandingPage() {
    * wild carry `?courses=` and must keep working, and a link may carry both.
    */
   const [bundles, setBundles] = useState<PublicBundle[]>([]);
+
+  // The tier that already contains the others, when the shared bundles nest.
+  // Null when they do not, and the page falls back to showing each separately —
+  // which is right, because then they really are different purchases.
+  const coveringBundle = useMemo(() => findCoveringBundle(bundles), [bundles]);
   const [bundlesLoading, setBundlesLoading] = useState(true);
   const [affiliate, setAffiliate] = useState<AffiliatePublic | null>(null);
   const [loading, setLoading] = useState(true);
@@ -345,6 +355,55 @@ export default function RefLandingPage() {
             `bg-cardBackground` / `dark:border-border` tokens the course cards
             below use: those two class names are not in tailwind.config.ts and so
             resolve to nothing. */}
+        {/* ONE PURCHASE WHEN THE TIERS NEST.
+            An affiliate sharing several tiers is sharing a ladder: the top one
+            already contains the rest. Offering "buy both" here would not merely
+            overcharge — bundle checkout REFUSES a bundle whose courses the
+            buyer already owns, so the second purchase would 400 after the first
+            had been paid for. The covering tier is the only offer that works.
+
+            The individual cards stay below: someone who wants the cheaper tier
+            on its own must still be able to choose it. This leads, it does not
+            remove the choice. */}
+        {!bundlesLoading && coveringBundle && (
+          <div className="mb-8 rounded-2xl border border-blue-200 dark:border-mint-800 bg-blue-50 dark:bg-mint-950/30 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-700 dark:text-mint-300">
+              Recommended
+            </p>
+            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-ink-50">
+                  {coveringBundle.title}
+                </h2>
+                <p className="mt-1 text-sm text-gray-600 dark:text-ink-300">
+                  Includes everything in{' '}
+                  {bundles
+                    .filter((bundle) => bundle.id !== coveringBundle.id)
+                    .map((bundle) => bundle.title)
+                    .join(' and ')}
+                  {' '}— {courseCountLabel(coveringBundle.courseCount)} in one payment.
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-blue-600 dark:text-mint-400 tabular-nums">
+                  {formatRupees(coveringBundle.price)}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-ink-300">Lifetime access</p>
+              </div>
+            </div>
+            <Link
+              href={`/bundles/${coveringBundle.id}`}
+              className="btn-primary mt-5 w-full sm:w-auto sm:px-8 inline-flex justify-center"
+            >
+              Get {coveringBundle.title}
+            </Link>
+            <p className="mt-3 text-xs text-gray-500 dark:text-ink-300">
+              Buying the lower tier separately is not needed — and once you own one, the other
+              cannot be purchased, because you would already own its courses.
+            </p>
+          </div>
+        )}
+
         {!bundlesLoading && bundles.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
             {bundles.map((bundle) => {
