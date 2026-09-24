@@ -7,10 +7,26 @@ interface LogoProps {
 }
 
 export default function Logo({ className = '', showText = false, size = 'md' }: LogoProps) {
+  /**
+   * SIZED BY HEIGHT, WITH THE WIDTH LEFT TO THE ARTWORK.
+   *
+   * These used to be fixed SQUARES of 128-160px, inside a navbar only 64-80px
+   * tall. That overflowed the header the whole time; it was invisible only
+   * because the old logo was a transparent PNG whose mark floated in a large
+   * empty canvas, so the oversized box had nothing to show. The moment the file
+   * became a solid tile, the real box appeared and spilled out of the bar.
+   *
+   * The mark is 1.73:1, so constraining HEIGHT and letting width follow keeps
+   * it inside the navbar at any breakpoint and keeps the wordmark legible —
+   * squeezing a wide lockup into a square would have shrunk it to fit the
+   * narrower dimension and left the text unreadable.
+   *
+   * Heights are chosen against the navbar's own `h-16 sm:h-20`.
+   */
   const sizeClasses = {
-    sm: { icon: 'w-24 h-24 sm:w-28 sm:h-28', text: 'text-base', gap: 'gap-2.5', letterSpacing: 'tracking-tight' },
-    md: { icon: 'w-32 h-32 sm:w-40 sm:h-40', text: 'text-xl', gap: 'gap-3', letterSpacing: 'tracking-tight' },
-    lg: { icon: 'w-40 h-40 sm:w-48 sm:h-48', text: 'text-2xl', gap: 'gap-3.5', letterSpacing: 'tracking-tight' },
+    sm: { icon: 'h-7 sm:h-8', text: 'text-base', gap: 'gap-2.5', letterSpacing: 'tracking-tight' },
+    md: { icon: 'h-9 sm:h-11', text: 'text-xl', gap: 'gap-3', letterSpacing: 'tracking-tight' },
+    lg: { icon: 'h-11 sm:h-14', text: 'text-2xl', gap: 'gap-3.5', letterSpacing: 'tracking-tight' },
   };
 
   const { icon: iconSize, text: textSize, gap, letterSpacing } = sizeClasses[size];
@@ -18,11 +34,14 @@ export default function Logo({ className = '', showText = false, size = 'md' }: 
   return (
     <div className={`inline-flex items-center ${showText ? gap : ''} group ${className}`}>
       {/* Logo Image - Responsive and Dark Mode Compatible */}
-      <div className={`${iconSize} relative flex-shrink-0 overflow-hidden ${className}`}>
+      <div className={`${iconSize} relative flex-shrink-0 ${className}`}>
         <img
           src="/logo.png"
           alt="LearnWealthX Logo"
-          className="w-full h-full object-contain transition-all duration-300 dark:brightness-110 dark:contrast-110"
+          // `h-full w-auto`, not `w-full h-full`: the width must follow the
+          // artwork's own ratio. Forcing both would letterbox a wide mark
+          // inside a square and waste most of the space.
+          className="h-full w-auto object-contain rounded-md transition-all duration-300"
           style={{
             backgroundColor: 'transparent',
             background: 'transparent',
